@@ -1,0 +1,516 @@
+﻿@using GeletoCarDealer.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /><!-- Bootstrap -->
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css" type="text/css" /><!-- Icons -->
+    <link rel="stylesheet" href="fonts/themify-icons/themify-icons.css" type="text/css" /><!-- Icons -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" /><!-- Owl Carousal-->
+    <link rel="stylesheet" href="css/price-range.css" type="text/css" /><!-- Owl Carousal -->
+    <link rel="stylesheet" href="D:\GeletoCarDealer\light\doc\assets\blueprint-css\plugins\rtl" type="text/css" media="screen, projection">
+
+    <link rel="stylesheet" href="css/style.css" type="text/css" /><!-- Style -->
+    <link rel="stylesheet" href="css/responsive.css" type="text/css" /><!-- Responsive -->
+    <link rel="stylesheet" href="css/colors.css" type="text/css" /><!-- color -->
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="js/rs-plugin/css/settings.css">
+
+</head>
+<body>
+
+    <!-- /.preloader -->
+    <div id="preloader"></div>
+    <div class="theme-layout">
+        <div class="account-popup-sec">
+            <div class="account-popup-area">
+                <div class="account-popup">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="account-user">
+                                <div class="logo">
+                                    <a href="#" title="">
+                                        <i class="fa fa-get-pocket"></i>
+                                        <span>ГЕЛЕТО</span>
+                                        <strong>SELL VEHICULS</strong>
+                                    </a>
+                                </div><!-- LOGO -->
+                                <form>
+                                    <h1>Login Form</h1>
+                                    <div class="field">
+                                        <input type="text" placeholder="Username" />
+                                    </div>
+                                    <div class="field">
+                                        <input type="password" placeholder="Password" />
+                                    </div>
+                                    <div class="field">
+                                        <input type="submit" value="SEND NOW" class="flat-btn" />
+                                    </div>
+                                </form>
+                                <i>OR</i>
+                                <span>LOGIN WITH</span>
+                                <ul class="social-btns">
+                                    <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="registration-sec">
+                                <h1>SIGNUP Form</h1>
+                                <form>
+                                    <div class="field">
+                                        <input type="text" placeholder="Your Name" />
+                                    </div>
+                                    <div class="field">
+                                        <input type="text" placeholder="Your Email" />
+                                    </div>
+                                    <div class="field">
+                                        <input type="password" placeholder="Type Password" />
+                                    </div>
+                                    <div class="field">
+                                        <input type="password" placeholder="Retype Password" />
+                                    </div>
+                                    <input type="submit" value="Singup Now" class="flat-btn" />
+                                </form>
+                            </div><!-- Registration sec -->
+                        </div>
+                    </div>
+                    <span class="close-popup"><i class="fa fa-close"></i></span>
+                </div>
+            </div>
+        </div>
+    </div><!-- Account Popup Sec -->
+    <header class="simple-header for-sticky white">
+        <div class="top-bar">
+            <div class="container">
+                <ul class="contact-item">
+                    <li><i class="fa fa-envelope-o"></i>yourcompnay@email.com</li>
+                    <li><i class="fa fa-mobile"></i>+1 333 44 555 / +1 333 44 500</li>
+                </ul>
+            </div>
+        </div><!-- Top bar -->
+        <div class="menu">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html" title="">
+                        <span><img class="img-logo" src="img\logo.png" width="150" height="80"></span>
+                    </a>
+                </div><!-- LOGO -->
+                <div class="popup-client">
+                    <span><i class="fa fa-user"></i> /  Signup</span>
+                </div>
+                <span class="menu-toggle"><i class="fa fa-bars"></i></span>
+                <nav>
+                    <h1 class="nocontent outline">--- Main Navigation ---</h1>
+                    <ul>
+                        <li class="menu-item-has-children">
+                            <a href="#" title="">Начало</a>
+                        <li class="menu-item-has-children">
+                            <a href="#" title="">Категория</a>
+                            <ul>
+                                <li><a href="vehiculs3.html" title="">Автомобили и Джипове</a></li>
+                                <li><a href="vehiculs.html" title="">Бусове</a></li>
+                                <li><a href="vehiculs2.html" title="">Камиони</a></li>
+                                <li><a href="vehicul.html" title="">Мотори</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children mega">
+                            <a href="vehiculs2.html" title="">Търсене на Автомобил</a>
+                        <li class="menu-item-has-children">
+                            <a href="#" title="">Форум</a>
+                        <li><a href="contact.html" title="">Контакти</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <div class="inner-head overlap">
+        <div style="background: url(img/parallax1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible"></div><!-- PARALLAX BACKGROUND IMAGE -->
+        <div class="container">
+            <div class="inner-content">
+                <span><i class="ti ti-home"></i></span>
+                <h2>АВТОКЪЩА - ГЕЛЕТО</h2>
+                <ul>
+                    <li><a href="index.html" title="">НАЧАЛО</a></li>
+                    <li><a href="vehiculs.html" title="">АВТОМОБИЛИ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!--<!-- inner Head -->
+    <section class="horizontal-search">
+        <div class="container">
+            <h1 class="nocontent outline">--- Search form  ---</h1>
+            <div class="">
+                <div class="search-form">
+                    <form action="vehiculs.html" method="get" class="form-inline">
+                        <div class="search-form-content">
+                            <div class="search-form-field">
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_location">
+                                            <option>Марка</option>
+                                            <option>Audi</option>
+                                            <option>Mercedes-Benz</option>
+                                            <option>BMW</option>
+                                            <option>Lexus</option>
+                                            <option>Lincoln</option>
+                                            <option>Ford</option>
+                                            <option>Fiat</option>
+                                            <option>Dodge</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="anymodule">
+                                            <option>Модел</option>
+                                            <option value="1">R8</option>
+                                            <option value="2">S500</option>
+                                            <option value="3">540i</option>
+                                            <option value="4">RX300</option>
+                                            <option value="5">Navigator</option>
+                                            <option value="6">Taurus</option>
+                                            <option value="7">Doblo</option>
+                                            <option value="8">Viper</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_location">
+                                            <option>Година</option>
+                                            <option>2014</option>
+                                            <option>2013</option>
+                                            <option>2012</option>
+                                            <option>2011</option>
+                                            <option>2010</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_statu">
+                                            <option>Двигател</option>
+                                            <option value="damaged">Бензин</option>
+                                            <option value="new">Дизел</option>
+                                            <option value="semi-new">Хибрид</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <span class="gprice-label">Цена</span>
+                                    <input type="text" class="span2" value="" data-slider-min="0"
+                                           data-slider-max="60000" data-slider-step="5"
+                                           data-slider-value="[0,60000]" id="price-range">
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <span class="garea-label">Километри</span>
+                                    <input type="text" class="span2" value="" data-slider-min="0"
+                                           data-slider-max="10000000" data-slider-step="5"
+                                           data-slider-value="[50,1000000]" id="vehicul-geo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search-form-submit">
+                            <button type="submit" class="btn-search">Търси</button>
+                        </div>
+                    </form>
+                </div><!-- Services Sec -->
+
+            </div>
+        </div>
+    </section>
+    <section class="block remove-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading4">
+                        <h2>Последно добавени</h2>
+                    </div>
+                    <div class="vehiculs-sec">
+                        <div class="carousel-prop">
+                            <div class="vehiculs-box">
+                                <div class="vehiculs-thumb">
+                                    <img src="img/demo/vehicul1.jpg" alt="" />
+                                    <span class="spn-status"> Damaged</span>
+                                    <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                    <a class="proeprty-sh-more" href="vehicul.html"><i class="fa fa-angle-double-right"> </i><i class="fa fa-angle-double-right"> </i></a>
+                                    <p class="car-info-smal">
+                                        Registration 2010<br>
+                                        3.0 Diesel<br>
+                                        230 HP<br>
+                                        Body Coupe<br>
+                                        80 000 Miles
+                                    </p>
+                                </div>
+                                <h3><a href="vehicul.html" title="Mercedes-Benz">Mercedes-Benz</a></h3>
+                                <span class="price">$340000</span>
+                            </div>
+                            <div class="vehiculs-box">
+                                <div class="vehiculs-thumb">
+                                    <img src="img/demo/vehicul2.jpg" alt="" />
+                                    <span class="spn-status"> Semi-New </span>
+                                    <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                    <a class="proeprty-sh-more" href="vehicul.html"><i class="fa fa-angle-double-right"> </i><i class="fa fa-angle-double-right"> </i></a>
+                                    <p class="car-info-smal">
+                                        Registration 2010<br>
+                                        3.0 Diesel<br>
+                                        230 HP<br>
+                                        Body Coupe<br>
+                                        80 000 Miles
+                                    </p>
+                                </div>
+                                <h3><a href="#" title="New York Villa">Mercedes-Benz</a></h3>
+                                <span class="price">$3400000</span>
+                            </div>
+                            <div class="vehiculs-box">
+                                <div class="vehiculs-thumb">
+                                    <img src="img/demo/vehicul3.jpg" alt="" />
+                                    <span class="spn-status"> Semi-New</span>
+                                    <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                    <a class="proeprty-sh-more" href="vehicul.html"><i class="fa fa-angle-double-right"> </i><i class="fa fa-angle-double-right"> </i></a>
+                                    <p class="car-info-smal">
+                                        Registration 2010<br>
+                                        3.0 Diesel<br>
+                                        230 HP<br>
+                                        Body Coupe<br>
+                                        80 000 Miles
+                                    </p>
+                                </div>
+                                <h3><a href="vehicul.html" title="">Mercedes-Benz</a></h3>
+                                <span class="price">$300000</span>
+                            </div>
+                            <div class="vehiculs-box">
+                                <div class="vehiculs-thumb">
+                                    <img src="img/demo/vehicul4.jpg" alt="" />
+                                    <span class="spn-status"> Damaged </span>
+                                    <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                    <a class="proeprty-sh-more" href="vehicul.html"><i class="fa fa-angle-double-right"> </i><i class="fa fa-angle-double-right"> </i></a>
+                                    <p class="car-info-smal">
+                                        Registration 2010<br>
+                                        3.0 Diesel<br>
+                                        230 HP<br>
+                                        Body Coupe<br>
+                                        80 000 Miles
+                                    </p>
+                                </div>
+                                <h3><a href="vehicul.html" title="">Mercedes-Benz</a></h3>
+                                <span class="price">$34.00</span>
+                            </div>
+                            <div class="vehiculs-box">
+                                <div class="vehiculs-thumb">
+                                    <img src="img/demo/vehicul5.jpg" alt="" />
+                                    <span class="spn-status"> For Rent </span>
+                                    <span class="spn-save"> <i class="ti ti-heart"></i> </span>
+                                    <a class="proeprty-sh-more" href="vehicul.html"><i class="fa fa-angle-double-right"> </i><i class="fa fa-angle-double-right"> </i></a>
+                                    <p class="car-info-smal">
+                                        Registration 2010<br>
+                                        3.0 Diesel<br>
+                                        230 HP<br>
+                                        Body Coupe<br>
+                                        80 000 Miles
+                                    </p>
+                                </div>
+                                <h3><a href="vehicul.html" title="">Mercedes-Benz</a></h3>
+                                <span class="price">$9000000</span>
+                            </div>
+                        </div><!-- Carousel -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+    </div>
+
+    <footer class="light-footer">
+        <div class="bottom-line">
+            <div class="container">
+                <span>Copyright All Right Reserved 2020</span>
+                <ul>
+                    <li><a title="" href="#">НАЧАЛО</a></li>
+                    <li><a title="" href="#">ЗА НАС!</a></li>
+                    <li><a title="" href="#">АВТОМОБИЛИ</a></li>
+                    <li><a title="" href="#">ФОРУМ</a></li>
+                    <li><a title="" href="#">КОНТАКТИ</a></li>
+                </ul>
+            </div>
+        </div>
+        <a href="#" class="scrollToTop"><i class="ti ti-arrow-circle-up"></i></a>
+    </footer>
+
+    @*<environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+   @*@this.RenderSection("Scripts", required: false)*@
+
+    <!-- Script -->
+    <script type="text/javascript" src="js/modernizr.js"></script><!-- Modernizer -->
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script><!-- Jquery -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script><!-- Owl Carousal -->
+    <script type="text/javascript" src="js/html5lightbox.js"></script><!-- HTML -->
+    <script type="text/javascript" src="js/scrolly.js"></script><!-- Parallax -->
+    <script type="text/javascript" src="js/price-range.js"></script><!-- Parallax -->
+    <script type="text/javascript" src="js/script.js"></script><!-- Script -->
+
+    <script src="js/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            "use strict";
+            jQuery('.tp-banner').show().revolution({
+                dottedOverlay: "none",
+                delay: 16000,
+                startwidth: 1170,
+                startheight: 700,
+                hideThumbs: 200,
+                thumbWidth: 100,
+                thumbHeight: 50,
+                thumbAmount: 5,
+                navigationType: "bullet",
+                navigationArrows: "solo",
+                navigationStyle: "preview1",
+                touchenabled: "on",
+                onHoverStop: "on",
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+                parallax: "mouse",
+                parallaxBgFreeze: "on",
+                parallaxLevels: [7, 4, 3, 2, 5, 4, 3, 2, 1, 0],
+                keyboardNavigation: "off",
+                navigationHAlign: "center",
+                navigationVAlign: "bottom",
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+                soloArrowLeftHalign: "left",
+                soloArrowLeftValign: "center",
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+                soloArrowRightHalign: "right",
+                soloArrowRightValign: "center",
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+                shadow: 0,
+                fullWidth: "on",
+                fullScreen: "off",
+                spinner: "spinner4",
+                stopLoop: "off",
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+                shuffle: "off",
+                autoHeight: "off",
+                forceFullWidth: "off",
+                hideThumbsOnMobile: "off",
+                hideNavDelayOnMobile: 1500,
+                hideBulletsOnMobile: "off",
+                hideArrowsOnMobile: "off",
+                hideThumbsUnderResolution: 0,
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                videoJsPath: "rs-plugin/videojs/",
+                fullScreenOffsetContainer: ""
+            });
+
+            $(".carousel-prop").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 2000,
+                loop: true,
+                dots: true,
+                nav: false,
+                items: 4,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    600: {
+                        items: 2,
+                        nav: false
+                    },
+                    1000: {
+                        items: 3,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+
+            $(".carousel").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 2000,
+                loop: false,
+                dots: false,
+                nav: true,
+                margin: 0,
+                items: 3
+            });
+
+            $(".carousel-client").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 2000,
+                loop: false,
+                dots: false,
+                nav: true,
+                margin: 30,
+                items: 5,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: true
+                    },
+                    1000: {
+                        items: 5,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
