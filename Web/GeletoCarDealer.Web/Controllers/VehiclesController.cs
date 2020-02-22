@@ -8,5 +8,10 @@
         {
             return this.View("Vehicles");
         }
+
+        public IActionResult Info()
+        {
+            return this.View();
+        }
     }
 }
