@@ -522,10 +522,10 @@ iframe{
     position: relative;
     width: 100%;
 }
-.inner-head.overlap {
-    margin-top: -125px;
-    padding-top: 190px;
-}
+    .inner-head.overlap {
+        margin-top: -90px;
+        padding-top: 180px;
+    }
 .inner-content {
     float: left;
     padding-left: 180px;
