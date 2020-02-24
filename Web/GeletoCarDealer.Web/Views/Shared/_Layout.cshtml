@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/css/responsive.css" type="text/css" /><!-- Responsive -->
     <link rel="stylesheet" href="~/css/colors.css" type="text/css" /><!-- color -->
     <!-- REVOLUTION STYLE SHEETS -->
-    <link rel="stylesheet" type="text/css" href="~/js/rs-plugin/css/settings.css"/>
+    <link rel="stylesheet" type="text/css" href="~/js/rs-plugin/css/settings.css" />
 
 
 </head>
@@ -24,66 +24,66 @@
 
     <!-- /.preloader -->
     @*<div class="theme-layout">
-        <div class="account-popup-sec">
-            <div class="account-popup-area">
-                <div class="account-popup">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="account-user">
-                                <div class="logo">
-                                    <a href="#" title="">
-                                        <i class="fa fa-get-pocket"></i>
-                                        <span>ГЕЛЕТО</span>
-                                        <strong>SELL VEHICULS</strong>
-                                    </a>
-                                </div> LOGO 
-                                <form>
-                                    <h1>Login Form</h1>
-                                    <div class="field">
-                                        <input type="text" placeholder="Username" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="password" placeholder="Password" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="submit" value="SEND NOW" class="flat-btn" />
-                                    </div>
-                                </form>
-                                <i>OR</i>
-                                <span>LOGIN WITH</span>
-                                <ul class="social-btns">
-                                    <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                </ul>
+            <div class="account-popup-sec">
+                <div class="account-popup-area">
+                    <div class="account-popup">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="account-user">
+                                    <div class="logo">
+                                        <a href="#" title="">
+                                            <i class="fa fa-get-pocket"></i>
+                                            <span>ГЕЛЕТО</span>
+                                            <strong>SELL VEHICULS</strong>
+                                        </a>
+                                    </div> LOGO
+                                    <form>
+                                        <h1>Login Form</h1>
+                                        <div class="field">
+                                            <input type="text" placeholder="Username" />
+                                        </div>
+                                        <div class="field">
+                                            <input type="password" placeholder="Password" />
+                                        </div>
+                                        <div class="field">
+                                            <input type="submit" value="SEND NOW" class="flat-btn" />
+                                        </div>
+                                    </form>
+                                    <i>OR</i>
+                                    <span>LOGIN WITH</span>
+                                    <ul class="social-btns">
+                                        <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="registration-sec">
+                                    <h1>SIGNUP Form</h1>
+                                    <form>
+                                        <div class="field">
+                                            <input type="text" placeholder="Your Name" />
+                                        </div>
+                                        <div class="field">
+                                            <input type="text" placeholder="Your Email" />
+                                        </div>
+                                        <div class="field">
+                                            <input type="password" placeholder="Type Password" />
+                                        </div>
+                                        <div class="field">
+                                            <input type="password" placeholder="Retype Password" />
+                                        </div>
+                                        <input type="submit" value="Singup Now" class="flat-btn" />
+                                    </form>
+                                </div> Registration sec
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="registration-sec">
-                                <h1>SIGNUP Form</h1>
-                                <form>
-                                    <div class="field">
-                                        <input type="text" placeholder="Your Name" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="text" placeholder="Your Email" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="password" placeholder="Type Password" />
-                                    </div>
-                                    <div class="field">
-                                        <input type="password" placeholder="Retype Password" />
-                                    </div>
-                                    <input type="submit" value="Singup Now" class="flat-btn" />
-                                </form>
-                            </div> Registration sec 
-                        </div>
+                        <span class="close-popup"><i class="fa fa-close"></i></span>
                     </div>
-                    <span class="close-popup"><i class="fa fa-close"></i></span>
                 </div>
             </div>
-        </div>
-    </div>*@<!-- Account Popup Sec -->
+        </div>*@<!-- Account Popup Sec -->
     <header class="simple-header for-sticky white">
         <div class="top-bar">
             <div class="container">
@@ -100,9 +100,23 @@
                         <span><img class="img-logo" src="~/img/logo.png" width="150" height="80"></span>
                     </a>
                 </div><!-- LOGO -->
-                <div class="popup-client">                 
-                    <span><a href="/Users/Login" class="fa fa-user" title="">Signup</a></span>
-                </div>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <form asp-area="Identity" asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                          method="post">
+                        <div class="popup-client">
+                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="popup-client">
+                        <span><a href="/Identity/Account/Login" title="Manage">Login</a></span>
+                        <span><a href="/Identity/Account/Register" title="Manage">Register</a></span>
+                    </div>
+                }
                 <span class="menu-toggle"><i class="fa fa-bars"></i></span>
                 <nav>
                     <h1 class="nocontent outline">--- Main Navigation ---</h1>

@@ -35,9 +35,9 @@
         [Fact]
         public async Task GetCountShouldReturnCorrectNumberUsingDbContext()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            var options = new DbContextOptionsBuilder<GeletoDbContext>()
                 .UseInMemoryDatabase(databaseName: "SettingsTestDb").Options;
-            var dbContext = new ApplicationDbContext(options);
+            var dbContext = new GeletoDbContext(options);
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());

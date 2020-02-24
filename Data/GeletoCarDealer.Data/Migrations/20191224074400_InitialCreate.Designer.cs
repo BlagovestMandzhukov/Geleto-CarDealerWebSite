@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GeletoCarDealer.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(GeletoDbContext))]
     [Migration("20191224074400_InitialCreate")]
     partial class InitialCreate
     {
