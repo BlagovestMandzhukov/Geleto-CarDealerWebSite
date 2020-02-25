@@ -1,71 +1,26 @@
-﻿@using GeletoCarDealer.Common
+﻿@using Microsoft.AspNetCore.Identity
 @using GeletoCarDealer.Data.Models
-@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div id="preloader"></div>
-<div class="theme-layout">
-    <div class="account-popup-sec">
-        <div class="account-popup-area">
-            <div class="account-popup">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="account-user">
-                            <div class="logo">
-                                <a href="#" title="">
-                                    <i class="fa fa-get-pocket"></i>
-                                    <span>KwitaraCars</span>
-                                    <strong>SELL VEHICULS</strong>
-                                </a>
-                            </div><!-- LOGO -->
-                            <form>
-                                <h1>Login Form</h1>
-                                <div class="field">
-                                    <input type="text" placeholder="Username" />
-                                </div>
-                                <div class="field">
-                                    <input type="password" placeholder="Password" />
-                                </div>
-                                <div class="field">
-                                    <input type="submit" value="SEND NOW" class="flat-btn" />
-                                </div>
-                            </form>
-                            <i>OR</i>
-                            <span>LOGIN WITH</span>
-                            <ul class="social-btns">
-                                <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="registration-sec">
-                            <h1>SIGNUP Form</h1>
-                            <form>
-                                <div class="field">
-                                    <input type="text" placeholder="Your Name" />
-                                </div>
-                                <div class="field">
-                                    <input type="text" placeholder="Your Email" />
-                                </div>
-                                <div class="field">
-                                    <input type="password" placeholder="Type Password" />
-                                </div>
-                                <div class="field">
-                                    <input type="password" placeholder="Retype Password" />
-                                </div>
-                                <label>
-                                    <input type="checkbox" /> By Clicking on this You are agree with our <a href="#" title="">Terms & Condition</a>
-                                </label>
-                                <input type="submit" value="Singup Now" class="flat-btn" />
-                            </form>
-                        </div><!-- Registration sec -->
-                    </div>
-                </div>
-                <span class="close-popup"><i class="fa fa-close"></i></span>
-            </div>
-        </div>
-    </div><!-- Account Popup Sec -->
-</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}
