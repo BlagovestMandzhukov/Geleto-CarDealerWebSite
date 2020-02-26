@@ -1,0 +1,26 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div class="theme-layout">
+</div>
+<div class="account-user">
+    <form method="post">
+        <h1>Login</h1>
+        <div class="field">
+            <input asp-for="Input.Username" type="text" id="username" name="username" placeholder="Username" />
+            <span asp-validation-for="Input.Username" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <input asp-for="Input.Password" type="password" id="password" name="password" placeholder="Password" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <input type="submit" value="SEND NOW" class="flat-btn" />
+        </div>
+    </form>
+</div>
