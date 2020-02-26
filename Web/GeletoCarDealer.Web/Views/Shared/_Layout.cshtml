@@ -102,12 +102,10 @@
                 </div><!-- LOGO -->
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    <form asp-area="Identity" asp-page="/Account/Logout"
+                    <form class="popup-client" asp-area="Identity" asp-page="/Account/Logout"
                           asp-route-returnUrl="@Url.Page("/", new { area = "" })"
                           method="post">
-                        <div class="popup-client">
-                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                        </div>
+                        <span><input style="border:none" type="submit" value="Logout" /></span>
                     </form>
                 }
                 else

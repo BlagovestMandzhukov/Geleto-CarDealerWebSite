@@ -2995,8 +2995,7 @@ blockquote p {
     float: left;
     padding: 46px 60px;
     text-align: center;
-    width: 100%;
-    background-color: #777777;
+    width: 50%;
 }
 
     .registration-sec > h1 {
@@ -3032,16 +3031,16 @@ blockquote p {
 }
 
     .registration-sec .field input[type="text"], .registration-sec .field input[type="password"] {
-        /*background: rgba(0, 0, 0, 0) none repeat scroll 0 0;*/
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
         border: 3px solid rgba(0, 0, 0, 0.1);
         color: #666666;
-        float: cente;
+        float: left;
         font-family: Montserrat;
         font-size: 15px;
         height: 45px;
         margin-top: 16px;
         padding: 0 30px;
-        width: 50%;
+        width: 100%;
     }
 
 .registration-sec > form input.flat-btn {

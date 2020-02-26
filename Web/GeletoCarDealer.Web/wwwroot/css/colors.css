@@ -1,6 +1,8 @@
 /** Background Color **/
 .choose-language > a:hover,
 .popup-client > span,
+.popup-client > input,
+.popup-client > form,
 .inner-content > span,
 .post-detail a.post-cat,
 .vehicul-post-detail a.vehicul-more,
@@ -10,7 +12,7 @@
 .subscribe_widget button,
 .pagination > li:hover > a:before,
 .pagination > li.active > a:before,
-.heading2 h3::before,.heading2 h2::before,
+.heading2 h3::before, .heading2 h2::before,
 .search_widget > form button,
 .category_widget > ul li:hover > a:before,
 .flat-btn,
@@ -41,8 +43,7 @@
 .cart-thumb > a.delete-cart,
 .c-input-number > span input.userincr-btn-dec,
 .c-input-number > span input.userincr-btn-inc,
-.single-vehiculs-infos a.flat-btn.add_to_cart
-{
+.single-vehiculs-infos a.flat-btn.add_to_cart {
     background-color: #ff2929;
 }
 

@@ -206,7 +206,7 @@
         width: 90%;
     }
     .popup-client > span {
-        width: 71px;
+        /*width: 71px;*/
         height: 47px;
         color: transparent;
     }
