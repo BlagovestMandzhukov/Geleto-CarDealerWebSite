@@ -3033,7 +3033,7 @@ blockquote p {
     .registration-sec .field input[type="text"], .registration-sec .field input[type="password"] {
         background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
         border: 3px solid rgba(0, 0, 0, 0.1);
-        color: white;
+        color: black;
         /*float: left;*/
         font-family: Montserrat;
         font-size: 15px;

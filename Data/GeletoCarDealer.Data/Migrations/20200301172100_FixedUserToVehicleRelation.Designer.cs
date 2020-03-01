@@ -4,14 +4,16 @@ using GeletoCarDealer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200301172100_FixedUserToVehicleRelation")]
+    partial class FixedUserToVehicleRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,9 +306,6 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -334,8 +333,6 @@ namespace GeletoCarDealer.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -495,10 +492,6 @@ namespace GeletoCarDealer.Data.Migrations
 
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Vehicle", b =>
                 {
-                    b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")

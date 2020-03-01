@@ -4,14 +4,16 @@ using GeletoCarDealer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200227202904_NewEntities")]
+    partial class NewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,7 +306,10 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CategoryId")
@@ -335,7 +340,7 @@ namespace GeletoCarDealer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("CategoryId");
 
@@ -496,8 +501,8 @@ namespace GeletoCarDealer.Data.Migrations
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Vehicle", b =>
                 {
                     b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ApplicationUserId");
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
                         .WithMany()
