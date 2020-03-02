@@ -100,9 +100,10 @@ input[type="checkbox"] {
 ul li, ul li a,
 ol li, ol li a {
     font-family: open sans;
-    color: #666666;
+    color: white;
     font-size: 14px;
     line-height: 26px;
+    list-style-type:none;
 }
 
 a:hover,

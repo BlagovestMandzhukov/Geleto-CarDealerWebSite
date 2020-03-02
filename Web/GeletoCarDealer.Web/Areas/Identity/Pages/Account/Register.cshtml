@@ -11,6 +11,7 @@
     <h1>Create a new account</h1>
 
     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="All"></div>
         <div class="field">
             <input asp-for="Input.Username" type="text" id="username" name="username" placeholder="Username" />
             <span asp-validation-for="Input.Username" class="text-danger"></span>
