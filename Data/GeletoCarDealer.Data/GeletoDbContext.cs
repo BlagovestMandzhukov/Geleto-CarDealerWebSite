@@ -23,6 +23,7 @@
             : base(options)
         {
         }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Image> Images { get; set; }
@@ -38,6 +39,8 @@
         public DbSet<VehicleModelSelect> VehiclesModelSelects { get; set; }
 
         public DbSet<VehicleYearSelect> VehiclesYearSelects { get; set; }
+
+        public DbSet<VehicleSpecificationsSelect> VehicleSpecificationsSelect { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 

@@ -31,7 +31,7 @@
 
         public int Milage { get; set; }
 
-        public FuelType FuelType { get; set; }
+        public string FuelType { get; set; }
 
         public decimal Price { get; set; }
 
@@ -40,6 +40,8 @@
         public string ApplicationUserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public string TransmissionType { get; set; }
 
     }
 }

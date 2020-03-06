@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    [Migration("20200227202904_NewEntities")]
-    partial class NewEntities
+    [Migration("20200305172809_AllownullSpecColumn")]
+    partial class AllownullSpecColumn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,7 +180,7 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -306,10 +306,7 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId1")
+                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CategoryId")
@@ -340,7 +337,7 @@ namespace GeletoCarDealer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -501,8 +498,8 @@ namespace GeletoCarDealer.Data.Migrations
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Vehicle", b =>
                 {
                     b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
                         .WithMany()
