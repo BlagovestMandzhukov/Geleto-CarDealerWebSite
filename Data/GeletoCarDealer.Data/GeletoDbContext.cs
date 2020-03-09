@@ -81,7 +81,7 @@
             builder.Entity<ApplicationUser>()
                 .HasMany(v => v.Vehicles)
                 .WithOne(u => u.ApplicationUser)
-                .HasForeignKey(v => v.ApplicationUserId);
+                .HasForeignKey(v => v.UserId);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

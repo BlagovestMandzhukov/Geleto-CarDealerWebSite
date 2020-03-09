@@ -4,12 +4,18 @@
 
     public class VehicleMakeSelect
     {
+        public VehicleMakeSelect()
+        {
+            this.Models = new HashSet<VehicleModelSelect>();
+            this.Years = new HashSet<VehicleYearSelect>();
+        }
+
         public int Id { get; set; }
 
         public string Make { get; set; }
 
-        public virtual ICollection<VehicleModelSelect> Models { get; set; } = new HashSet<VehicleModelSelect>();
+        public virtual ICollection<VehicleModelSelect> Models { get; set; }
 
-        public virtual ICollection<VehicleYearSelect> Years { get; set; } = new HashSet<VehicleYearSelect>();
+        public virtual ICollection<VehicleYearSelect> Years { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using GeletoCarDealer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200306180335_newTable")]
+    partial class newTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,10 +225,13 @@ namespace GeletoCarDealer.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MakeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehicleMakeSelectId")
+                    b.Property<int?>("VehicleMakeSelectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -499,9 +504,7 @@ namespace GeletoCarDealer.Data.Migrations
                 {
                     b.HasOne("GeletoCarDealer.Data.Models.Models.VehicleMakeSelect", "VehicleMakeSelect")
                         .WithMany("Models")
-                        .HasForeignKey("VehicleMakeSelectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("VehicleMakeSelectId");
                 });
 
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleYearSelect", b =>

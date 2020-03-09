@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace GeletoCarDealer.Data.Models.Models
+﻿namespace GeletoCarDealer.Data.Models.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class VehicleSpecificationsSelect
     {
         public int Id { get; set; }
