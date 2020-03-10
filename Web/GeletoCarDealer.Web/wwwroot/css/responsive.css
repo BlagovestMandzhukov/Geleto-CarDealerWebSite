@@ -20,7 +20,6 @@
     }
     .simple-header.for-sticky {
         float: left;
-        position: relative !important;
         width: 100%;
         z-index: 99;
     }

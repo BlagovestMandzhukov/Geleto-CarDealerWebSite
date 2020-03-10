@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(GeletoCarDealer.Web.Areas.Identity.IdentityHostingStartup))]
+
 namespace GeletoCarDealer.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
