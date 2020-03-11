@@ -1,0 +1,20 @@
+﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.CreateInputModel
+@{
+    ViewData["Title"] = "AddVehicle";
+}
+<div align="center">
+    <h1>Добавяне на автомобили</h1>>
+</div>
+
+<div align="center" >
+    <form asp-controller="Administration" asp-action="Create">
+
+        <select asp-for="Id"
+                asp-items="@(new SelectList(Model.Make))">
+            <option>Please select one</option>
+        </select>
+
+        <input type="submit" />
+
+    </form>
+</div>
