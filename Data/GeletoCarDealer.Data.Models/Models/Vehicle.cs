@@ -11,7 +11,7 @@
         public Vehicle()
         {
             this.Images = new HashSet<Image>();
-            this.Specifications = new HashSet<Specification>();
+            this.Specifications = new HashSet<VehicleSpecification>();
         }
 
         [Required]
@@ -22,8 +22,9 @@
 
         public virtual ICollection<Image> Images { get; set; }
 
-        public virtual ICollection<Specification> Specifications { get; set; }
+        public virtual ICollection<VehicleSpecification> Specifications { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int Year { get; set; }
 
         public int CategoryId { get; set; }
@@ -34,8 +35,10 @@
 
         public string FuelType { get; set; }
 
+        [Range(1, int.MaxValue)]
         public decimal Price { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int HorsePower { get; set; }
 
         public string UserId { get; set; }

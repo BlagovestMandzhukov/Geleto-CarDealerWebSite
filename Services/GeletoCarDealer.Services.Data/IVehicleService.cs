@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace GeletoCarDealer.Services.Data
+﻿namespace GeletoCarDealer.Services.Data
 {
+    using System.Collections.Generic;
+
     public interface IVehicleService
     {
-        IEnumerable<T> GetModels<T>();
-
-        IEnumerable<T> GetMakes<T>();
-
-        IEnumerable<T> GetYear<T>();
+        IEnumerable<T> GetMakesWithModels<T>(int id);
 
         string AddVehicle();
 

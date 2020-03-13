@@ -1,20 +1,94 @@
 ﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.CreateInputModel
+@using GeletoCarDealer.Data.Models.Enums
+
 @{
-    ViewData["Title"] = "AddVehicle";
+    ViewData["Title"] = "Добавяне на автомобили";
 }
 <div align="center">
-    <h1>Добавяне на автомобили</h1>>
+    <h1>Добавяне на автомобили</h1>
 </div>
+<form method="post" align="center">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="Make">Добави марка</label>
+            <input type="text" class="form-control" id="make" aria-describedby="make" placeholder="Добави марка">
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="Model">Добави модел</label>
+            <input type="text" class="form-control" id="model" placeholder="Добави модел">
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="Model">Година на производство</label>
+            <input type="number" class="form-control" id="year" placeholder="Година на производство">
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="milage">Пробег</label>
+            <input type="number" class="form-control" id="milage" placeholder="Пробег">
+            <span asp-validation-for="Milage" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="category">Избери категория</label>
+            <select asp-for="@Model.Category" asp-items="@Html.GetEnumSelectList<CategoryType>()" placeholder="Категория" class="form-control">
+                <option selected="selected" value="">Избери категория</option>
+            </select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="category">Двигател</label>
+            <select asp-for="@Model.FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()" placeholder="Двигател" class="form-control">
+                <option selected="selected" value="">Избери двигател</option>
+            </select>
+            <span asp-validation-for="FuelType" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="price">Цена</label>
+            <input type="number" class="form-control" id="price" placeholder="Цена">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="horsePower">Мощност</label>
+            <input type="number" class="form-control" id="milage" placeholder="Мощност">
+            <span asp-validation-for="HorsePower" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label for="transmission">Трансмисия</label>
+            <select asp-for="@Model.TransmissionType" asp-items="@Html.GetEnumSelectList<TransmissionType>()" placeholder="Трансмисия" class="form-control">
+                <option selected="selected" value="">Избери трансмисия</option>
+            </select>
+            <span asp-validation-for="TransmissionType" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="file-upload btn btn-primary">
+            Избери снимки... <input type="file" multiple id="photos" name="images" />
+        </label>
+    </div>
+    <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-primary">Добави</button>
+    </div>
+</form>
 
-<div align="center" >
-    <form asp-controller="Administration" asp-action="Create">
+<script>
+    window.onload = () => {
+        $('#manufacturedOn').datetimepicker({
+            format: 'd.m.Y H:i',
+            lang: 'en'
+        });
+    };
+</script>
 
-        <select asp-for="Id"
-                asp-items="@(new SelectList(Model.Make))">
-            <option>Please select one</option>
-        </select>
-
-        <input type="submit" />
-
-    </form>
-</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

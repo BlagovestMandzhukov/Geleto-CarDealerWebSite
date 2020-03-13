@@ -3,7 +3,6 @@
     using GeletoCarDealer.Common;
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.Controllers;
-    using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +10,6 @@
     [Area("Administration")]
     public class AdministrationController : BaseController
     {
-        private readonly IVehicleService vehicleService;
-
-        public AdministrationController(IVehicleService vehicleService)
-        {
-            this.vehicleService = vehicleService;
-        }
 
         [Route("/[controller]/Admin")]
         public IActionResult Index()
@@ -26,15 +19,10 @@
 
         public IActionResult Create()
         {
-            var makes = this.vehicleService.GetMakes<MakeViewModel>();
-            return this.View(makes);
+            return this.View();
         }
 
-        //[HttpPost]
-        //public IActionResult Create()
-        //{
-        //    return this.View();
-        //}
+      
 
         public IActionResult Edit()
         {

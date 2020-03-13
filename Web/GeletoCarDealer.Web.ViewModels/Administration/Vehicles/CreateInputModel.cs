@@ -1,40 +1,49 @@
 ﻿namespace GeletoCarDealer.Web.ViewModels.Administration.Vehicles
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text;
 
+    using GeletoCarDealer.Data.Models;
+    using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Services.Mapping;
 
-    public class CreateInputModel
+    public class CreateInputModel : IMapFrom<Vehicle>
     {
-        public int Id { get; set; }
-
         [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string Make { get; set; }
 
         [Required]
-        public IEnumerable<VehicleModelSelect> Models { get; set; }
+        [StringLength(50, MinimumLength = 1)]
+        public string Model { get; set; }
 
-        [Required]
-        public IEnumerable<Image> Images { get; set; }
+        public virtual IEnumerable<Image> Images { get; set; }
 
-        [Required]
-        public IEnumerable<Specification> Specifications { get; set; }
+        public virtual IEnumerable<VehicleSpecification> Specifications { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int Year { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        [StringLength(50, MinimumLength = 1)]
+        public CategoryType Category { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int Milage { get; set; }
 
-        public string FuelType { get; set; }
+        [Required]
+        public FuelType FuelType { get; set; }
 
+        [Range(1, int.MaxValue)]
         public decimal Price { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int HorsePower { get; set; }
 
         [Required]
-        public string TransmissionType { get; set; }
+        public TransmissionType TransmissionType { get; set; }
     }
 }

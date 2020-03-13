@@ -28,19 +28,11 @@
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<Specification> Specifications { get; set; }
-
         public DbSet<Vehicle> Vehicles { get; set; }
 
         public DbSet<VehicleCategory> VehiclesCategories { get; set; }
 
-        public DbSet<VehicleMakeSelect> VehiclesMakeSelects { get; set; }
-
-        public DbSet<VehicleModelSelect> VehiclesModelSelects { get; set; }
-
-        public DbSet<VehicleYearSelect> VehiclesYearSelects { get; set; }
-
-        public DbSet<VehicleSpecificationsSelect> VehicleSpecificationsSelect { get; set; }
+        public DbSet<VehicleSpecification> VehicleSpecifications { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 
