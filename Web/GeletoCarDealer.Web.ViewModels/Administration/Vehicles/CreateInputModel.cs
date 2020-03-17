@@ -10,7 +10,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
 
-    public class CreateInputModel : IMapFrom<Vehicle>
+    public class CreateInputModel
     {
         [Required]
         [StringLength(50, MinimumLength = 1)]
@@ -20,9 +20,9 @@
         [StringLength(50, MinimumLength = 1)]
         public string Model { get; set; }
 
-        public virtual IEnumerable<Image> Images { get; set; }
+        public IEnumerable<Image> Images { get; set; }
 
-        public virtual IEnumerable<VehicleSpecification> Specifications { get; set; }
+        public IList<SpecificationsViewModel> Specifications { get; set; }
 
         [Range(1, int.MaxValue)]
         public int Year { get; set; }
