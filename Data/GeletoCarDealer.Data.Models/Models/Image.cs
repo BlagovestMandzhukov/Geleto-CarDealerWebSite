@@ -1,10 +1,12 @@
 ﻿namespace GeletoCarDealer.Data.Models.Models
 {
-    public class Image
-    {
-        public int Id { get; set; }
+    using GeletoCarDealer.Data.Common.Models;
 
-        public string ImageUrl { get; set; }
+    public class Image : BaseDeletableModel<int>
+    {
+        public string Title { get; set; }
+
+        public byte[] ImageData { get; set; }
 
         public int VehicleId { get; set; }
 

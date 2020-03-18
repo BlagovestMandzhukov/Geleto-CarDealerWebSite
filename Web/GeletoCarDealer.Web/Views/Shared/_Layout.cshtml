@@ -19,72 +19,8 @@
     <!-- REVOLUTION STYLE SHEETS -->
     <link rel="stylesheet" type="text/css" href="~/js/rs-plugin/css/settings.css" />
 
-
 </head>
 <body>
-
-    <!-- /.preloader -->
-    @*<div class="theme-layout">
-            <div class="account-popup-sec">
-                <div class="account-popup-area">
-                    <div class="account-popup">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="account-user">
-                                    <div class="logo">
-                                        <a href="#" title="">
-                                            <i class="fa fa-get-pocket"></i>
-                                            <span>ГЕЛЕТО</span>
-                                            <strong>SELL VEHICULS</strong>
-                                        </a>
-                                    </div> LOGO
-                                    <form>
-                                        <h1>Login Form</h1>
-                                        <div class="field">
-                                            <input type="text" placeholder="Username" />
-                                        </div>
-                                        <div class="field">
-                                            <input type="password" placeholder="Password" />
-                                        </div>
-                                        <div class="field">
-                                            <input type="submit" value="SEND NOW" class="flat-btn" />
-                                        </div>
-                                    </form>
-                                    <i>OR</i>
-                                    <span>LOGIN WITH</span>
-                                    <ul class="social-btns">
-                                        <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="registration-sec">
-                                    <h1>SIGNUP Form</h1>
-                                    <form>
-                                        <div class="field">
-                                            <input type="text" placeholder="Your Name" />
-                                        </div>
-                                        <div class="field">
-                                            <input type="text" placeholder="Your Email" />
-                                        </div>
-                                        <div class="field">
-                                            <input type="password" placeholder="Type Password" />
-                                        </div>
-                                        <div class="field">
-                                            <input type="password" placeholder="Retype Password" />
-                                        </div>
-                                        <input type="submit" value="Singup Now" class="flat-btn" />
-                                    </form>
-                                </div> Registration sec
-                            </div>
-                        </div>
-                        <span class="close-popup"><i class="fa fa-close"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>*@<!-- Account Popup Sec -->
     <header class="simple-header for-sticky white">
         <div class="top-bar">
             <div class="container">
@@ -120,24 +56,22 @@
                 <nav>
                     <h1 class="nocontent outline">--- Main Navigation ---</h1>
                     <ul>
-                        <li> <a href="/Home/Index" title="">Начало</a></li>
+                        <li> <a asp-controller="Home" asp-action="Index" title="">Начало</a></li>
                         <li class="menu-item-has-children">
                             <a href="#" title="">Категория</a>
                             <ul>
-                                <li><a href="/Vehicles/GetAll" title="">Автомобили и Джипове</a></li>
-                                <li><a href="/Vehicles/GetAll" title="">Бусове</a></li>
-                                <li><a href="/Vehicles/GetAll" title="">Камиони</a></li>
-                                <li><a href="/Vehicles/GetAll" title="">Мотори</a></li>
+                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Автомобили и Джипове</a></li>
+                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Бусове</a></li>
+                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Камиони</a></li>
+                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Мотори</a></li>
                             </ul>
                         </li>
                         <li><a href="/Vehicles/GetAll" title="">Търсене на Автомобил</a></li>
-                        <li><a href="/Home/Index" title="">Форум</a></li>
                         <li>
-                            <a href="/Home/Contacts" title="">Контакти</a>
+                            <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </header>
@@ -152,10 +86,9 @@
             <div class="container">
                 <span>Copyright All Right Reserved 2020</span>
                 <ul>
-                    <li><a title="" href="/Home/Index">НАЧАЛО</a></li>
-                    <li><a title="" href="/Vehicles/GetAll">АВТОМОБИЛИ</a></li>
-                    <li><a title="" href="#">ФОРУМ</a></li>
-                    <li><a title="" href="/Home/Contacts">КОНТАКТИ</a></li>
+                    <li><a title="" asp-controller="Home" asp-action="Index">НАЧАЛО</a></li>
+                    <li><a title="" asp-controller="Vehicles" asp-action="GetAll">АВТОМОБИЛИ</a></li>
+                    <li><a title="" asp-controller="Home" asp-action="Contacts">КОНТАКТИ</a></li>
                 </ul>
             </div>
         </div>

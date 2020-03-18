@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Добавяне на снимки";
+}
+<div align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+    <form class="form" asp-action="UploadImage" asp-controller="Administration" method="post" enctype="multipart/form-data">
+        <label class="file-upload btn btn-primary">
+            Избери снимки... <input type="file" multiple id="photos" name="images" />
+        </label>
+        <button type="submit" class="btn btn-primary">Добави</button>
+    </form>
+</div>

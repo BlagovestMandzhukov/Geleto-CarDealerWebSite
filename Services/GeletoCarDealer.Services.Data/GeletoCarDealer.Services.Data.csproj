@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\GeletoCarDealer.Data.Common\GeletoCarDealer.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\GeletoCarDealer.Data.Models\GeletoCarDealer.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\GeletoCarDealer.Web.ViewModels\GeletoCarDealer.Web.ViewModels.csproj" />
     <ProjectReference Include="..\GeletoCarDealer.Services.Mapping\GeletoCarDealer.Services.Mapping.csproj" />
   </ItemGroup>
 

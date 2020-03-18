@@ -7,63 +7,55 @@
 <div align="center">
     <h1>Добавяне на автомобили</h1>
 </div>
-<form method="post" align="center">
+<form method="post" asp-controller="Administration" asp-action="Create" align="center" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="Make">Добави марка</label>
-            <input type="text" class="form-control" id="make" aria-describedby="make" placeholder="Добави марка">
+            <label asp-for="Make">Добави марка</label>
+            <input asp-for="Make" type="text" class="form-control" id="make" aria-describedby="make" placeholder="Добави марка">
             <span asp-validation-for="Make" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="Model">Добави модел</label>
-            <input type="text" class="form-control" id="model" placeholder="Добави модел">
+            <label asp-for="Model">Добави модел</label>
+            <input asp-for="Model" type="text" class="form-control" id="model" placeholder="Добави модел">
             <span asp-validation-for="Model" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
             <div asp-validation-summary="ModelOnly"></div>
-            <label for="Model">Година на производство</label>
-            <input type="number" class="form-control" id="year" placeholder="Година на производство">
+            <label asp-for="Year">Година на производство</label>
+            <input  asp-for="Year" type="number" class="form-control" id="year" placeholder="Година на производство">
             <span asp-validation-for="Year" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="milage">Пробег</label>
-            <input type="number" class="form-control" id="milage" placeholder="Пробег">
+            <label asp-for="Milage">Пробег</label>
+            <input asp-for="Milage" type="number" class="form-control" id="milage" placeholder="Пробег">
             <span asp-validation-for="Milage" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="category">Избери категория</label>
+            <label asp-for="Category">Избери категория</label>
             <select asp-for="@Model.Category" asp-items="@Html.GetEnumSelectList<CategoryType>()" placeholder="Категория" class="form-control">
                 <option selected="selected" value="">Избери категория</option>
             </select>
             <span asp-validation-for="Category" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="category">Двигател</label>
+            <label asp-for="FuelType">Двигател</label>
             <select asp-for="@Model.FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()" placeholder="Двигател" class="form-control">
                 <option selected="selected" value="">Избери двигател</option>
             </select>
             <span asp-validation-for="FuelType" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="price">Цена</label>
-            <input type="number" class="form-control" id="price" placeholder="Цена">
+            <label asp-for="Price">Цена</label>
+            <input asp-for="Price" type="number" class="form-control" id="price" placeholder="Цена">
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="horsePower">Мощност</label>
-            <input type="number" class="form-control" id="milage" placeholder="Мощност">
+            <label asp-for="HorsePower">Мощност</label>
+            <input asp-for="HorsePower" type="number" class="form-control" id="milage" placeholder="Мощност">
             <span asp-validation-for="HorsePower" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <div asp-validation-summary="ModelOnly"></div>
-            <label for="transmission">Трансмисия</label>
+            <label asp-for="TransmissionType">Трансмисия</label>
             <select asp-for="@Model.TransmissionType" asp-items="@Html.GetEnumSelectList<TransmissionType>()" placeholder="Трансмисия" class="form-control">
                 <option selected="selected" value="">Избери трансмисия</option>
             </select>
@@ -71,7 +63,7 @@
         </div>
     </div>
     <div>
-        <label align="center">Допълнителни екстри</label>
+        <label asp-for="Specifications" align="center">Допълнителни екстри</label>
         <table width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:10px;">
             <tr>
                 <td valign=top>
@@ -85,11 +77,6 @@
             </tr>
         </table>
         @Html.ValidationMessageFor(model => model.Specifications, "", new { @class = "text-danger" })
-    </div>
-    <div width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
-        <label class="file-upload btn btn-primary">
-            Избери снимки... <input type="file" multiple id="photos" name="images" />
-        </label>
     </div>
     <div  cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
         <button type="submit" class="btn btn-primary">Добави</button>
