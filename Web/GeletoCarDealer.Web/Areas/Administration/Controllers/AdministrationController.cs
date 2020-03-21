@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using GeletoCarDealer.Common;
     using GeletoCarDealer.Data.Common.Repositories;
+    using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
@@ -21,10 +22,16 @@
     public class AdministrationController : BaseController
     {
         private readonly Data.Common.Repositories.IDeletableEntityRepository<Image> repository;
+        private readonly IImageService imageService;
+        private readonly IVehicleService vehicleService;
 
-        public AdministrationController(IDeletableEntityRepository<Image> repository)
+        public AdministrationController(IDeletableEntityRepository<Image> repository,
+            IImageService imageService,
+            IVehicleService vehicleService)
         {
             this.repository = repository;
+            this.imageService = imageService;
+            this.vehicleService = vehicleService;
         }
 
         [Route("/[controller]/Admin")]
@@ -53,25 +60,10 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage(IList<IFormFile> images)
+        public async Task<IActionResult> Create(CreateInputModel inputModel)
         {
-            foreach (var file in this.Request.Form.Files)
-            {
-                Image img = new Image();
-                img.Title = file.FileName;
-
-                MemoryStream ms = new MemoryStream();
-                await file.CopyToAsync(ms);
-                img.ImageData = ms.ToArray();
-
-                ms.Close();
-                await ms.DisposeAsync();
-
-                await this.repository.AddAsync(img);
-                await this.repository.SaveChangesAsync();
-            }
-
-            return this.Redirect("/Home/GetAll");
+            this.vehicleService.CreateVehicleAsync(inputModel.Make, inputModel.Model, inputModel.Year, inputModel.Milage, inputModel.Category, inputModel.FuelType, inputModel.Price, inputModel.HorsePower, inputModel.TransmissionType, inputModel.Specifications, inputModel.Images);
+            return this.Redirect("/Home/Index");
         }
 
         public IActionResult Edit()

@@ -22,7 +22,7 @@
         <div class="form-group col-md-4">
             <div asp-validation-summary="ModelOnly"></div>
             <label asp-for="Year">Година на производство</label>
-            <input  asp-for="Year" type="number" class="form-control" id="year" placeholder="Година на производство">
+            <input asp-for="Year" type="number" class="form-control" id="year" placeholder="Година на производство">
             <span asp-validation-for="Year" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
@@ -72,13 +72,20 @@
                         @Html.DisplayFor(m => m.Specifications[i].Specification);
                         @Html.CheckBoxFor(m => m.Specifications[i].IsSelected);
                         @Html.HiddenFor(m => m.Specifications[i].Specification);
+                        @Html.HiddenFor(m => m.Specifications[i].Id);
                     }
                 </td>
             </tr>
         </table>
         @Html.ValidationMessageFor(model => model.Specifications, "", new { @class = "text-danger" })
     </div>
-    <div  cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+    <div align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+            <label class="file-upload btn btn-primary">
+                Избери снимки... <input type="file" multiple id="photos" name="images" />
+            </label>
+            <button type="submit" class="btn btn-primary">Добави</button>
+    </div>
+    <div cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
         <button type="submit" class="btn btn-primary">Добави</button>
     </div>
 </form>

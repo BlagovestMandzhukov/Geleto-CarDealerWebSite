@@ -1,7 +1,7 @@
 ﻿namespace GeletoCarDealer.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using GeletoCarDealer.Data;
     using GeletoCarDealer.Data.Common;
     using GeletoCarDealer.Data.Common.Repositories;
@@ -59,6 +59,16 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IVehicleService, VehicleService>();
+
+            Account account = new Account(
+                                this.configuration.GetSection("Cloudinary")["AppName"],
+                                this.configuration.GetSection("Cloudinary")["AppKey"],
+                                this.configuration.GetSection("Cloudinary")["AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

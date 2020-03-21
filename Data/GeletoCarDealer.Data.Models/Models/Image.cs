@@ -4,9 +4,9 @@
 
     public class Image : BaseDeletableModel<int>
     {
-        public string Title { get; set; }
+        public string Name { get; set; }
 
-        public byte[] ImageData { get; set; }
+        public string ImageUrl { get; set; }
 
         public int VehicleId { get; set; }
 
