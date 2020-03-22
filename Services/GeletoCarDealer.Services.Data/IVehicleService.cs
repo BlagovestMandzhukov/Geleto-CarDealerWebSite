@@ -8,7 +8,7 @@
 
     public interface IVehicleService
     {
-        Task<int> CreateVehicleAsync(string make, string model, int year, int milage, int category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images);
+        Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images);
 
     }
 }

@@ -7,13 +7,13 @@
         [Display(Name = "Автомобили и джипове")]
         Car = 1,
 
-        [Display(Name = "Мотоциклет")]
+        [Display(Name = "Мотоциклети")]
         Motorcycle = 2,
 
-        [Display(Name = "Бус")]
+        [Display(Name = "Бусове")]
         Bus = 3,
 
-        [Display(Name = "Камион")]
+        [Display(Name = "Камиони")]
         Truck = 4,
     }
 }

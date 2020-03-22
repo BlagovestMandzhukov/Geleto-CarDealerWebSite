@@ -3,7 +3,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
 
-    public class CategoryViewModel : IMapFrom<Category>
+    public class CategoryViewModel
     {
         public int Id { get; set; }
 

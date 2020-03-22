@@ -16,6 +16,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
@@ -25,7 +26,8 @@
         private readonly IImageService imageService;
         private readonly IVehicleService vehicleService;
 
-        public AdministrationController(IDeletableEntityRepository<Image> repository,
+        public AdministrationController(
+            IDeletableEntityRepository<Image> repository,
             IImageService imageService,
             IVehicleService vehicleService)
         {
@@ -53,16 +55,34 @@
             return this.View(model);
         }
 
-        [HttpGet]
-        public IActionResult UploadImage()
-        {
-            return this.View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(CreateInputModel inputModel)
         {
-            this.vehicleService.CreateVehicleAsync(inputModel.Make, inputModel.Model, inputModel.Year, inputModel.Milage, inputModel.Category, inputModel.FuelType, inputModel.Price, inputModel.HorsePower, inputModel.TransmissionType, inputModel.Specifications, inputModel.Images);
+            IList<string> specs = new List<string>();
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            foreach (var spec in inputModel.Specifications.Where(x => x.IsSelected == true))
+            {
+                  specs.Add(spec.Specification.ToString());
+            }
+
+            var vehicle = await this.vehicleService.CreateVehicleAsync(
+                inputModel.Make,
+                inputModel.Model,
+                inputModel.Year,
+                inputModel.Milage,
+                inputModel.Category,
+                inputModel.FuelType,
+                inputModel.Price,
+                inputModel.HorsePower,
+                inputModel.TransmissionType,
+                specs,
+                inputModel.Images);
+
             return this.Redirect("/Home/Index");
         }
 

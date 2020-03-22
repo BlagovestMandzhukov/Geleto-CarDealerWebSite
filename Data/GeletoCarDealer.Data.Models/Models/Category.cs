@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace GeletoCarDealer.Data.Models.Models
+﻿namespace GeletoCarDealer.Data.Models.Models
 {
+    using System.Collections.Generic;
+
     public class Category
     {
         public Category()
