@@ -54,6 +54,7 @@
         [StringLength(500, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Трябва да добавите поне една снимка")]
         public IList<IFormFile> Images { get; set; }
 
         public IList<SpecificationsViewModel> Specifications { get; set; }

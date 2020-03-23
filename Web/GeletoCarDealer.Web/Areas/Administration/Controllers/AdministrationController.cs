@@ -70,16 +70,20 @@
                   specs.Add(spec.Specification.ToString());
             }
 
+            var category = Enum.GetName(typeof(CategoryType), int.Parse(inputModel.Category));
+            var fuelType = Enum.GetName(typeof(FuelType), int.Parse(inputModel.FuelType));
+            var transmissionType = Enum.GetName(typeof(TransmissionType), int.Parse(inputModel.TransmissionType));
+
             var vehicle = await this.vehicleService.CreateVehicleAsync(
                 inputModel.Make,
                 inputModel.Model,
                 inputModel.Year,
                 inputModel.Milage,
-                inputModel.Category,
-                inputModel.FuelType,
+                category,
+                fuelType,
                 inputModel.Price,
                 inputModel.HorsePower,
-                inputModel.TransmissionType,
+                transmissionType,
                 specs,
                 inputModel.Images,
                 inputModel.Description);

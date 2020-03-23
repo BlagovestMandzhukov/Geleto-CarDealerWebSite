@@ -8,7 +8,5 @@
     public interface ICategoryService
     {
         Task<int> CreateCategory(string name);
-
-        Task AddVehicleToCategory(int vehicleId, int categoryId);
     }
 }

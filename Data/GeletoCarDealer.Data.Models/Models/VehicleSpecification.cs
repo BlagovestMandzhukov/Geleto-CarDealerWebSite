@@ -4,10 +4,9 @@
 
     public class VehicleSpecification
     {
-        public int Id { get; set; }
+        public int SpecificationId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        public virtual Specification Specification { get; set; }
 
         public int VehicleId { get; set; }
 

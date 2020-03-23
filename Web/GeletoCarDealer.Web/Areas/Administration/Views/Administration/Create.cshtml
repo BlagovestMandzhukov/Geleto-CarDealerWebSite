@@ -123,8 +123,9 @@
             }
         </style>
         <div class="field" align="center">
-            <label>Добави снимки</label>
-            <input type="file" id="files" name="files[]" multiple />
+            <label asp-for="@Model.Images">Добави снимки</label>
+            <input asp-for="@Model.Images" type="file" id="files" name="images" multiple />
+            <span asp-validation-for="Images" class="text-danger"></span>
         </div>
     </div>
     <div cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">

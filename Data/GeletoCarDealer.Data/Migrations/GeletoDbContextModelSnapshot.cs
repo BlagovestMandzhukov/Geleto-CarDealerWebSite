@@ -4,16 +4,14 @@ using GeletoCarDealer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    [Migration("20200306180335_newTable")]
-    partial class newTable
+    partial class GeletoDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,13 +159,30 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Images");
                 });
@@ -175,109 +190,31 @@ namespace GeletoCarDealer.Data.Migrations
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.Specification", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Specifications");
                 });
 
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleCategory", b =>
+            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleSpecification", b =>
                 {
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("SpecificationId")
                         .HasColumnType("int");
 
-                    b.HasKey("VehicleId", "CategoryId");
+                    b.HasKey("VehicleId", "SpecificationId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("SpecificationId");
 
-                    b.ToTable("VehiclesCategories");
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleMakeSelect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Make")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VehiclesMakeSelects");
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleModelSelect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MakeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("VehicleMakeSelectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VehicleMakeSelectId");
-
-                    b.ToTable("VehiclesModelSelects");
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleSpecificationsSelect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VehicleSpecificationsSelect");
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleYearSelect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("VehicleMakeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VehicleMakeSelectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VehicleMakeSelectId");
-
-                    b.ToTable("VehiclesYearSelects");
+                    b.ToTable("VehicleSpecifications");
                 });
 
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Setting", b =>
@@ -319,20 +256,26 @@ namespace GeletoCarDealer.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AddedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FuelType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HorsePower")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Make")
                         .IsRequired()
@@ -345,20 +288,33 @@ namespace GeletoCarDealer.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("SpecificationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TransmissionType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SpecificationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
                 });
@@ -476,55 +432,36 @@ namespace GeletoCarDealer.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.Specification", b =>
+            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleSpecification", b =>
                 {
+                    b.HasOne("GeletoCarDealer.Data.Models.Models.Specification", "Specification")
+                        .WithMany()
+                        .HasForeignKey("SpecificationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("GeletoCarDealer.Data.Models.Vehicle", "Vehicle")
                         .WithMany("Specifications")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleCategory", b =>
-                {
-                    b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("GeletoCarDealer.Data.Models.Vehicle", "Vehicle")
-                        .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleModelSelect", b =>
-                {
-                    b.HasOne("GeletoCarDealer.Data.Models.Models.VehicleMakeSelect", "VehicleMakeSelect")
-                        .WithMany("Models")
-                        .HasForeignKey("VehicleMakeSelectId");
-                });
-
-            modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.VehicleYearSelect", b =>
-                {
-                    b.HasOne("GeletoCarDealer.Data.Models.Models.VehicleMakeSelect", "VehicleMakeSelect")
-                        .WithMany("Years")
-                        .HasForeignKey("VehicleMakeSelectId");
-                });
-
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Vehicle", b =>
                 {
-                    b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Vehicles")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("GeletoCarDealer.Data.Models.Models.Specification", null)
+                        .WithMany("Vehicles")
+                        .HasForeignKey("SpecificationId");
+
+                    b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

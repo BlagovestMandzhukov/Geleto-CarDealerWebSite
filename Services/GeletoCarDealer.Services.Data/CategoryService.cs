@@ -14,32 +14,11 @@
     public class CategoryService : ICategoryService
     {
         private readonly IRepository<Category> categoryRepository;
-        private readonly IRepository<VehicleCategory> vehicleCategoryRepository;
 
         public CategoryService(
-            IRepository<Category> categoryRepository,
-            IRepository<VehicleCategory> vehicleCategoryRepository)
+            IRepository<Category> categoryRepository)
         {
             this.categoryRepository = categoryRepository;
-            this.vehicleCategoryRepository = vehicleCategoryRepository;
-        }
-
-        public async Task AddVehicleToCategory(int vehicleId, int categoryId)
-        {
-            var vehicle = await this.vehicleCategoryRepository.All().FirstOrDefaultAsync(x => x.VehicleId == vehicleId);
-            var category = await this.vehicleCategoryRepository.All().FirstOrDefaultAsync(x => x.CategoryId == categoryId);
-
-            if (vehicle == null && category == null)
-            {
-                var vc = new VehicleCategory
-                {
-                    CategoryId = categoryId,
-                    VehicleId = vehicleId,
-                };
-
-                await this.vehicleCategoryRepository.AddAsync(vc);
-                await this.vehicleCategoryRepository.SaveChangesAsync();
-            }
         }
 
         public async Task<int> CreateCategory(string name)

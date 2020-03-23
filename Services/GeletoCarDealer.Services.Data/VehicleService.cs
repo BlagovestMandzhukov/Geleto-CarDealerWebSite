@@ -19,15 +19,21 @@
         private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
         private readonly IImageService imageService;
         private readonly ICategoryService categoryService;
+        private readonly IRepository<Specification> specRepository;
+        private readonly IRepository<VehicleSpecification> vehicleSpecRepository;
 
         public VehicleService(
-            IDeletableEntityRepository<Vehicle> vehicleRepository, 
+            IDeletableEntityRepository<Vehicle> vehicleRepository,
             IImageService imageService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            IRepository<Specification> specRepository,
+            IRepository<VehicleSpecification> vehicleSpecRepository)
         {
             this.vehicleRepository = vehicleRepository;
             this.imageService = imageService;
             this.categoryService = categoryService;
+            this.specRepository = specRepository;
+            this.vehicleSpecRepository = vehicleSpecRepository;
         }
 
         public async Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description)
@@ -46,23 +52,34 @@
             };
 
             var categoryId = await this.categoryService.CreateCategory(category);
-            //await this.categoryService.AddVehicleToCategory(vehicle.Id, categoryId);
             vehicle.CategoryId = categoryId;
-
             await this.vehicleRepository.AddAsync(vehicle);
             await this.vehicleRepository.SaveChangesAsync();
 
             foreach (var spec in specifications)
             {
-                var vs = new VehicleSpecification
+                var specification = await this.specRepository.All().FirstOrDefaultAsync(x => x.Name == spec);
+                if (specification == null)
                 {
-                    Name = spec,
+                    var newSpec = new Specification
+                    {
+                        Name = spec,
+                    };
+
+                    await this.specRepository.AddAsync(newSpec);
+                    await this.specRepository.SaveChangesAsync();
+                    specification = newSpec;
+                }
+
+                var vehicleSpec = new VehicleSpecification
+                {
+                    SpecificationId = specification.Id,
                     VehicleId = vehicle.Id,
                 };
-
-                vehicle.Specifications.Add(vs);
-
+                await this.vehicleSpecRepository.AddAsync(vehicleSpec);
             };
+
+            await this.vehicleSpecRepository.SaveChangesAsync();
             await this.vehicleRepository.SaveChangesAsync();
             await this.imageService.UploadImageAsync(vehicle.Id, images);
             return vehicle.Id;

@@ -30,9 +30,9 @@
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<VehicleCategory> VehiclesCategories { get; set; }
-
         public DbSet<VehicleSpecification> VehicleSpecifications { get; set; }
+
+        public DbSet<Specification> Specifications { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 
@@ -62,13 +62,9 @@
                 .WithOne(v => v.Vehicle)
                 .HasForeignKey(i => i.Id);
 
-            builder.Entity<Vehicle>()
-                .HasMany(s => s.Specifications)
-                .WithOne(v => v.Vehicle)
-                .HasForeignKey(s => s.Id);
 
-            builder.Entity<VehicleCategory>()
-                .HasKey(x => new { x.VehicleId, x.CategoryId });
+            builder.Entity<VehicleSpecification>()
+                .HasKey(x => new { x.VehicleId, x.SpecificationId });
 
             builder.Entity<ApplicationUser>()
                 .HasMany(v => v.Vehicles)
