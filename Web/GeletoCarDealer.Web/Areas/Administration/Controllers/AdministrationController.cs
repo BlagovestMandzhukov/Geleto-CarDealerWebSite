@@ -81,7 +81,8 @@
                 inputModel.HorsePower,
                 inputModel.TransmissionType,
                 specs,
-                inputModel.Images);
+                inputModel.Images,
+                inputModel.Description);
 
             return this.Redirect("/Home/Index");
         }

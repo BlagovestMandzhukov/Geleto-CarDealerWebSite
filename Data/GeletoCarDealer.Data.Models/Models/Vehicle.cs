@@ -46,5 +46,7 @@
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string TransmissionType { get; set; }
+
+        public string Description { get; set; }
     }
 }

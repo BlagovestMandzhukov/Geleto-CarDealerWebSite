@@ -62,7 +62,11 @@
 
             foreach (var imageUrl in list)
             {
-                var image = new Image { ImageUrl = imageUrl };
+                var image = new Image
+                {
+                    ImageUrl = imageUrl,
+                    VehicleId = vehicle.Id,
+                };
                 vehicle.Images.Add(image);
             }
 

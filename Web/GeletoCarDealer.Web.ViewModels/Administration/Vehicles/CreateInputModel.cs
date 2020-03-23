@@ -26,7 +26,7 @@
 
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(1, int.MaxValue)]
+        [Range(1, int.MaxValue, ErrorMessage = "Полето е задължително")]
         public int Year { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
@@ -34,22 +34,25 @@
         public string Category { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(1, int.MaxValue)]
+        [Range(1, int.MaxValue, ErrorMessage = "Полето е задължително")]
         public int Milage { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         public string FuelType { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(1, int.MaxValue)]
+        [Range(1, int.MaxValue, ErrorMessage = "Полето е задължително")]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(1, int.MaxValue)]
+        [Range(1, int.MaxValue, ErrorMessage = "Полето е задължително")]
         public int HorsePower { get; set; }
 
         [Required]
         public string TransmissionType { get; set; }
+
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+        public string Description { get; set; }
 
         public IList<IFormFile> Images { get; set; }
 
