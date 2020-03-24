@@ -259,7 +259,6 @@ namespace GeletoCarDealer.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
                     VehicleId = table.Column<int>(nullable: false)
                 },

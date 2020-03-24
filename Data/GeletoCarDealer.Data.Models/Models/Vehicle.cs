@@ -20,10 +20,6 @@
         [Required]
         public string Model { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
-
-        public virtual ICollection<VehicleSpecification> Specifications { get; set; }
-
         [Range(1, int.MaxValue)]
         public int Year { get; set; }
 
@@ -48,5 +44,9 @@
         public string TransmissionType { get; set; }
 
         public string Description { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+
+        public virtual ICollection<VehicleSpecification> Specifications { get; set; }
     }
 }

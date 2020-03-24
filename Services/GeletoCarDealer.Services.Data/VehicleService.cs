@@ -10,6 +10,7 @@
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,11 @@
             this.vehicleSpecRepository = vehicleSpecRepository;
         }
 
+
         public async Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description)
         {
+            var categoryId = await this.categoryService.CreateCategory(category);
+
             var vehicle = new Vehicle
             {
                 Make = make,
@@ -47,12 +51,11 @@
                 FuelType = fuelType,
                 Price = price,
                 HorsePower = horsePower,
+                CategoryId = categoryId,
                 TransmissionType = transmission,
                 Description = description,
             };
 
-            var categoryId = await this.categoryService.CreateCategory(category);
-            vehicle.CategoryId = categoryId;
             await this.vehicleRepository.AddAsync(vehicle);
             await this.vehicleRepository.SaveChangesAsync();
 
@@ -79,10 +82,17 @@
                 await this.vehicleSpecRepository.AddAsync(vehicleSpec);
             };
 
+            await this.imageService.UploadImageAsync(vehicle, images);
             await this.vehicleSpecRepository.SaveChangesAsync();
             await this.vehicleRepository.SaveChangesAsync();
-            await this.imageService.UploadImageAsync(vehicle.Id, images);
             return vehicle.Id;
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
+
+            return query.To<T>().ToList();
         }
     }
 }

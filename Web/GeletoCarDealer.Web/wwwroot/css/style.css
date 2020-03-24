@@ -909,13 +909,13 @@ iframe {
 .vehicul-thumb {
     float: left;
     position: relative;
-    width: 100%;
+    width: 30%;
 }
 
     .vehicul-thumb > img {
         float: left;
-        width: 100%;
-        height: 430px;
+        width: 30%;
+        height: 50%;
     }
 
     .vehicul-thumb:hover > .vehicul-post-detail {
@@ -3274,7 +3274,6 @@ body.fixed-bg-boxed {
 .vehiculs-box {
     float: left;
     margin-top: 30px;
-    width: 100%;
 }
 
 .agnet-prop .vehiculs-box, .agnet-prop .vehicul-post {
@@ -3287,19 +3286,19 @@ body.fixed-bg-boxed {
 
 .agnet-prop .filter-wrapper {
     margin-bottom: 45px;
+    margin-top: 60px
 }
 
 .vehiculs-thumb {
     float: left;
     position: relative;
-    width: 100%;
+    width: 30%;
     z-index: 0;
 }
 
     .vehiculs-thumb > img {
         float: left;
         width: 100%;
-        min-height: 350px;
         max-height: 350px;
     }
 
@@ -3389,12 +3388,12 @@ body.fixed-bg-boxed {
 
 .vehiculs-box > h3 {
     color: #1b1d21;
-    float: left;
     font-family: Montserrat;
-    font-size: 19px;
+    font-size: 22px;
     font-weight: bold;
     margin: 22px 0 7px;
     width: 100%;
+    margin-left: 15px;
 }
 
     .vehiculs-box > h3 a {
@@ -3402,9 +3401,9 @@ body.fixed-bg-boxed {
     }
 
 .vehiculs-box span.price {
-    float: left;
     font-family: Montserrat;
-    font-size: 22px;
+    font-size: 30px;
+    margin-left: 15px;
 }
 
 .vehiculs-thumb::before {

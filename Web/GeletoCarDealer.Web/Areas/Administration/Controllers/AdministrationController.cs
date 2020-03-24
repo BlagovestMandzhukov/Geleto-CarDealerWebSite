@@ -17,23 +17,24 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using GeletoCarDealer.Services.Mapping;
 
     //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
     public class AdministrationController : BaseController
     {
-        private readonly Data.Common.Repositories.IDeletableEntityRepository<Image> repository;
         private readonly IImageService imageService;
         private readonly IVehicleService vehicleService;
+        private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
         public AdministrationController(
-            IDeletableEntityRepository<Image> repository,
             IImageService imageService,
-            IVehicleService vehicleService)
+            IVehicleService vehicleService,
+            IDeletableEntityRepository<Vehicle> vehicleRepository)
         {
-            this.repository = repository;
             this.imageService = imageService;
             this.vehicleService = vehicleService;
+            this.vehicleRepository = vehicleRepository;
         }
 
         [Route("/[controller]/Admin")]
@@ -91,9 +92,13 @@
             return this.Redirect("/Home/Index");
         }
 
-        public IActionResult Edit()
+        public IActionResult AllVehicles()
         {
-            return this.View();
+            var viewModel = new AllVehiclesViewModel();
+
+            var vehicles = this.vehicleRepository.All().To<VehiclesViewModel>().ToList();
+            viewModel.Vehicles = vehicles;
+            return this.View(viewModel);
         }
     }
 }

@@ -26,10 +26,8 @@
             this.cloudinary = cloudinary;
         }
 
-        public async Task UploadImageAsync(int id, IList<IFormFile> files)
+        public async Task UploadImageAsync(Vehicle vehicle, IList<IFormFile> files)
         {
-            var list = new List<string>();
-
             foreach (var file in files)
             {
                 byte[] imasgeDestination;
@@ -48,29 +46,14 @@
                     };
 
                     var res = await this.cloudinary.UploadAsync(uploadParams);
-                    list.Add(res.Uri.AbsoluteUri);
+
+                    var image = new Image { ImageUrl = res.Uri.AbsoluteUri };
+
+                    vehicle.Images.Add(image);
                 }
-
             }
 
-            var vehicle = await this.vehiclesRepository.All().Include(x => x.Images).FirstOrDefaultAsync(x => x.Id == id);
-
-            if (vehicle == null)
-            {
-                return;
-            }
-
-            foreach (var imageUrl in list)
-            {
-                var image = new Image
-                {
-                    ImageUrl = imageUrl,
-                    VehicleId = vehicle.Id,
-                };
-                vehicle.Images.Add(image);
-            }
-
-            await this.vehiclesRepository.SaveChangesAsync();
+            await this.imageRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Image>> GetImagesAsync(int id)
