@@ -5,21 +5,28 @@
     using System.Linq;
     using GeletoCarDealer.Data;
     using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels;
-
+    using GeletoCarDealer.Web.ViewModels.Home.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly GeletoDbContext db;
+        private readonly IVehicleService vehicleService;
 
-        public HomeController(GeletoDbContext db)
+        public HomeController(IVehicleService vehicleService)
         {
-            this.db = db;
+            this.vehicleService = vehicleService;
         }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new AllVehiclesViewModel
+            {
+                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult Contacts()

@@ -1,39 +1,85 @@
 ﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.AllVehiclesViewModel
+@using GeletoCarDealer.Data.Models.Enums
 @{
     ViewData["Title"] = "Моите автомобили";
 }
-<div class="container agnet-prop">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="filter-wrapper">
-                <ol class="list-option-filter">
-                    <li class="sort-rates-lastest">
-                        <div class="option-filter-box">
-                            <span class="title">СОРТИРАЙ:</span>
-                            <a href="" class="sort-icon orderby" data-order="" data-sort="rating_score">
-                                Цена
-                            </a> /
-                            <a href="" class="sort-icon orderby active" data-order="" data-sort="date">
-                                Последно добавени
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-                <div class="clearfix"></div>
-                @foreach (var vehicle in Model.Vehicles)
-                {
 
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                        <div>
-                            <a asp-controller="Administration" asp-action="AllVehicles" asp-route-id="@vehicle.Id">
-                                <div class="card-img-top zoom">
-                                    <img src="@vehicle.ImageUrl" alt="@vehicle.Make">
+@foreach (var vehicle in Model.Vehicles)
+{
+    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
+    <div class="recommended-cars">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row py-2">
+                                <div class="col-md-4 vertical-box">
+                                    <div class="card">
+                                        <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="Card image">
+                                        <div class="card-body">
+                                            <h4 class="card-title mw30-text">
+                                                @vehicle.Year | @vehicle.Make | @vehicle.Model
+                                            </h4>
+                                            <h5 class="card-text">@vehicle.Price лв.</h5>
+
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">@vehicle.Milage Km</li>
+                                                <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
+                                                <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-success">Contact Sellers</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
+                                <div class="col-md-4 vertical-box">
+                                    <div class="card">
+                                        <img class="card-img-top mh200-text" src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg" alt="Card image">
+                                        <div class="card-body">
+                                            <h4 class="card-title mw30-text">
+                                                2006 Toyota Innova 2.5 V Diesel 7-seater
+                                                2006 Toyota Innova 2.5 V Diesel 7-se
+                                            </h4>
+                                            <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">44,114 Km</li>
+                                                <li class="list-inline-item">Petrol</li>
+                                                <li class="list-inline-item">Gurugram</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-outline-danger">Contact Sellers</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 vertical-box">
+                                    <div class="card">
+                                        <img class="card-img-top mh200-text" src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg" alt="Card image">
+                                        <div class="card-body">
+                                            <h4 class="card-title mw30-text">
+                                                2006 Toyota Innova 2.5 V Diesel 7-seater
+                                                2006 Toyota Innova 2.5 V Diesel 7-se
+                                            </h4>
+                                            <h5 class="card-text">Rs. 25.32 Lac*</h5>
+
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">44,114 Km</li>
+                                                <li class="list-inline-item">Petrol</li>
+                                                <li class="list-inline-item">Gurugram</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-outline-danger">Contact Sellers</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                }
                 </div>
             </div>
         </div>
     </div>
+
+}
+

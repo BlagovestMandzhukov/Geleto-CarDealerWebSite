@@ -25,16 +25,13 @@
     {
         private readonly IImageService imageService;
         private readonly IVehicleService vehicleService;
-        private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
         public AdministrationController(
             IImageService imageService,
-            IVehicleService vehicleService,
-            IDeletableEntityRepository<Vehicle> vehicleRepository)
+            IVehicleService vehicleService)
         {
             this.imageService = imageService;
             this.vehicleService = vehicleService;
-            this.vehicleRepository = vehicleRepository;
         }
 
         [Route("/[controller]/Admin")]
@@ -89,15 +86,16 @@
                 inputModel.Images,
                 inputModel.Description);
 
-            return this.Redirect("/Home/Index");
+            return this.Redirect("/Administration/AllVehicles");
         }
 
         public IActionResult AllVehicles()
         {
-            var viewModel = new AllVehiclesViewModel();
+            var viewModel = new AllVehiclesViewModel
+            {
+                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
+            };
 
-            var vehicles = this.vehicleRepository.All().To<VehiclesViewModel>().ToList();
-            viewModel.Vehicles = vehicles;
             return this.View(viewModel);
         }
     }

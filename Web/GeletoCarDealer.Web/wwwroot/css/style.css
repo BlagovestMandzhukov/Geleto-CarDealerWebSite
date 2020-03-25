@@ -55,6 +55,7 @@ body {
     font-family: open sans;
     letter-spacing: 0.4px;
     color: #777777;
+    margin-top: 50px;
     position: relative;
 }
 
@@ -69,6 +70,16 @@ p {
     line-height: 26px;
     font-size: 14px;
     letter-spacing: 0.4px;
+}
+.mw30-text {
+    /*max-height: 30px;*/
+    overflow: hidden;
+}
+
+.mh200-text {
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 input[type="checkbox"] {
@@ -129,7 +140,7 @@ input[type="file"] {
 ul li, ul li a,
 ol li, ol li a {
     font-family: open sans;
-    color: white;
+    color: black;
     font-size: 14px;
     line-height: 26px;
     list-style-type:none;
@@ -3149,6 +3160,7 @@ html.no-scroll {
 
 header.white > .menu {
     background: rgba(255, 255, 255, 0.98) none repeat scroll 0 0;
+    height:113px;
 }
 
     header.white > .menu .logo span {

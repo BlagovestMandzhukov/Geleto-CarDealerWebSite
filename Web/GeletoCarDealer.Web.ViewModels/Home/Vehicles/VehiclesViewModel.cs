@@ -1,4 +1,4 @@
-﻿namespace GeletoCarDealer.Web.ViewModels.Administration.Vehicles
+﻿namespace GeletoCarDealer.Web.ViewModels.Home.Vehicles
 {
     using System;
     using System.Collections.Generic;

@@ -28,6 +28,8 @@
 
         public async Task UploadImageAsync(Vehicle vehicle, IList<IFormFile> files)
         {
+            var list = new List<string>();
+
             foreach (var file in files)
             {
                 byte[] imasgeDestination;
@@ -46,14 +48,20 @@
                     };
 
                     var res = await this.cloudinary.UploadAsync(uploadParams);
+                    list.Add(res.Uri.AbsoluteUri);
 
-                    var image = new Image { ImageUrl = res.Uri.AbsoluteUri };
+                }
+
+                foreach (var url in list)
+                {
+                    var image = new Image
+                    {
+                        ImageUrl = url,
+                    };
 
                     vehicle.Images.Add(image);
                 }
             }
-
-            await this.imageRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Image>> GetImagesAsync(int id)

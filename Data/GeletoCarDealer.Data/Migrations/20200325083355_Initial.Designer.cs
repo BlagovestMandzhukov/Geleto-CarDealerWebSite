@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    [Migration("20200324172133_Initial")]
+    [Migration("20200325083355_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,7 +159,9 @@ namespace GeletoCarDealer.Data.Migrations
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Models.Image", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -182,6 +184,8 @@ namespace GeletoCarDealer.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Images");
                 });
@@ -255,6 +259,9 @@ namespace GeletoCarDealer.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -300,20 +307,20 @@ namespace GeletoCarDealer.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("SpecificationId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
                 });
@@ -426,7 +433,7 @@ namespace GeletoCarDealer.Data.Migrations
                 {
                     b.HasOne("GeletoCarDealer.Data.Models.Vehicle", "Vehicle")
                         .WithMany("Images")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -448,6 +455,10 @@ namespace GeletoCarDealer.Data.Migrations
 
             modelBuilder.Entity("GeletoCarDealer.Data.Models.Vehicle", b =>
                 {
+                    b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Category", "Category")
                         .WithMany("Vehicles")
                         .HasForeignKey("CategoryId")
@@ -457,10 +468,6 @@ namespace GeletoCarDealer.Data.Migrations
                     b.HasOne("GeletoCarDealer.Data.Models.Models.Specification", null)
                         .WithMany("Vehicles")
                         .HasForeignKey("SpecificationId");
-
-                    b.HasOne("GeletoCarDealer.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

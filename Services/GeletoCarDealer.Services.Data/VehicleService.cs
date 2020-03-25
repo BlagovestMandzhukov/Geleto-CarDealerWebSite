@@ -37,7 +37,6 @@
             this.vehicleSpecRepository = vehicleSpecRepository;
         }
 
-
         public async Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description)
         {
             var categoryId = await this.categoryService.CreateCategory(category);
@@ -91,7 +90,6 @@
         public IEnumerable<T> GetAll<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
-
             return query.To<T>().ToList();
         }
     }

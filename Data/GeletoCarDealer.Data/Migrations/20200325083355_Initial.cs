@@ -223,6 +223,7 @@ namespace GeletoCarDealer.Data.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     HorsePower = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     TransmissionType = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     SpecificationId = table.Column<int>(nullable: true)
@@ -230,6 +231,12 @@ namespace GeletoCarDealer.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vehicles_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Vehicles_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -242,19 +249,14 @@ namespace GeletoCarDealer.Data.Migrations
                         principalTable: "Specifications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -266,8 +268,8 @@ namespace GeletoCarDealer.Data.Migrations
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_Vehicles_Id",
-                        column: x => x.Id,
+                        name: "FK_Images_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -352,9 +354,19 @@ namespace GeletoCarDealer.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_VehicleId",
+                table: "Images",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_ApplicationUserId",
+                table: "Vehicles",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_CategoryId",
@@ -370,11 +382,6 @@ namespace GeletoCarDealer.Data.Migrations
                 name: "IX_Vehicles_SpecificationId",
                 table: "Vehicles",
                 column: "SpecificationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_UserId",
-                table: "Vehicles",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleSpecifications_SpecificationId",
@@ -415,13 +422,13 @@ namespace GeletoCarDealer.Data.Migrations
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Specifications");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

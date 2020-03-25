@@ -60,16 +60,20 @@
             builder.Entity<Vehicle>()
                 .HasMany(i => i.Images)
                 .WithOne(v => v.Vehicle)
-                .HasForeignKey(i => i.Id);
-
+                .HasForeignKey(v => v.VehicleId);
 
             builder.Entity<VehicleSpecification>()
-                .HasKey(x => new { x.VehicleId, x.SpecificationId });
+                .HasKey(vs => new { vs.VehicleId, vs.SpecificationId });
 
-            builder.Entity<ApplicationUser>()
-                .HasMany(v => v.Vehicles)
-                .WithOne(u => u.ApplicationUser)
-                .HasForeignKey(v => v.UserId);
+            builder.Entity<VehicleSpecification>()
+                .HasOne(vs => vs.Vehicle)
+                .WithMany(s => s.Specifications)
+                .HasForeignKey(vs => vs.VehicleId);
+
+            builder.Entity<VehicleSpecification>()
+                .HasOne(vs => vs.Specification)
+                .WithMany(v => v.Vehicles)
+                .HasForeignKey(vs => vs.SpecificationId);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
