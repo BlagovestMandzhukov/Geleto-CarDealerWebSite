@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Моите автомобили";
 }
-
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div class="theme-layout"></div>
 @foreach (var vehicle in Model.Vehicles)
 {
     var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
@@ -17,7 +19,7 @@
                             <div class="row py-2">
                                 <div class="col-md-4 vertical-box">
                                     <div class="card">
-                                        <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="Card image">
+                                        <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="@vehicle.Make">
                                         <div class="card-body">
                                             <h4 class="card-title mw30-text">
                                                 @vehicle.Year | @vehicle.Make | @vehicle.Model
@@ -29,7 +31,7 @@
                                                 <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
                                                 <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
                                             </ul>
-                                            <button type="button" class="btn btn-success">Contact Sellers</button>
+                                            <a href="/Administration/Administration/VehicleById?id=@vehicle.Id" class="btn bg-success text-white">Детайли</a>
                                         </div>
                                     </div>
                                 </div>

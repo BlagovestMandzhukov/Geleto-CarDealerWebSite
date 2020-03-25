@@ -98,5 +98,18 @@
 
             return this.View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult VehicleById(int id)
+        {
+            var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
+
+            if (vehicle == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(vehicle);
+        }
     }
 }

@@ -1,0 +1,85 @@
+﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.VehicleDetailsViewModel
+@using GeletoCarDealer.Data.Models.Enums
+
+@{
+    ViewData["Title"] = "Добавяне на автомобили";
+}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .mySlides {
+        display: none;
+    }
+</style>
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div class="theme-layout"></div>
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                        <div class="w3-content" style="max-width:1200px;">
+                            @foreach (var image in Model.Images)
+                            {
+                                <img class="mySlides" id="@image.Id" src="@image.ImageUrl" style="width:100%">
+                            }
+                            <div class="w3-row-padding w3-section">
+                                @for (int i = 0; i < Model.Images.Count; i++)
+                                {
+                                    <div class="w3-col s4">
+                                        <img class="demo w3-opacity w3-hover-opacity-off" src="@Model.Images[i].ImageUrl" style="width:100%;cursor:pointer" onclick="currentDiv(@Model.Images[i].Id)">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
+                        var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
+                    }
+                    <div class="details col-md-6" >
+                        <h3 asp-for="@Model.Make" class="product-title">@Model.Make  @Model.Model</h3>
+                        <h4 asp-for="@Model.Price" class="price">Цена: <span>@Model.Price лв.</span></h4>
+                        <p asp-for="@Model.Year" class="colors">
+                            Година на производство:   @Model.Year г.
+                        </p>
+                        <p asp-for="@Model.HorsePower" class="colors">
+                            Мощност:   @Model.HorsePower к.с.
+                        </p>
+                        <p asp-for="@Model.FuelType" class="colors">
+                            Тип двигател:    @Html.DisplayFor(e => fuelType)
+                        </p>
+                        <p asp-for="@Model.TransmissionType" class="colors">
+                            Скоростна кутия:    @Html.DisplayFor(t => transmissionType)
+                        </p>
+                        <p asp-for="@Model.Milage" class="colors">
+                            Пробег:   @Model.Milage км
+                        </p>
+                        <p asp-for="@Model.Description" class="product-description">@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function currentDiv(n) {
+            showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-opacity-off";
+        }
+    </script>

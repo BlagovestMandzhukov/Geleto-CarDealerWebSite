@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Http;
@@ -12,5 +13,6 @@
 
         IEnumerable<T> GetAll<T>();
 
+        T GetById<T>(int id);
     }
 }

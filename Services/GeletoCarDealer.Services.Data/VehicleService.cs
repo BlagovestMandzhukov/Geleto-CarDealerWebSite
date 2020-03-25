@@ -92,5 +92,14 @@
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
             return query.To<T>().ToList();
         }
+
+        public T GetById<T>(int id)
+        {
+            var vehicle = this.vehicleRepository.All()
+                .Include(x => x.Images)
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return vehicle;
+        }
     }
 }
