@@ -1,8 +1,8 @@
-﻿namespace GeletoCarDealer.Web.ViewModels.Administration.Vehicles
+﻿namespace GeletoCarDealer.Web.ViewModels.Administration.Specifications
 {
     using GeletoCarDealer.Data.Models.Enums;
 
-    public class SpecificationsViewModel
+    public class SpecificationsInputModel
     {
         public int Id { get; set; }
 

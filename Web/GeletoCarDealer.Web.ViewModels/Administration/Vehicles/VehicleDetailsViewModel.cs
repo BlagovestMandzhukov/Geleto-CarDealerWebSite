@@ -8,6 +8,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.ViewModels.Administration.Images;
+    using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
 
     public class VehicleDetailsViewModel : IMapFrom<Vehicle>, IMapFrom<Image>, IMapFrom<Specification>
     {
@@ -33,12 +34,7 @@
 
         public IList<ImagesViewModel> Images{ get; set; }
 
-        //public ICollection<string> Specifications { get; set; }
+        public ICollection<VehicleSpecificationsViewModel> Specifications { get; set; }
 
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration.CreateMap<Vehicle, VehicleDetailsViewModel>()
-        //        .ForMember(x => x.ImageUrl, cfg => cfg.MapFrom(x => x.Images.FirstOrDefault().ImageUrl));
-        //}
     }
 }

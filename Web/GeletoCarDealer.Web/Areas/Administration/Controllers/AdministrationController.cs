@@ -18,6 +18,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using GeletoCarDealer.Services.Mapping;
+    using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
 
     //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
@@ -43,11 +44,11 @@
         public IActionResult Create()
         {
             var model = new CreateInputModel();
-            model.Specifications = new List<SpecificationsViewModel>();
+            model.Specifications = new List<SpecificationsInputModel>();
 
             foreach (Specifications spec in Enum.GetValues(typeof(Specifications)))
             {
-                model.Specifications.Add(new SpecificationsViewModel { Specification = spec, IsSelected = false });
+                model.Specifications.Add(new SpecificationsInputModel { Specification = spec, IsSelected = false });
             }
 
             return this.View(model);
@@ -86,7 +87,7 @@
                 inputModel.Images,
                 inputModel.Description);
 
-            return this.Redirect("/Administration/AllVehicles");
+            return this.Redirect("/Administration/Administration/AllVehicles");
         }
 
         public IActionResult AllVehicles()

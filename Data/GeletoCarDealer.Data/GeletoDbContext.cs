@@ -30,8 +30,6 @@
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<VehicleSpecification> VehicleSpecifications { get; set; }
-
         public DbSet<Specification> Specifications { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
@@ -62,18 +60,23 @@
                 .WithOne(v => v.Vehicle)
                 .HasForeignKey(v => v.VehicleId);
 
-            builder.Entity<VehicleSpecification>()
-                .HasKey(vs => new { vs.VehicleId, vs.SpecificationId });
+            builder.Entity<Vehicle>()
+                .HasMany(s => s.Specifications)
+                .WithOne(v => v.Vehicle)
+                .HasForeignKey(v => v.VehicleId);
 
-            builder.Entity<VehicleSpecification>()
-                .HasOne(vs => vs.Vehicle)
-                .WithMany(s => s.Specifications)
-                .HasForeignKey(vs => vs.VehicleId);
+            //builder.Entity<VehicleSpecification>()
+            //    .HasKey(vs => new { vs.VehicleId, vs.SpecificationId });
 
-            builder.Entity<VehicleSpecification>()
-                .HasOne(vs => vs.Specification)
-                .WithMany(v => v.Vehicles)
-                .HasForeignKey(vs => vs.SpecificationId);
+            //builder.Entity<VehicleSpecification>()
+            //    .HasOne(vs => vs.Vehicle)
+            //    .WithMany(s => s.Specifications)
+            //    .HasForeignKey(vs => vs.VehicleId);
+
+            //builder.Entity<VehicleSpecification>()
+            //    .HasOne(vs => vs.Specification)
+            //    .WithMany(v => v.Vehicles)
+            //    .HasForeignKey(vs => vs.SpecificationId);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

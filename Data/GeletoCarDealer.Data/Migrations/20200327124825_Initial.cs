@@ -86,19 +86,6 @@ namespace GeletoCarDealer.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Specifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Specifications", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -225,8 +212,7 @@ namespace GeletoCarDealer.Data.Migrations
                     UserId = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     TransmissionType = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    SpecificationId = table.Column<int>(nullable: true)
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -241,12 +227,6 @@ namespace GeletoCarDealer.Data.Migrations
                         name: "FK_Vehicles_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_Specifications_SpecificationId",
-                        column: x => x.SpecificationId,
-                        principalTable: "Specifications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -276,23 +256,19 @@ namespace GeletoCarDealer.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VehicleSpecifications",
+                name: "Specifications",
                 columns: table => new
                 {
-                    SpecificationId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
                     VehicleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleSpecifications", x => new { x.VehicleId, x.SpecificationId });
+                    table.PrimaryKey("PK_Specifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VehicleSpecifications_Specifications_SpecificationId",
-                        column: x => x.SpecificationId,
-                        principalTable: "Specifications",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_VehicleSpecifications_Vehicles_VehicleId",
+                        name: "FK_Specifications_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
@@ -364,6 +340,11 @@ namespace GeletoCarDealer.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Specifications_VehicleId",
+                table: "Specifications",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_ApplicationUserId",
                 table: "Vehicles",
                 column: "ApplicationUserId");
@@ -377,16 +358,6 @@ namespace GeletoCarDealer.Data.Migrations
                 name: "IX_Vehicles_IsDeleted",
                 table: "Vehicles",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_SpecificationId",
-                table: "Vehicles",
-                column: "SpecificationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VehicleSpecifications_SpecificationId",
-                table: "VehicleSpecifications",
-                column: "SpecificationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -413,7 +384,7 @@ namespace GeletoCarDealer.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
-                name: "VehicleSpecifications");
+                name: "Specifications");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -426,9 +397,6 @@ namespace GeletoCarDealer.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Specifications");
         }
     }
 }

@@ -4,82 +4,123 @@
 @{
     ViewData["Title"] = "Добавяне на автомобили";
 }
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-    .mySlides {
-        display: none;
-    }
-</style>
+@{
+    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
+    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
+}
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
-<div class="container">
-    <div class="card">
-        <div class="container-fliud">
-            <div class="wrapper row">
-                <div class="preview col-md-6">
-                    <div class="preview-pic tab-content">
-                        <div class="w3-content" style="max-width:1200px;">
-                            @foreach (var image in Model.Images)
-                            {
-                                <img class="mySlides" id="@image.Id" src="@image.ImageUrl" style="width:100%">
-                            }
-                            <div class="w3-row-padding w3-section">
-                                @for (int i = 0; i < Model.Images.Count; i++)
-                                {
-                                    <div class="w3-col s4">
-                                        <img class="demo w3-opacity w3-hover-opacity-off" src="@Model.Images[i].ImageUrl" style="width:100%;cursor:pointer" onclick="currentDiv(@Model.Images[i].Id)">
+<section class="block">
+    <div class="container">
+        <h1>@Model.Make @Model.Model @Model.Year</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-8 column">
+                        <div class="single-post-sec">
+                            <div class="blog-post vehicul-post">
+                                <ul class="pgwSlider">
+                                    @foreach (var image in Model.Images)
+                                    {
+                                        <li>
+                                            <a href="@image.ImageUrl" target="_blank"><img src="@image.ImageUrl" alt="@Model.Make" /></a>
+                                            <span>@Model.Make  @Model.Model</span>
+                                        </li>
+                                    }
+                                </ul>
+                                <h1>@Model.Make  @Model.Model | @Model.Year | @Model.Price лв.</h1>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="vehicul-detail">
+                                            <div class="detail-field row">
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Марка:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Make</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Модел:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Model</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Година:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Year</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Вид на трансмисия:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(t => transmissionType)</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Километри:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Milage км.</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Двигател:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(f => fuelType)</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Мощност:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.HorsePower к.с.</span>
+                                                <span class="col-xs-6 col-md-5 detail-field-label">Цена:</span>
+                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Price  лв.</span>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    @{
-                        var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
-                        var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
-                    }
-                    <div class="details col-md-6" >
-                        <h3 asp-for="@Model.Make" class="product-title">@Model.Make  @Model.Model</h3>
-                        <h4 asp-for="@Model.Price" class="price">Цена: <span>@Model.Price лв.</span></h4>
-                        <p asp-for="@Model.Year" class="colors">
-                            Година на производство:   @Model.Year г.
-                        </p>
-                        <p asp-for="@Model.HorsePower" class="colors">
-                            Мощност:   @Model.HorsePower к.с.
-                        </p>
-                        <p asp-for="@Model.FuelType" class="colors">
-                            Тип двигател:    @Html.DisplayFor(e => fuelType)
-                        </p>
-                        <p asp-for="@Model.TransmissionType" class="colors">
-                            Скоростна кутия:    @Html.DisplayFor(t => transmissionType)
-                        </p>
-                        <p asp-for="@Model.Milage" class="colors">
-                            Пробег:   @Model.Milage км
-                        </p>
-                        <p asp-for="@Model.Description" class="product-description">@Model.Description</p>
+                                    <div>
+                                       <p>@Model.Description</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        @foreach (var spec in Model.Specifications)
+                                        {
+                                            var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
+                                            <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="send-email-to-agent">
+                                    <div class="comment-form">
+                                        <div class="heading3">
+                                            <h2>Send Message to Agent</h2>
+                                        </div>
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" placeholder="Name" />
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        <i class="fa fa-at"></i>
+                                                        <input type="text" placeholder="Email Id" />
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        <i class="fa fa-phone"></i>
+                                                        <input type="text" placeholder="Phone Number" />
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label>
+                                                        <i class="fa fa-pencil"></i>
+                                                        <textarea placeholder="Your Message"></textarea>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="flat-btn">SEND MESSAGE</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div><!-- Blog Post -->
+                        </div><!-- Blog POst Sec -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        function currentDiv(n) {
-            showDivs(slideIndex = n);
-        }
-
-        function showDivs(n) {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            if (n > x.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = x.length }
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-            }
-            x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " w3-opacity-off";
-        }
-    </script>
+</section>
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/pgwslider.min.js"></script>
+<script>
+    $('.pgwSlider').pgwSlider({
+        displayControls: true,
+        transitionEffect: 'sliding',
+        listPosition: 'left',
+        autoSlide: false,
+        adaptiveHeight: true,
+        displayList: false,
+    });
+</script>

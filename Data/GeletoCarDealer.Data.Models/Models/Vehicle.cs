@@ -11,7 +11,7 @@
         public Vehicle()
         {
             this.Images = new HashSet<Image>();
-            this.Specifications = new HashSet<VehicleSpecification>();
+            this.Specifications = new HashSet<Specification>();
         }
 
         [Required]
@@ -47,6 +47,6 @@
 
         public virtual ICollection<Image> Images { get; set; }
 
-        public virtual ICollection<VehicleSpecification> Specifications { get; set; }
+        public virtual ICollection<Specification> Specifications { get; set; }
     }
 }

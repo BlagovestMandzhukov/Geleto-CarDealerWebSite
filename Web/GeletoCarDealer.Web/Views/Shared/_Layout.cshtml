@@ -7,29 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <!-- Styles -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="~/fonts/font-awesome/css/font-awesome.css" type="text/css" />
-    <link rel="stylesheet" href="~/fonts/themify-icons/themify-icons.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/price-range.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/style.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/responsive.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/colors.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/lightslider.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css" /><!-- Bootstrap -->
+    <link rel="stylesheet" href="~/fonts/font-awesome/css/font-awesome.css" type="text/css" /><!-- Icons -->
+    <link rel="stylesheet" href="~/fonts/themify-icons/themify-icons.css" type="text/css" /><!-- Icons -->
+    <link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css" /><!-- Owl Carousal -->
+    <link rel="stylesheet" href="~/css/price-range.css" type="text/css" /><!-- Owl Carousal -->
+    <link type="text/css" rel="stylesheet" href="~/css/lightslider.css" />
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" /><!-- Style -->
+    <link rel="stylesheet" href="~/css/responsive.css" type="text/css" /><!-- Responsive -->
+    <link rel="stylesheet" href="~/css/colors.css" type="text/css" /><!-- color -->
     <!-- REVOLUTION STYLE SHEETS -->
     <link rel="stylesheet" type="text/css" href="~/js/rs-plugin/css/settings.css" />
 
 </head>
 <body>
     <header class="simple-header for-sticky white">
-        <div class="top-bar">
+        @*<div class="top-bar">
             <div class="container">
                 <ul class="contact-item">
                     <li><i class="fa fa-envelope-o"></i>yourcompnay@email.com</li>
                     <li><i class="fa fa-mobile"></i>+1 333 44 555 / +1 333 44 500</li>
                 </ul>
             </div>
-        </div><!-- Top bar -->
+        </div*@<!-- Top bar -->
         <div class="menu">
             <div class="container">
                 <div class="logo">
@@ -99,14 +99,13 @@
     <script src="~/Identity/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script type="text/javascript" src="~/js/modernizr.js"></script>
-    <script type="text/javascript" src="~/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="~/js/html5lightbox.js"></script>
     <script type="text/javascript" src="~/js/scrolly.js"></script>
     <script type="text/javascript" src="~/js/price-range.js"></script>
     <script type="text/javascript" src="~/js/script.js"></script>
-
     <script src="~/js/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
     <script src="~/js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     @this.RenderSection("Scripts", required: false)

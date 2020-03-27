@@ -6,17 +6,17 @@
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
-@foreach (var vehicle in Model.Vehicles)
-{
-    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
-    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
-    <div class="recommended-cars">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row py-2">
+<div class="recommended-cars">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row py-2">
+                            @foreach (var vehicle in Model.Vehicles)
+                            {
+                                var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+                                var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
                                 <div class="col-md-4 vertical-box">
                                     <div class="card">
                                         <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="@vehicle.Make">
@@ -35,53 +35,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 vertical-box">
-                                    <div class="card">
-                                        <img class="card-img-top mh200-text" src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg" alt="Card image">
-                                        <div class="card-body">
-                                            <h4 class="card-title mw30-text">
-                                                2006 Toyota Innova 2.5 V Diesel 7-seater
-                                                2006 Toyota Innova 2.5 V Diesel 7-se
-                                            </h4>
-                                            <h5 class="card-text">Rs. 25.32 Lac*</h5>
-
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">44,114 Km</li>
-                                                <li class="list-inline-item">Petrol</li>
-                                                <li class="list-inline-item">Gurugram</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-outline-danger">Contact Sellers</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 vertical-box">
-                                    <div class="card">
-                                        <img class="card-img-top mh200-text" src="https://img2.gaadicdn.com/images/usedcarimages/320x224/11-2017/1843403/IMG_6603.jpg" alt="Card image">
-                                        <div class="card-body">
-                                            <h4 class="card-title mw30-text">
-                                                2006 Toyota Innova 2.5 V Diesel 7-seater
-                                                2006 Toyota Innova 2.5 V Diesel 7-se
-                                            </h4>
-                                            <h5 class="card-text">Rs. 25.32 Lac*</h5>
-
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">44,114 Km</li>
-                                                <li class="list-inline-item">Petrol</li>
-                                                <li class="list-inline-item">Gurugram</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-outline-danger">Contact Sellers</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                                }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-}
 

@@ -9,7 +9,7 @@
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
-
+    using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using Microsoft.AspNetCore.Http;
 
     public class CreateInputModel : IMapTo<Vehicle>
@@ -23,7 +23,6 @@
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string Model { get; set; }
-
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [Range(1, int.MaxValue, ErrorMessage = "Полето е задължително")]
@@ -57,6 +56,6 @@
         [Required(ErrorMessage = "Трябва да добавите поне една снимка")]
         public IList<IFormFile> Images { get; set; }
 
-        public IList<SpecificationsViewModel> Specifications { get; set; }
+        public IList<SpecificationsInputModel> Specifications { get; set; }
     }
 }
