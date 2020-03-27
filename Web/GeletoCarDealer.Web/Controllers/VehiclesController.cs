@@ -1,17 +1,39 @@
 ﻿namespace GeletoCarDealer.Web.Controllers
 {
+    using GeletoCarDealer.Services.Data;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
     public class VehiclesController : Controller
     {
-        public IActionResult GetAll()
+        private readonly IVehicleService vehicleService;
+
+        public VehiclesController(IVehicleService vehicleService)
         {
-            return this.View("Vehicles");
+            this.vehicleService = vehicleService;
         }
 
-        public IActionResult Info()
+        public IActionResult GetAll()
         {
-            return this.View();
+            var viewModel = new AllVehiclesViewModel
+            {
+                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
+            };
+
+            return this.View("Vehicles", viewModel);
+        }
+
+        [Route("ById/{id:int}")]
+        public IActionResult ById(int id)
+        {
+            var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
+
+            if (vehicle == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(vehicle);
         }
     }
 }

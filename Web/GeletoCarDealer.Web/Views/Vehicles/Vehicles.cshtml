@@ -1,11 +1,48 @@
-﻿
+﻿@model GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles.AllVehiclesViewModel
+@using GeletoCarDealer.Data.Models.Enums
 @{
-    ViewData["Title"] = "Автомобили";
+    ViewData["Title"] = "Aвтомобили";
 }
 <!-- /.preloader -->
 <div id="preloader"></div>
-<div class="theme-layout">
-</div>
+<div class="theme-layout"></div>
+<div class="recommended-cars">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row py-2">
+                            @foreach (var vehicle in Model.Vehicles)
+                            {
+                                var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+                                var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
+                                <div class="col-md-4 vertical-box">
+                                    <a asp-controller="Vehicles" asp-action="ById"asp-route-id="@vehicle.Id" style="display:block;">
+                                        <div class="card">
+                                            <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="@vehicle.Make">
+                                            <div class="card-body">
+                                                <h4 class="card-title mw30-text">
+                                                    @vehicle.Year | @vehicle.Make | @vehicle.Model
+                                                </h4>
+                                                <h5 class="card-text">@vehicle.Price лв.</h5>
 
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">@vehicle.Milage Km</li>
+                                                    <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
+                                                    <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 

@@ -114,9 +114,16 @@
         }
         public IActionResult EditVehicle(int id)
         {
-            var viewModel = this.vehicleService.GetById<EditVehicleViewModel>(id);
+            var model = this.vehicleService.GetById<EditVehicleViewModel>(id);
 
-            return this.View(viewModel);
+            model.Specifications = new List<SpecificationsInputModel>();
+
+            foreach (Specifications spec in Enum.GetValues(typeof(Specifications)))
+            {
+                model.Specifications.Add(new SpecificationsInputModel { Specification = spec, IsSelected = false });
+            }
+
+            return this.View(model);
         }
     }
 }

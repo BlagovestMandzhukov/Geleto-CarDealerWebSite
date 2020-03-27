@@ -108,7 +108,6 @@
                     </div>
                 </form>
             </div><!-- Services Sec -->
-
         </div>
     </div>
 </section>
@@ -132,20 +131,21 @@
                                             <div class="row py-2">
                                                 <div class="col-md-4 vertical-box">
                                                     <div class="card">
-                                                        <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="Card image">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title mw30-text">
-                                                                @vehicle.Year | @vehicle.Make | @vehicle.Model
-                                                            </h4>
-                                                            <h5 class="card-text">@vehicle.Price лв.</h5>
+                                                        <a asp-controller="Vehicles" asp-action="ById"  asp-route-id="@vehicle.Id">
+                                                            <img  class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="Card image">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title mw30-text">
+                                                                    @vehicle.Year | @vehicle.Make | @vehicle.Model
+                                                                </h4>
+                                                                <h5 class="card-text">@vehicle.Price лв.</h5>
 
-                                                            <ul class="list-inline">
-                                                                <li class="list-inline-item">@vehicle.Milage Km</li>
-                                                                <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
-                                                                <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
-                                                            </ul>
-                                                            <button type="button" class="btn btn-success">Детайли</button>
-                                                        </div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item">@vehicle.Milage Km</li>
+                                                                    <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
+                                                                    <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
+                                                                </ul>
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 vertical-box">

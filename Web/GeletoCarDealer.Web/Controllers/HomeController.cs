@@ -7,7 +7,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels;
-    using GeletoCarDealer.Web.ViewModels.Home.Vehicles;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
