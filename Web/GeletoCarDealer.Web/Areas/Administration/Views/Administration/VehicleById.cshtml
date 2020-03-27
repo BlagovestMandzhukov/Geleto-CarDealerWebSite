@@ -2,7 +2,7 @@
 @using GeletoCarDealer.Data.Models.Enums
 
 @{
-    ViewData["Title"] = "Добавяне на автомобили";
+    ViewData["Title"] = Model.Make + " " + Model.Model;
 }
 @{
     var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);

@@ -112,5 +112,11 @@
 
             return this.View(vehicle);
         }
+        public IActionResult EditVehicle(int id)
+        {
+            var viewModel = this.vehicleService.GetById<EditVehicleViewModel>(id);
+
+            return this.View(viewModel);
+        }
     }
 }
