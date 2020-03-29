@@ -30,6 +30,11 @@
                                         </li>
                                     }
                                 </ul>
+                                <div>
+                                    <a asp-controller="Administration" asp-action="EditImages" asp-route-id="@Model.Id">
+                                        <input type="button" class="btn btn-danger" value="Редактиране на снимки">
+                                    </a>
+                                </div>
                                 <h1>@Model.Make  @Model.Model | @Model.Year | @Model.Price лв.</h1>
                                 <div class="row">
                                     <div class="col-md-5">

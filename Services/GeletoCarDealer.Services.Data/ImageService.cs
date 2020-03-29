@@ -10,6 +10,7 @@
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Services.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
@@ -74,6 +75,13 @@
             }
 
             return vehicle.Images.ToList();
+        }
+
+        public IEnumerable<T> GetAllImages<T>(int id)
+        {
+            IQueryable<Image> getImagesQuery = this.imageRepository.All().Where(x => x.VehicleId == id);
+
+            return getImagesQuery.To<T>().ToList();
         }
     }
 }

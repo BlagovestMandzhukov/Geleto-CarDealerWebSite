@@ -13,27 +13,34 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row py-2">
-                            @foreach (var vehicle in Model.Vehicles)
+                            @if (Model.Vehicles.Count() == 0)
                             {
-                                var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
-                                var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
-                                <div class="col-md-4 vertical-box">
-                                    <div class="card">
-                                        <img class="card-img-top mh200-text" href="/Administration/Administration/VehicleById?id=@vehicle.Id" src="@vehicle.ImageUrl" alt="@vehicle.Make">
-                                        <div class="card-body">
-                                            <h4 href="/Administration/Administration/VehicleById?id=@vehicle.Id" class="card-title mw30-text">
-                                                @vehicle.Year | @vehicle.Make | @vehicle.Model
-                                            </h4>
-                                            <h5 class="card-text">@vehicle.Price лв.</h5>
+                                <h1>Няма премахнати автомобили!</h1>
+                            }
+                            else
+                            {
+                                @foreach (var vehicle in Model.Vehicles)
+                                {
+                                    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+                                    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
+                                    <div class="col-md-4 vertical-box">
+                                        <div class="card">
+                                            <img class="card-img-top mh200-text" href="/Administration/Administration/VehicleById?id=@vehicle.Id" src="@vehicle.ImageUrl" alt="@vehicle.Make">
+                                            <div class="card-body">
+                                                <h4 href="/Administration/Administration/VehicleById?id=@vehicle.Id" class="card-title mw30-text">
+                                                    @vehicle.Year | @vehicle.Make | @vehicle.Model
+                                                </h4>
+                                                <h5 class="card-text">@vehicle.Price лв.</h5>
 
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">@vehicle.Milage Km</li>
-                                                <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
-                                                <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
-                                            </ul>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">@vehicle.Milage Km</li>
+                                                    <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
+                                                    <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
                         </div>
                     </div>

@@ -1,0 +1,70 @@
+﻿@model GeletoCarDealer.Web.ViewModels.Administration.Images.AllImagesViewModel
+
+@{
+    ViewData["Title"] = "Редактиране на снимки";
+}
+<div class="row">
+    <div class="col-md-8 column">
+        <div class="single-post-sec">
+            <div class="blog-post vehicul-post">
+                <ul class="pgwSlider">
+                    @foreach (var image in Model.Images)
+                    {
+                        <li>
+                            <img src="@image.ImageUrl" />
+                        </li>
+                    }
+                </ul>
+                @foreach (var image in Model.Images)
+                {
+
+                    <div>
+                        <img src="@image.ImageUrl" />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-danger">Добави снимки</button>
+                        <button type="submit" class="btn btn-danger">Премахни снимки</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="field" align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+    <style>
+        .thumb {
+            height: 75px;
+            border: 1px solid #000;
+            margin: 10px 5px 0 0;
+        }
+    </style>
+    <div class="field" align="center">
+        <label asp-for="@Model.Images">Добави снимки</label>
+        <input asp-for="@Model.Images" type="file" id="files" name="images" multiple />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+</div>
+<div cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+    <button type="submit" class="btn btn-primary">Добави</button>
+</div>
+
+<script>
+    window.onload = () => {
+        $('#manufacturedOn').datetimepicker({
+            format: 'd.m.Y H:i',
+            lang: 'en'
+        });
+    };
+</script>
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/pgwslider.min.js"></script>
+<script>
+    $('.pgwSlider').pgwSlider({
+        displayControls: true,
+        transitionEffect: 'sliding',
+        listPosition: 'left',
+        autoSlide: false,
+        adaptiveHeight: true,
+        displayList: false,
+    });
+</script>

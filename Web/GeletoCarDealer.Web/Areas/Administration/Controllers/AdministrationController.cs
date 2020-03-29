@@ -14,6 +14,7 @@
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.Controllers;
+    using GeletoCarDealer.Web.ViewModels.Administration.Images;
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Authorization;
@@ -183,6 +184,16 @@
             };
 
             return this.View("AllDeletedVehicles", viewModel);
+        }
+
+        public IActionResult EditImages(int id)
+        {
+            var viewModel = new AllImagesViewModel
+            {
+                Images = this.imageService.GetAllImages<ImagesViewModel>(id),
+            };
+
+            return this.View("EditImages", viewModel);
         }
     }
 }

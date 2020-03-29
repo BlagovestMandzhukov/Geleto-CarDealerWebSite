@@ -1499,9 +1499,16 @@ iframe {
 
 /*=============== Footer ===================*/
 footer {
-    float: left;
+    /*float: left;
     position: relative;
+    width: 100%;*/
+    position: static;
+    left: 0;
+    bottom: 0;
     width: 100%;
+    /*background-color: red;
+    color: white;*/
+    text-align: center;
 }
 
     footer .blackish::before {
