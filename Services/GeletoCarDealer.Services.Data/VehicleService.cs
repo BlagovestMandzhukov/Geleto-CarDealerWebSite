@@ -62,11 +62,19 @@
                     Name = spec,
                 };
                 vehicle.Specifications.Add(newSpec);
-            };
+            }
 
             await this.imageService.UploadImageAsync(vehicle, images);
             await this.vehicleRepository.SaveChangesAsync();
             return vehicle.Id;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var vehicle = await this.vehicleRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+            this.vehicleRepository.Delete(vehicle);
+            await this.vehicleRepository.SaveChangesAsync();
+            return true;
         }
 
         public async Task<int> EditVehicle(int id, string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, string description)
@@ -95,6 +103,13 @@
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
             return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllDeleted<T>()
+        {
+            IQueryable<Vehicle> deletedVehiclesQuery = this.vehicleRepository.AllWithDeleted().Where(x => x.IsDeleted == true);
+
+            return deletedVehiclesQuery.To<T>().ToList();
         }
 
         public T GetById<T>(int id)

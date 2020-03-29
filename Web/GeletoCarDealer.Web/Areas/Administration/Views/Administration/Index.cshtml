@@ -1,12 +1,12 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Администратор";
 }
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
 <div>
-    <h1 align="center">Hello, Admin</h1>
+    <h1 align="center">Администраторска страница</h1>
 </div>
 
 <div align="center">
@@ -15,6 +15,9 @@
     </a>
     <a asp-controller="Administration" asp-action="AllVehicles">
         <input type="button" class="btn btn-danger" value="Моите автомобили">
+    </a>
+    <a asp-controller="Administration" asp-action="AllDeleted">
+        <input type="button" class="btn btn-danger" value="Премахнати автомобили">
     </a>
 </div>
 

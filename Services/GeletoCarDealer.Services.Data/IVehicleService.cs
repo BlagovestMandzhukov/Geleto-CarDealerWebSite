@@ -13,8 +13,12 @@
 
         IEnumerable<T> GetAll<T>();
 
+        IEnumerable<T> GetAllDeleted<T>();
+
         T GetById<T>(int id);
 
         Task<int> EditVehicle(int id, string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, string description);
+
+        Task<bool> Delete(int id);
     }
 }

@@ -5,20 +5,21 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
     using GeletoCarDealer.Common;
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
+    using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.Controllers;
+    using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using GeletoCarDealer.Services.Mapping;
-    using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
 
     //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
@@ -149,6 +150,39 @@
                 inputModel.Description);
 
             return this.RedirectToAction("VehicleById", new { id = vehicleId });
+        }
+
+        [HttpGet]
+        [Route("Delete/{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
+
+            if (vehicle == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(vehicle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteVehicle(int id)
+        {
+           var deleted = await this.vehicleService.Delete(id);
+
+           return this.RedirectToAction("AllVehicles");
+        }
+
+        [Route("Deleted")]
+        public IActionResult AllDeleted()
+        {
+            var viewModel = new AllVehiclesViewModel
+            {
+                Vehicles = this.vehicleService.GetAllDeleted<VehiclesViewModel>(),
+            };
+
+            return this.View("AllDeletedVehicles", viewModel);
         }
     }
 }

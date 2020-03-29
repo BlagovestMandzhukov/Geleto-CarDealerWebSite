@@ -1,0 +1,94 @@
+﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.VehicleDetailsViewModel
+
+@using GeletoCarDealer.Data.Models.Enums
+
+@{
+    ViewData["Title"] = Model.Make + " " + Model.Model;
+}
+@{
+    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
+    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
+}
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div class="theme-layout"></div>
+<form asp-action="DeleteVehicle" asp-route-id="@Model.Id" method="post" class="form border-primary-4 rounded p-3 w-60 mx-auto mt-3" enctype="multipart/form-data">
+    <section class="block">
+        <h4 class="mobile-fondsize-20 text-muted text-center">Сигурни ли сте, че искате да изтриете тази обява?</h4>
+        <hr />
+        <div align="center">
+            <button class="btn btn-danger">Изтрий обявата</button>
+        </div>
+        <div class="container">
+            <h1>@Model.Make @Model.Model @Model.Year г.</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8 column">
+                            <div class="single-post-sec">
+                                <div class="blog-post vehicul-post">
+                                    <ul class="pgwSlider">
+                                        @foreach (var image in Model.Images)
+                                        {
+                                            <li>
+                                                <a href="@image.ImageUrl" target="_blank"><img src="@image.ImageUrl" alt="@Model.Make" /></a>
+                                                <span>@Model.Make  @Model.Model</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <h1>@Model.Make  @Model.Model | @Model.Year | @Model.Price лв.</h1>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="vehicul-detail">
+                                                <div class="detail-field row">
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Марка:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Make</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Модел:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Model</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Година:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Year</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Вид на трансмисия:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(t => transmissionType)</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Километри:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Milage км.</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Двигател:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(f => fuelType)</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Мощност:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.HorsePower к.с.</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Цена:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Price  лв.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>@Model.Description</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @foreach (var spec in Model.Specifications)
+                                            {
+                                                var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
+                                                <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div><!-- Blog Post -->
+                            </div><!-- Blog POst Sec -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/pgwslider.min.js"></script>
+<script>
+    $('.pgwSlider').pgwSlider({
+        displayControls: true,
+        transitionEffect: 'sliding',
+        listPosition: 'left',
+        autoSlide: false,
+        adaptiveHeight: true,
+        displayList: false,
+    });
+</script>

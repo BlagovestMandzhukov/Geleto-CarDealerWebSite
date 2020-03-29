@@ -1,7 +1,7 @@
 ﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.AllVehiclesViewModel
 @using GeletoCarDealer.Data.Models.Enums
 @{
-    ViewData["Title"] = "Моите автомобили";
+    ViewData["Title"] = "Премахнати автомобили";
 }
 <!-- /.preloader -->
 <div id="preloader"></div>
@@ -31,13 +31,10 @@
                                                 <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
                                                 <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
                                             </ul>
-                                            <a asp-action="VehicleById" asp-route-id="@vehicle.Id" class="btn btn-success">Детайли</a>
-                                            <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
-                                            <a asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
                                         </div>
                                     </div>
                                 </div>
-                                }
+                            }
                         </div>
                     </div>
                 </div>
