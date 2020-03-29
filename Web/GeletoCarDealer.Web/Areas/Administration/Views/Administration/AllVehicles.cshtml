@@ -31,8 +31,9 @@
                                                 <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
                                                 <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
                                             </ul>
-                                            <a href="/Administration/Administration/VehicleById?id=@vehicle.Id" class="btn bg-success text-white">Детайли</a>
-                                            <a href="/Administration/Administration/EditVehicle?id=@vehicle.Id" class="btn bg-success text-white">Редактирай обявата</a>
+                                            <a asp-action="VehicleById" asp-route-id="@vehicle.Id" class="btn btn-success">Детайли</a>
+                                            <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
+                                            <a href="/Administration/Administration/EditVehicle?id=@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
                                         </div>
                                     </div>
                                 </div>

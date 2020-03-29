@@ -90,6 +90,7 @@
             return this.Redirect("/Administration/Administration/AllVehicles");
         }
 
+        [Route("All")]
         public IActionResult AllVehicles()
         {
             var viewModel = new AllVehiclesViewModel
@@ -101,6 +102,7 @@
         }
 
         [HttpGet]
+        [Route("VehicleById/{id:int}")]
         public IActionResult VehicleById(int id)
         {
             var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
@@ -112,18 +114,41 @@
 
             return this.View(vehicle);
         }
+
+        [Route("Edit/{id:int}")]
         public IActionResult EditVehicle(int id)
         {
             var model = this.vehicleService.GetById<EditVehicleViewModel>(id);
 
-            model.Specifications = new List<SpecificationsInputModel>();
+            return this.View(model);
+        }
 
-            foreach (Specifications spec in Enum.GetValues(typeof(Specifications)))
+        [HttpPost]
+        public async Task<IActionResult> EditVehicle(int id, EditVehicleViewModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
             {
-                model.Specifications.Add(new SpecificationsInputModel { Specification = spec, IsSelected = false });
+                return this.View(inputModel);
             }
 
-            return this.View(model);
+            var category = Enum.GetName(typeof(CategoryType), int.Parse(inputModel.Category));
+            var fuelType = Enum.GetName(typeof(FuelType), int.Parse(inputModel.FuelType));
+            var transmissionType = Enum.GetName(typeof(TransmissionType), int.Parse(inputModel.TransmissionType));
+
+            var vehicleId = await this.vehicleService.EditVehicle(
+                id,
+                inputModel.Make,
+                inputModel.Model,
+                inputModel.Year,
+                inputModel.Milage,
+                category,
+                fuelType,
+                inputModel.Price,
+                inputModel.HorsePower,
+                transmissionType,
+                inputModel.Description);
+
+            return this.RedirectToAction("VehicleById", new { id = vehicleId });
         }
     }
 }

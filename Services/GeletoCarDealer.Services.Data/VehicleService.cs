@@ -69,6 +69,28 @@
             return vehicle.Id;
         }
 
+        public async Task<int> EditVehicle(int id, string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, string description)
+        {
+            var vehicle = await this.vehicleRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var categoryId = await this.categoryService.CreateCategory(category);
+
+            vehicle.Make = make;
+            vehicle.Model = model;
+            vehicle.Year = year;
+            vehicle.Milage = milage;
+            vehicle.CategoryId = categoryId;
+            vehicle.FuelType = fuelType;
+            vehicle.Price = price;
+            vehicle.HorsePower = horsePower;
+            vehicle.TransmissionType = transmission;
+            vehicle.Description = description;
+
+            this.vehicleRepository.Update(vehicle);
+            await this.vehicleRepository.SaveChangesAsync();
+
+            return vehicle.Id;
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);

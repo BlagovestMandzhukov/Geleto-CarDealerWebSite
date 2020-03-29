@@ -13,7 +13,7 @@
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using Microsoft.AspNetCore.Http;
 
-    public class EditVehicleViewModel : IMapFrom<Vehicle>
+    public class EditVehicleViewModel : IMapFrom<Vehicle>, IMapTo<Vehicle>
     {
         public int Id { get; set; }
 
@@ -53,10 +53,5 @@
 
         [StringLength(500, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Трябва да добавите поне една снимка")]
-        public IList<ImagesViewModel> Images { get; set; }
-
-        public IList<SpecificationsInputModel> Specifications { get; set; }
     }
 }

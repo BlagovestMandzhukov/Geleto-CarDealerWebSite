@@ -35,6 +35,5 @@
         public IList<ImagesViewModel> Images { get; set; }
 
         public ICollection<VehicleSpecificationsViewModel> Specifications { get; set; }
-
     }
 }

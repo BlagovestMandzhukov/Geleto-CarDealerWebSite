@@ -331,10 +331,29 @@ img {
     }
 
 .card {
-    /*margin-top: 50px;*/
+    margin-top: 20px;
     background: #eee;
-    padding: 3em;
+    padding: 20px;
     line-height: 1.5em;
+
+}
+.h3-SideBar {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 5px
+}
+.card-Sidebar {
+    margin-top: 20px;
+    padding: 20px;
+    line-height: 1.5em;
+    border: solid;
+    border-color: black;
+    margin-top: 20px;
+    border-width: thin;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    background: #eee;
 }
 
 @media screen and (min-width: 997px) {
@@ -492,7 +511,7 @@ p {
 
 .mh200-text {
     min-height: 200px;
-    max-height: 200px;
+    /*max-height: 200px;*/
     overflow: hidden;
 }
 
@@ -2373,7 +2392,9 @@ blockquote p {
         color: #FFF;
     }
 
+.h3-SideBar{
 
+}
 /* Our team */
 .lsting-agents-sec {
     float: left;
@@ -4664,6 +4685,15 @@ footer.light-footer .bottom-line {
 .vehicul-detail {
     background: rgba(242, 242, 242, 0.9) none repeat scroll 0 0;
     padding: 40px 15px;
+    padding: 40px 15px;
+    border: solid;
+    border-color: black;
+    /* margin-top: 20px; */
+    border-width: thin;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    background: #eee;
 }
 
     .vehicul-detail > span {
@@ -4695,6 +4725,15 @@ footer.light-footer .bottom-line {
     background-color: rgb(245, 245, 245);
     text-align: center;
     clear: both;
+    border: solid;
+    border-color: black;
+    /*margin-top: 20px;*/
+    border-width: thin;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    background: #eee;
+    margin-bottom: 20px;
 }
 
     .agent_widget .agent_pic img {

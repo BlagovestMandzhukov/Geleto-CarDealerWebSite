@@ -41,7 +41,7 @@
 <div align="center">
     <h1>Добавяне на автомобили</h1>
 </div>
-<form method="post" asp-controller="Administration" asp-action="Create" align="center" enctype="multipart/form-data">
+<form method="post" align="center" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-4">
             <label asp-for="Category">Избери категория</label>
@@ -96,23 +96,6 @@
             <span asp-validation-for="TransmissionType" class="text-danger"></span>
         </div>
     </div>
-    <div>
-        <label asp-for="Specifications" align="center">Допълнителни екстри</label>
-        <table width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:10px;">
-            <tr>
-                <td valign=top>
-                    @for (int i = 0; i < Model.Specifications.Count; i++)
-                    {
-                        @Html.DisplayFor(m => m.Specifications[i].Specification);
-                        @Html.CheckBoxFor(m => m.Specifications[i].IsSelected);
-                        @Html.HiddenFor(m => m.Specifications[i].Specification);
-                        @Html.HiddenFor(m => m.Specifications[i].Id);
-                    }
-                </td>
-            </tr>
-        </table>
-        @Html.ValidationMessageFor(model => model.Specifications, "", new { @class = "text-danger" })
-    </div>
     <div align="center">
 
         <textarea asp-for="Description" id="textarea" placeholder="Допълнителна информация" style="margin: 30px; height: 154px; width: 407px;"></textarea>
@@ -126,14 +109,10 @@
                 margin: 10px 5px 0 0;
             }
         </style>
-        <div class="field" align="center">
-            <label asp-for="@Model.Images">Добави снимки</label>
-            <input asp-for="@Model.Images" type="file" id="files" name="images" multiple />
-            <span asp-validation-for="Images" class="text-danger"></span>
-        </div>
+       
     </div>
     <div cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
-        <button type="submit" class="btn btn-primary">Добави</button>
+        <button type="submit" class="btn btn-primary">Редактирай</button>
     </div>
 </form>
 <script>

@@ -1,0 +1,28 @@
+﻿@model GeletoCarDealer.Web.ViewModels.SideBarViewModel
+
+<div class="posts margin-bottom-40">
+    <h3 class="h3-SideBar">Други обяви</h3>
+    @foreach (var car in Model.Vehicles)
+    {
+
+        <div class="col-md-4 vertical-box">
+            <a asp-controller="Vehicles" asp-action="ById" asp-route-id="@car.Id" style="display:block;">
+                <div class="card-Sidebar">
+                    <img class="card-img-top mh200-text" src="@car.ImageUrl" alt="@car.Make">
+                    <div class="card-body">
+                        <h4 class="card-title mw30-text">
+                            @car.Year | @car.Make | @car.Model
+                        </h4>
+                        <h5 class="card-text">@car.Price лв.</h5>
+
+                        <ul class="list-inline">
+                            <li class="list-inline-item">@car.Milage Км</li>
+                            <li class="list-inline-item">@car.Year г.</li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <hr />
+    }
+</div>
