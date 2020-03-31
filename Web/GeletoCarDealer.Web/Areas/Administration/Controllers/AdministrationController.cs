@@ -126,6 +126,7 @@
         }
 
         [HttpPost]
+        [Route("Edit/{id:int}")]
         public async Task<IActionResult> EditVehicle(EditVehicleViewModel inputModel)
         {
             if (!this.ModelState.IsValid)
