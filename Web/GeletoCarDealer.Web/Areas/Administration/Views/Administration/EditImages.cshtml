@@ -4,26 +4,33 @@
     ViewData["Title"] = "Редактиране на снимки";
 }
 
-<div class="row">
-    <div class="col-md-8 column">
-        <div class="single-post-sec">
-            <div class="blog-post vehicul-post">
-                @foreach (var image in Model.Images)
-                {
-
-                    <div>
-                        <img src="@image.ImageUrl" />
-                    </div>
-                    <form method="post" asp-controller="Administration" asp-action="DeleteImage" asp-route-id="@image.Id" align="center" enctype="multipart/form-data">
-                        <div>
-                            <button type="submit" class="btn btn-danger">Премахни снимка</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row py-2">
+                            <div class="col-md-4 vertical-box">
+                                <div class="card">
+                                    @foreach (var image in Model.Images)
+                                    {
+                                        <div>
+                                            <img src="@image.ImageUrl" />
+                                        </div>
+                                        <form method="post" asp-controller="Administration" asp-action="DeleteImage" asp-route-id="@image.Id" align="center" enctype="multipart/form-data">
+                                            <div>
+                                                <button type="submit" class="btn btn-danger">Премахни снимка</button>
+                                            </div>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <form method="post" asp-controller="Administration" asp-action="AddImages" asp-route-id="@Model.VehicleId" align="center" enctype="multipart/form-data">
     <div class="field" align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
         <style>

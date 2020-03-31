@@ -3,6 +3,94 @@
 @{
     ViewData["Title"] = "Aвтомобили";
 }
+    <section class="horizontal-search">
+        <div class="container">
+            <h1 class="nocontent outline">--- Search form  ---</h1>
+            <div class="">
+                <div class="search-form">
+                    <form action="vehiculs.html" method="get" class="form-inline">
+                        <div class="search-form-content">
+                            <div class="search-form-field">
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_location">
+                                            <option>Марка</option>
+                                            <option>Audi</option>
+                                            <option>Mercedes-Benz</option>
+                                            <option>BMW</option>
+                                            <option>Lexus</option>
+                                            <option>Lincoln</option>
+                                            <option>Ford</option>
+                                            <option>Fiat</option>
+                                            <option>Dodge</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="anymodule">
+                                            <option>Модел</option>
+                                            <option value="1">R8</option>
+                                            <option value="2">S500</option>
+                                            <option value="3">540i</option>
+                                            <option value="4">RX300</option>
+                                            <option value="5">Navigator</option>
+                                            <option value="6">Taurus</option>
+                                            <option value="7">Doblo</option>
+                                            <option value="8">Viper</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_location">
+                                            <option>Година</option>
+                                            <option>2014</option>
+                                            <option>2013</option>
+                                            <option>2012</option>
+                                            <option>2011</option>
+                                            <option>2010</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <div class="label-select">
+                                        <select class="form-control" name="s_statu">
+                                            <option>Двигател</option>
+                                            <option value="damaged">Бензин</option>
+                                            <option value="new">Дизел</option>
+                                            <option value="semi-new">Хибрид</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <span class="gprice-label">Цена</span>
+                                    <input type="text" class="span2" value="" data-slider-min="0"
+                                           data-slider-max="60000" data-slider-step="5"
+                                           data-slider-value="[0,60000]" id="price-range">
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                    <span class="garea-label">Километри</span>
+                                    <input type="text" class="span2" value="" data-slider-min="0"
+                                           data-slider-max="10000000" data-slider-step="5"
+                                           data-slider-value="[50,1000000]" id="vehicul-geo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search-form-submit">
+                            <button type="submit" class="btn-search">Търси</button>
+                        </div>
+                    </form>
+                </div><!-- Services Sec -->
+            </div>
+        </div>
+    </section>
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>

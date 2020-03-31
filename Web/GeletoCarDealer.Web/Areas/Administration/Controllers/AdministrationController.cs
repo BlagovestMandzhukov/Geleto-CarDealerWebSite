@@ -89,7 +89,7 @@
                 inputModel.Images,
                 inputModel.Description);
 
-            return this.Redirect("/Administration/Administration/AllVehicles");
+            return this.RedirectToAction("AllVehicles");
         }
 
         [Route("All")]
@@ -126,7 +126,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditVehicle(int id, EditVehicleViewModel inputModel)
+        public async Task<IActionResult> EditVehicle(EditVehicleViewModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -136,9 +136,10 @@
             var category = Enum.GetName(typeof(CategoryType), int.Parse(inputModel.Category));
             var fuelType = Enum.GetName(typeof(FuelType), int.Parse(inputModel.FuelType));
             var transmissionType = Enum.GetName(typeof(TransmissionType), int.Parse(inputModel.TransmissionType));
+            var vehicleId = await this.vehicleService.GetVehicleId(inputModel.Id);
 
-            var vehicleId = await this.vehicleService.EditVehicle(
-                id,
+            var vehicle = await this.vehicleService.EditVehicle(
+                vehicleId,
                 inputModel.Make,
                 inputModel.Model,
                 inputModel.Year,

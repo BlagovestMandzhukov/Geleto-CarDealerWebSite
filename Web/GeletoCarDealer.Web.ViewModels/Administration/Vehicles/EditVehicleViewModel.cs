@@ -13,7 +13,7 @@
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using Microsoft.AspNetCore.Http;
 
-    public class EditVehicleViewModel : IMapFrom<Vehicle>, IMapTo<Vehicle>
+    public class EditVehicleViewModel : IMapFrom<Vehicle>
     {
         public int Id { get; set; }
 

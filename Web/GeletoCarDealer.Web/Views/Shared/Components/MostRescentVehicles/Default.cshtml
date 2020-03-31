@@ -1,0 +1,26 @@
+﻿@model GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles.MostRescentVehiclesViewModel
+@using GeletoCarDealer.Data.Models.Enums
+@foreach (var vehicle in Model.Vehicles)
+{
+    var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+    var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
+    <div class="col-md-4 vertical-box">
+        <div class="card">
+            <a asp-controller="Vehicles" asp-action="ById" asp-route-id="@vehicle.Id">
+                <img class="card-img-top mh200-text" src="@vehicle.ImageUrl" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title mw30-text">
+                        @vehicle.Year | @vehicle.Make | @vehicle.Model
+                    </h4>
+                    <h5 class="card-text">@vehicle.Price лв.</h5>
+
+                    <ul class="list-inline">
+                        <li class="list-inline-item">@vehicle.Milage Km</li>
+                        <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
+                        <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+    </div>
+}

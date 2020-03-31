@@ -54,16 +54,20 @@
 
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="col-md-7">
+                                        <h4>Описание за автомобила</h4>
+                                        <hr />
                                         <p>@Model.Description</p>
                                     </div>
-                                    <div class="col-md-7">
-                                        @foreach (var spec in Model.Specifications)
-                                        {
-                                            var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
-                                            <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
-                                        }
-                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5 style="font-size:20px">Допълнителни ектсри</h5>
+                                    <hr />
+                                    @foreach (var spec in Model.Specifications)
+                                    {
+                                        var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
+                                        <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
+                                    }
                                 </div>
                             </div><!-- Blog Post -->
                         </div><!-- Blog POst Sec -->

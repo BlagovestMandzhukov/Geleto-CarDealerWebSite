@@ -12,12 +12,12 @@
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
-    [ViewComponent(Name = "Sidebar")]
-    public class SideBarViewComponent : ViewComponent
+    [ViewComponent(Name = "MostRescentVehicles")]
+    public class MostRescentVehiclesViewComponent : ViewComponent
     {
         private readonly IDeletableEntityRepository<Vehicle> vehiclesRepository;
 
-        public SideBarViewComponent(IDeletableEntityRepository<Vehicle> vehiclesRepository)
+        public MostRescentVehiclesViewComponent(IDeletableEntityRepository<Vehicle> vehiclesRepository)
         {
             this.vehiclesRepository = vehiclesRepository;
         }
@@ -25,10 +25,10 @@
         public IViewComponentResult Invoke()
         {
 
-            var model = new SideBarViewModel
+            var model = new MostRescentVehiclesViewModel
             {
-                 Vehicles = this.vehiclesRepository.All().Take(2)
-                                    .To<SideBarVehiclesViewModel>().ToList(),
+                Vehicles = this.vehiclesRepository.All().OrderByDescending(x => x.CreatedOn).Take(3)
+                                    .To<VehiclesViewModel>().ToList(),
             };
 
             return this.View(model);
