@@ -15,5 +15,7 @@
         Task<IEnumerable<Image>> GetImagesAsync(int id);
 
         IEnumerable<T> GetAllImages<T>(int id);
+
+        Task<int> RemoveImageAsync(int imageId);
     }
 }

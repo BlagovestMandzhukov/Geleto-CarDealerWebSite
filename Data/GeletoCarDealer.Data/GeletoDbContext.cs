@@ -65,6 +65,9 @@
                 .WithOne(v => v.Vehicle)
                 .HasForeignKey(v => v.VehicleId);
 
+            builder.Entity<Image>()
+                .HasIndex(i => i.Id)
+                .IsUnique();
             //builder.Entity<VehicleSpecification>()
             //    .HasKey(vs => new { vs.VehicleId, vs.SpecificationId });
 

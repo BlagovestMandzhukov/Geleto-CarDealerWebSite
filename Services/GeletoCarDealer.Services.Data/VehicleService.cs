@@ -99,6 +99,15 @@
             return vehicle.Id;
         }
 
+        public async Task<int> AddVehicleImagesAsync(int id, IList<IFormFile> images)
+        {
+            var vehicle = await this.vehicleRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            await this.imageService.UploadImageAsync(vehicle, images);
+            await this.vehicleRepository.SaveChangesAsync();
+            return vehicle.Id;
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
@@ -119,6 +128,13 @@
                 .Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
             return vehicle;
+        }
+
+        public async Task<int> GetVehicleId(int id)
+        {
+            var vehicle = await this.vehicleRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+
+            return vehicle.Id;
         }
     }
 }

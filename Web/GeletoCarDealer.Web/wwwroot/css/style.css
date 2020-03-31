@@ -578,7 +578,14 @@ ol li, ol li a {
     line-height: 26px;
     list-style-type:none;
 }
-
+    ul li.Admin {
+        margin-top: 40px;
+        font-family: open sans;
+        color: black;
+        font-size: 14px;
+        line-height: 26px;
+        list-style-type: none;
+    }
 a:hover,
 a:focus {
     text-decoration: none;

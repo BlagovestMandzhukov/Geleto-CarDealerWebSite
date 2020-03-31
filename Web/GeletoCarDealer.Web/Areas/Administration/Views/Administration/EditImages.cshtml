@@ -3,68 +3,75 @@
 @{
     ViewData["Title"] = "Редактиране на снимки";
 }
+
 <div class="row">
     <div class="col-md-8 column">
         <div class="single-post-sec">
             <div class="blog-post vehicul-post">
-                <ul class="pgwSlider">
-                    @foreach (var image in Model.Images)
-                    {
-                        <li>
-                            <img src="@image.ImageUrl" />
-                        </li>
-                    }
-                </ul>
                 @foreach (var image in Model.Images)
                 {
 
                     <div>
                         <img src="@image.ImageUrl" />
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-danger">Добави снимки</button>
-                        <button type="submit" class="btn btn-danger">Премахни снимки</button>
-                    </div>
+                    <form method="post" asp-controller="Administration" asp-action="DeleteImage" asp-route-id="@image.Id" align="center" enctype="multipart/form-data">
+                        <div>
+                            <button type="submit" class="btn btn-danger">Премахни снимка</button>
+                        </div>
+                    </form>
                 }
             </div>
         </div>
     </div>
 </div>
-<div class="field" align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
-    <style>
-        .thumb {
-            height: 75px;
-            border: 1px solid #000;
-            margin: 10px 5px 0 0;
-        }
-    </style>
-    <div class="field" align="center">
-        <label asp-for="@Model.Images">Добави снимки</label>
-        <input asp-for="@Model.Images" type="file" id="files" name="images" multiple />
-        <span asp-validation-for="Images" class="text-danger"></span>
+<form method="post" asp-controller="Administration" asp-action="AddImages" asp-route-id="@Model.VehicleId" align="center" enctype="multipart/form-data">
+    <div class="field" align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+        <style>
+            .thumb {
+                height: 75px;
+                border: 1px solid #000;
+                margin: 10px 5px 0 0;
+            }
+        </style>
+        <div class="field" align="center">
+            <label asp-for="@Model.Images">Добави снимки</label>
+            <input asp-for="@Model.Images" type="file" id="files" name="images" multiple />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
     </div>
-</div>
-<div cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
-    <button type="submit" class="btn btn-primary">Добави</button>
-</div>
+    <div align="center" cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
+        <button type="submit" class="btn btn-primary">Добави</button>
+    </div>
+</form>
 
-<script>
-    window.onload = () => {
-        $('#manufacturedOn').datetimepicker({
-            format: 'd.m.Y H:i',
-            lang: 'en'
-        });
-    };
-</script>
-<script type="text/javascript" src="~/js/jquery.min.js"></script>
-<script type="text/javascript" src="~/js/pgwslider.min.js"></script>
-<script>
-    $('.pgwSlider').pgwSlider({
-        displayControls: true,
-        transitionEffect: 'sliding',
-        listPosition: 'left',
-        autoSlide: false,
-        adaptiveHeight: true,
-        displayList: false,
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (window.File && window.FileList && window.FileReader) {
+            $("#files").on("change", function (e) {
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function (e) {
+                        var file = e.target;
+                        $("<span class=\"pip\">" +
+                            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\">Remove image</span>" +
+                            "</span>").insertAfter("#files");
+                        $(".remove").click(function () {
+                            $(this).parent(".pip").remove();
+                        });
+
+                    });
+                    fileReader.readAsDataURL(f);
+                }
+            });
+        } else {
+            alert("Your browser doesn't support to File API")
+        }
     });
 </script>
+

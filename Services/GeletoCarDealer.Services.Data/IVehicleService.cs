@@ -20,5 +20,9 @@
         Task<int> EditVehicle(int id, string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, string description);
 
         Task<bool> Delete(int id);
+
+        Task<int> AddVehicleImagesAsync(int id, IList<IFormFile> images);
+
+        Task<int> GetVehicleId(int id);
     }
 }

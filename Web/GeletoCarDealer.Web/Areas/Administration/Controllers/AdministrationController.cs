@@ -186,14 +186,38 @@
             return this.View("AllDeletedVehicles", viewModel);
         }
 
-        public IActionResult EditImages(int id)
+        public async Task<IActionResult> EditImages(int id)
         {
+            var vehicleId = await this.vehicleService.GetVehicleId(id);
             var viewModel = new AllImagesViewModel
             {
+                VehicleId = vehicleId,
                 Images = this.imageService.GetAllImages<ImagesViewModel>(id),
             };
 
             return this.View("EditImages", viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddImages(int id, IList<IFormFile> images)
+        {
+            var vehicleId = await this.vehicleService.GetVehicleId(id);
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("EditImages", new { id = vehicleId });
+            }
+
+            await this.vehicleService.AddVehicleImagesAsync(id, images);
+
+            return this.RedirectToAction("VehicleById", new { id = vehicleId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            var vehicleId = await this.imageService.RemoveImageAsync(id);
+
+            return this.RedirectToAction("EditImages", new { id = vehicleId });
         }
     }
 }

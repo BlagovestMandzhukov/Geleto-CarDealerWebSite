@@ -29,8 +29,6 @@
 
         public async Task UploadImageAsync(Vehicle vehicle, IList<IFormFile> files)
         {
-            var list = new List<string>();
-
             foreach (var file in files)
             {
                 byte[] imasgeDestination;
@@ -49,19 +47,15 @@
                     };
 
                     var res = await this.cloudinary.UploadAsync(uploadParams);
-                    list.Add(res.Uri.AbsoluteUri);
 
-                }
-
-                foreach (var url in list)
-                {
                     var image = new Image
                     {
-                        ImageUrl = url,
+                        ImageUrl = res.Uri.AbsoluteUri,
                     };
-
                     vehicle.Images.Add(image);
+
                 }
+
             }
         }
 
@@ -82,6 +76,21 @@
             IQueryable<Image> getImagesQuery = this.imageRepository.All().Where(x => x.VehicleId == id);
 
             return getImagesQuery.To<T>().ToList();
+        }
+
+        public async Task<int> RemoveImageAsync(int imageId)
+        {
+            var image = await this.imageRepository.All()
+                .FirstOrDefaultAsync(x => x.Id == imageId);
+
+            var vehicle = await this.vehiclesRepository.All()
+                .Where(x => x.Id == image.VehicleId)
+                .FirstOrDefaultAsync();
+
+            this.imageRepository.HardDelete(image);
+            await this.imageRepository.SaveChangesAsync();
+
+            return vehicle.Id;
         }
     }
 }
