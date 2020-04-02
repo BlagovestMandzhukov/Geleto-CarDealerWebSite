@@ -62,6 +62,7 @@
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IVehicleService, VehicleService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IMessageService, MessageService>();
 
             Account account = new Account(
                                 this.configuration.GetSection("Cloudinary")["AppName"],

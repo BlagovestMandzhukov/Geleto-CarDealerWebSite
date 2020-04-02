@@ -4,7 +4,7 @@
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
-    public class VehiclesController : Controller
+    public class VehiclesController : BaseController
     {
         private readonly IVehicleService vehicleService;
 

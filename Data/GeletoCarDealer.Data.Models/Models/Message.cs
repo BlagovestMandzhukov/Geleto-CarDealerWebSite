@@ -12,12 +12,12 @@
         [EmailAddress]
         public string Email { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public int VehicleId { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
 
-        public string Content { get; set; }
+        public string MessageContent { get; set; }
     }
 }

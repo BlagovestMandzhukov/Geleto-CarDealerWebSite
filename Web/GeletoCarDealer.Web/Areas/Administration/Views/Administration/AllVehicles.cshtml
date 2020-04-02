@@ -10,40 +10,105 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row py-2">
-                            @foreach (var vehicle in Model.Vehicles)
-                            {
-                                var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
-                                var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
-                                <div class="col-md-4 vertical-box">
-                                    <div class="card">
-                                        <img class="card-img-top mh200-text" href="/Administration/Administration/VehicleById?id=@vehicle.Id" src="@vehicle.ImageUrl" alt="@vehicle.Make">
-                                        <div class="card-body">
-                                            <h4 href="/Administration/Administration/VehicleById?id=@vehicle.Id" class="card-title mw30-text">
-                                                @vehicle.Year | @vehicle.Make | @vehicle.Model
-                                            </h4>
-                                            <h5 class="card-text">@vehicle.Price лв.</h5>
+                <div id="cars-wrapper">
+                    <div class="white-box clearfix">
+                        @foreach (var vehicle in Model.Vehicles)
+                        {
+                            var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
+                            var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
+                        <div class="row car-listing">
+                            <div class="separator-lg noprint"></div>
+                            <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
+                            <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
+                            <a asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
+                                <a asp-controller="Administration" asp-action="VehicleById" asp-route-id="@vehicle.Id" title="@vehicle.Make @vehicle.Model" class="thumb js-query-href-car">
+                                    <img src="@vehicle.ImageUrl" alt="@vehicle.Make" />
+                                </a>
+                            </div>
+                            <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8">
+                                <h4>
+                                    <a asp-controller="Administration" asp-action="VehicleById" asp-route-id="@vehicle.Id">
+                                        @vehicle.Make @vehicle.Model @vehicle.Year
+                                    </a>
+                                </h4>
+                                <div class="row car-description">
+                                    <div class="col-sm-7 col-sm-push-5">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-push-6 right-col-xs">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <strong>@vehicle.Price BGN</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-sm-pull-6">
+                                                <div class="row hidden-xs">
+                                                    <div class="col-sm-12 col-verticalpad hidden-xs">
+                                                        @vehicle.Year
+                                                    </div>
 
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">@vehicle.Milage Km</li>
-                                                <li class="list-inline-item">@Html.DisplayFor(f => fuelType)</li>
-                                                <li class="list-inline-item">@Html.DisplayFor(t => transmissionType)</li>
-                                            </ul>
-                                            <a asp-action="VehicleById" asp-route-id="@vehicle.Id" class="btn btn-success">Детайли</a>
-                                            <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
-                                            <a asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
+                                                    <div class="col-sm-12 col-verticalpad">
+                                                        @vehicle.Milage км
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-verticalpad">
+                                                        @vehicle.HorsePower к.с.
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-verticalpad">
+                                                        @Html.DisplayFor(f => fuelType)
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-verticalpad">
+                                                        @Html.DisplayFor(f => transmissionType)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-sm-pull-7">
+                                        <div class="row hidden-xs">
+                                            <div class="col-sm-12 col-verticalpad hidden-xs">
+                                                Година на производство
+                                            </div>
+                                            <div class="col-sm-12 col-verticalpad">
+                                                Пробег
+                                            </div>
+                                            <div class="col-sm-12 col-verticalpad hidden-xs">
+                                                Мощност
+                                            </div>
+                                            <div class="col-sm-12 col-verticalpad hidden-xs">
+                                                Двигател
+                                            </div>
+                                            <div class="col-sm-12 col-verticalpad">
+                                                Скоростна кутия
+                                            </div>
+                                        </div>
+                                        <div class="row visible-xs">
+                                            <div class="col-xs-12">
+                                                @vehicle.Year
+                                            </div>
+                                            <div class="col-xs-12">
+                                                @vehicle.Milage км
+                                            </div>
+                                            <div class="col-xs-12">
+                                                @vehicle.HorsePower к.с.
+                                            </div>
+                                            <div class="col-xs-12">
+                                                @Html.DisplayFor(f => fuelType)<br />@Html.DisplayFor(t => transmissionType)<br />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                }
+                            </div>
                         </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 

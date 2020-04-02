@@ -8,6 +8,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Images;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Messages;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Specifications;
 
     public class VehicleDetailsViewModel : IMapFrom<Vehicle>, IMapFrom<Image>, IMapFrom<Specification>
@@ -35,5 +36,7 @@
         public IList<ImagesViewModel> Images { get; set; }
 
         public ICollection<VehicleSpecificationsViewModel> Specifications { get; set; }
+
+        public MessageInputModel MessageInputModel { get; set; }
     }
 }

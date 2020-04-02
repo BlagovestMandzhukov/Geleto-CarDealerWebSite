@@ -8,6 +8,7 @@
     var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
     var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
 }
+
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
@@ -106,36 +107,8 @@
                             <div class="heading3">
                                 <h2>НАПРАВИ ЗАПИТВАНЕ</h2>
                             </div>
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>
-                                            <i class="fa fa-user"></i>
-                                            <input type="text" placeholder="Name" />
-                                        </label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>
-                                            <i class="fa fa-at"></i>
-                                            <input type="text" placeholder="Email Id" />
-                                        </label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>
-                                            <i class="fa fa-phone"></i>
-                                            <input type="text" placeholder="Phone Number" />
-                                        </label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>
-                                            <i class="fa fa-pencil"></i>
-                                            <textarea placeholder="Your Message"></textarea>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button type="submit" class="flat-btn">ИЗПРАТИ</button>
-                                    </div>
-                                </div>
+                            <form method="post" asp-controller="Messages" asp-action="SendMessage" asp-route-id="@Model.Id">
+                                <partial name="~/Views/Shared/Partial/SendEmailPartial.cshtml" model="@Model.MessageInputModel" />
                             </form>
                         </div>
                     </div>
@@ -156,3 +129,6 @@
         displayList: false,
     });
 </script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
