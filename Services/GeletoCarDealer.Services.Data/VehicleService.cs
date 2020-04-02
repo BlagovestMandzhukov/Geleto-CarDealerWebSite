@@ -125,16 +125,18 @@
         {
             var vehicle = this.vehicleRepository.All()
                 .Include(x => x.Images)
+                .Include(x => x.Messages)
                 .Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
+
             return vehicle;
         }
 
-        public async Task<int> GetVehicleId(int id)
+        public Vehicle GetVehicle(int id)
         {
-            var vehicle = await this.vehicleRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var vehicle = this.vehicleRepository.All().FirstOrDefault(x => x.Id == id);
 
-            return vehicle.Id;
+            return vehicle;
         }
     }
 }

@@ -15,6 +15,7 @@
     using GeletoCarDealer.Services.Mapping;
     using GeletoCarDealer.Web.Controllers;
     using GeletoCarDealer.Web.ViewModels.Administration.Images;
+    using GeletoCarDealer.Web.ViewModels.Administration.Messages;
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Authorization;
@@ -28,13 +29,16 @@
     {
         private readonly IImageService imageService;
         private readonly IVehicleService vehicleService;
+        private readonly IMessageService messageService;
 
         public AdministrationController(
             IImageService imageService,
-            IVehicleService vehicleService)
+            IVehicleService vehicleService,
+            IMessageService messageService)
         {
             this.imageService = imageService;
             this.vehicleService = vehicleService;
+            this.messageService = messageService;
         }
 
         [Route("/[controller]/Admin")]
@@ -137,10 +141,10 @@
             var category = Enum.GetName(typeof(CategoryType), int.Parse(inputModel.Category));
             var fuelType = Enum.GetName(typeof(FuelType), int.Parse(inputModel.FuelType));
             var transmissionType = Enum.GetName(typeof(TransmissionType), int.Parse(inputModel.TransmissionType));
-            var vehicleId = await this.vehicleService.GetVehicleId(inputModel.Id);
+            var vehicle = this.vehicleService.GetVehicle(inputModel.Id);
 
-            var vehicle = await this.vehicleService.EditVehicle(
-                vehicleId,
+            var currentVehicle = await this.vehicleService.EditVehicle(
+                vehicle.Id,
                 inputModel.Make,
                 inputModel.Model,
                 inputModel.Year,
@@ -152,7 +156,7 @@
                 transmissionType,
                 inputModel.Description);
 
-            return this.RedirectToAction("VehicleById", new { id = vehicleId });
+            return this.RedirectToAction("VehicleById", new { id = vehicle.Id });
         }
 
         [HttpGet]
@@ -188,12 +192,12 @@
             return this.View("AllDeletedVehicles", viewModel);
         }
 
-        public async Task<IActionResult> EditImages(int id)
+        public IActionResult EditImages(int id)
         {
-            var vehicleId = await this.vehicleService.GetVehicleId(id);
+            var vehicle = this.vehicleService.GetVehicle(id);
             var viewModel = new AllImagesViewModel
             {
-                VehicleId = vehicleId,
+                VehicleId = vehicle.Id,
                 Images = this.imageService.GetAllImages<ImagesViewModel>(id),
             };
 
@@ -203,15 +207,15 @@
         [HttpPost]
         public async Task<IActionResult> AddImages(int id, IList<IFormFile> images)
         {
-            var vehicleId = await this.vehicleService.GetVehicleId(id);
+            var vehicleId = this.vehicleService.GetVehicle(id);
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction("EditImages", new { id = vehicleId });
+                return this.RedirectToAction("EditImages", new { id = vehicleId.Id });
             }
 
             await this.vehicleService.AddVehicleImagesAsync(id, images);
 
-            return this.RedirectToAction("VehicleById", new { id = vehicleId });
+            return this.RedirectToAction("VehicleById", new { id = vehicleId.Id });
         }
 
         [HttpPost]
@@ -220,6 +224,16 @@
             var vehicleId = await this.imageService.RemoveImageAsync(id);
 
             return this.RedirectToAction("EditImages", new { id = vehicleId });
+        }
+
+        public IActionResult MyMessages()
+        {
+            var viewModel = new AllMessagesViewModel
+            {
+                Messages = this.messageService.AllMessages<MessagesViewModel>(),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

@@ -9,7 +9,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
 
-    public class MessageInputModel
+    public class MessageInputModel : IMapTo<Message>
     {
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [StringLength(60, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]

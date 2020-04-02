@@ -22,17 +22,17 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("ById", input);
+                return this.RedirectToAction("ById", "Vehicles", new { _id = id });
             }
 
-            this.messageService.CreateMessage(
+            var vehicleId = this.messageService.CreateMessage(
                  id,
                  input.SendBy,
                  input.Email,
                  input.PhoneNumber,
                  input.MessageContent);
 
-            return this.RedirectToAction("ById", new { _id = id });
+            return this.RedirectToAction("ById", "Vehicles", new { id = vehicleId });
         }
     }
 }

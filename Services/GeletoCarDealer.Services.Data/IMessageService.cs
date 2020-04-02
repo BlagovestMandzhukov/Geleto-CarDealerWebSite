@@ -7,6 +7,8 @@
 
     public interface IMessageService
     {
-        bool CreateMessage(int vehicleId, string sentBy, string email, string phoneNumber, string messageContent);
+        int CreateMessage(int vehicleId, string sentBy, string email, string phoneNumber, string messageContent);
+
+        IEnumerable<T> AllMessages<T>();
     }
 }

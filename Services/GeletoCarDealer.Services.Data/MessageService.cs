@@ -9,6 +9,7 @@
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
     public class MessageService : IMessageService
@@ -27,9 +28,15 @@
             this.vehicleRepository = vehicleRepository;
         }
 
-        public bool CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
+        public IEnumerable<T> AllMessages<T>()
         {
-            var vehicle = this.vehicleService.GetById<Vehicle>(id);
+            IQueryable<Message> query = this.messagesRepository.All().OrderBy(x => x.CreatedOn);
+            return query.To<T>().ToList();
+        }
+
+        public int CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
+        {
+            var vehicle = this.vehicleService.GetVehicle(id);
             var message = new Message
             {
                 SendBy = sentBy,
@@ -39,8 +46,9 @@
             };
 
             vehicle.Messages.Add(message);
+            this.messagesRepository.SaveChangesAsync();
             this.vehicleRepository.SaveChangesAsync();
-            return true;
+            return vehicle.Id;
         }
     }
 }

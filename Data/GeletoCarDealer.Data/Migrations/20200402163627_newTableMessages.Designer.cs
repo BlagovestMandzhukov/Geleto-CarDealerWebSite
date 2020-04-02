@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeletoCarDealer.Data.Migrations
 {
     [DbContext(typeof(GeletoDbContext))]
-    [Migration("20200402152229_NewTableMessages")]
-    partial class NewTableMessages
+    [Migration("20200402163627_newTableMessages")]
+    partial class newTableMessages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,8 +218,8 @@ namespace GeletoCarDealer.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SendBy")
                         .IsRequired()
