@@ -51,7 +51,7 @@
         [Required]
         public string TransmissionType { get; set; }
 
-        [StringLength(500, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+        [StringLength(2000, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string Description { get; set; }
     }
 }

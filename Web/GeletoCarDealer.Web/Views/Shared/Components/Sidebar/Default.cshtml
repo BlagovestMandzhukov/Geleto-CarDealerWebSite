@@ -4,7 +4,7 @@
     @foreach (var car in Model.Vehicles)
     {
 
-        <div class="col-md-4 vertical-box">
+        <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
             <a asp-controller="Vehicles" asp-action="ById" asp-route-id="@car.Id" style="display:block;">
                 <div class="card-Sidebar">
                     <img class="card-img-top mh200-text" src="@car.ImageUrl" alt="@car.Make">

@@ -29,6 +29,8 @@
 
         public string TransmissionType { get; set; }
 
+        public int HorsePower { get; set; }
+
         public string ImageUrl { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

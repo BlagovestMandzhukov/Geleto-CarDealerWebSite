@@ -34,6 +34,8 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -68,6 +70,12 @@
             builder.Entity<Image>()
                 .HasIndex(i => i.Id)
                 .IsUnique();
+
+            builder.Entity<Vehicle>()
+                .HasMany(m => m.Messages)
+                .WithOne(v => v.Vehicle)
+                .HasForeignKey(v => v.VehicleId);
+
             //builder.Entity<VehicleSpecification>()
             //    .HasKey(vs => new { vs.VehicleId, vs.SpecificationId });
 

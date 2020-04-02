@@ -5425,3 +5425,110 @@ i.fa.fa-th {
 h1.outline, .outline {
     display: none;
 }
+.separator {
+    margin: 20px 0 10px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.separator-lg {
+    margin: 10px 0 30px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.separator-md {
+    margin: 5px 0 25px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.separator-xs {
+    margin: 5px 0;
+    border-top: 1px solid #e3e3e3;
+}
+.white-box {
+    padding: 45px 35px;
+    min-height: 500px;
+    background: #fff;
+    box-shadow: 0 1px 5px -1px #ccc;
+}
+.car-listing {
+    padding: 15px 0;
+    float:left;
+    margin-left:5%;
+}
+
+.car-description h4 {
+    font-size: 24px;
+    line-height: 30px;
+    margin: 20px 0 0px;
+    color: #333;
+    font-weight: bold;
+}
+
+.car-listing h4 a {
+    color: #333;
+}
+
+.car-listing .thumb img {
+    max-width: 100%;
+}
+
+.car-listing h4 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    line-height: 20px;
+    color: #333;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.car-description h3 {
+    margin: 25px 0 20px !important;
+    font-size: 15px;
+    color: #333333;
+    line-height: 24px;
+}
+
+.car-description {
+    padding-top: 1px;
+    clear: both;
+    font-size: 15px;
+    color: #777;
+    line-height: 25px;
+}
+
+    .car-description .first-line {
+        font-size: 16px;
+    }
+
+    .car-description strong {
+        color: #333;
+    }
+
+    .car-description .row {
+        line-height: 16px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+.col-verticalpad {
+    line-height: 16px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.car-description .row .col-xs-3,
+.car-description .row .col-xs-4,
+.car-description .row .col-xs-5 {
+    width: 33.33%;
+    padding: 0 10px 0 20px;
+    font-size: 12px;
+}
+
+.car-description .right-col,
+.car-description .right-col-xs {
+    text-align: right !important;
+}
+
+.car-description .left-col {
+    color: #333
+}

@@ -12,6 +12,7 @@
         {
             this.Images = new HashSet<Image>();
             this.Specifications = new HashSet<Specification>();
+            this.Messages = new HashSet<Message>();
         }
 
         [Required]
@@ -48,5 +49,7 @@
         public virtual ICollection<Image> Images { get; set; }
 
         public virtual ICollection<Specification> Specifications { get; set; }
+
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

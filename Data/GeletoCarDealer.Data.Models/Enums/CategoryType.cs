@@ -4,7 +4,7 @@
 
     public enum CategoryType
     {
-        [Display(Name = "Автомобили и джипове")]
+        [Display(Name = "Автомобили")]
         Car = 1,
 
         [Display(Name = "Мотоциклети")]
@@ -15,5 +15,8 @@
 
         [Display(Name = "Камиони")]
         Truck = 4,
+
+        [Display(Name = "Джипове")]
+        SUVS = 5,
     }
 }
