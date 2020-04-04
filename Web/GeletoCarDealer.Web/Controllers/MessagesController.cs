@@ -32,6 +32,7 @@
                  input.PhoneNumber,
                  input.MessageContent);
 
+            this.TempData["MessageSent"] = "Вашето запитване беше изпратено успешно!";
             return this.RedirectToAction("ById", "Vehicles", new { id = vehicleId });
         }
     }

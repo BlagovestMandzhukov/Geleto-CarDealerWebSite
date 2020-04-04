@@ -24,5 +24,6 @@
         Task<int> AddVehicleImagesAsync(int id, IList<IFormFile> images);
 
         Vehicle GetVehicle(int id);
+
     }
 }

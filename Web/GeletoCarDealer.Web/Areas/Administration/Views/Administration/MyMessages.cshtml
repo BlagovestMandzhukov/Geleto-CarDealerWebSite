@@ -3,3 +3,48 @@
 @{
     ViewData["Title"] = "Моите съобщения";
 }
+
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div class="theme-layout"></div>
+<div class="container">
+    <div class="heading4">
+        <h2>Получени съобщения</h2>
+    </div>
+</div>
+<div class="container">
+    @foreach (var message in Model.Messages)
+    {
+        <div class="row car-listing">
+            <hr />
+            <div class="media">
+                <div style="width: 200px; height: 250px; float: left; margin-right: 5rem;">
+                    <img class="align-self-start mr-3" src="@message.Vehicle.ImageUrl" alt="@message.Vehicle.Make">
+                </div>
+                <a asp-controller="Administration" asp-action="SendMessage" asp-route-id="@message.Id" class="btn btn-success">Отговори</a>
+                <div class="media-body">
+                    <h5 class="mt-0">@message.Vehicle.Make @message.Vehicle.Model  @message.Vehicle.Year</h5>
+                    <br />
+                    <p>@message.MessageContent</p>
+                    <br />
+                    <ul class="list-inline list-unstyled text-left">
+                        <li class="list-inline-item">
+                            <i class="fas fa-user-edit"></i>@message.SendBy
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-calendar-alt"></i> @message.Email
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-calendar-alt"></i> @message.CreatedOn
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-comment-dots"></i> @message.PhoneNumber
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

@@ -12,123 +12,133 @@
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
-<section class="block">
-    <div class="container">
-        <h1>@Model.Make @Model.Model @Model.Year</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8 column">
-                        <div class="single-post-sec">
-                            <div class="blog-post vehicul-post">
-                                <ul class="pgwSlider">
-                                    @foreach (var image in Model.Images)
-                                    {
-                                        <li>
-                                            <a href="@image.ImageUrl" target="_blank"><img src="@image.ImageUrl" alt="@Model.Make" /></a>
-                                            <span>@Model.Make  @Model.Model</span>
-                                        </li>
-                                    }
-                                </ul>
-                                <h1>@Model.Make  @Model.Model | @Model.Year | @Model.Price лв.</h1>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="vehicul-detail">
-                                            <div class="detail-field row">
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Марка:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Make</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Модел:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Model</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Година:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Year</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Вид на трансмисия:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(t => transmissionType)</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Километри:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Milage км.</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Двигател:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(f => fuelType)</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Мощност:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.HorsePower к.с.</span>
-                                                <span class="col-xs-6 col-md-5 detail-field-label">Цена:</span>
-                                                <span class="col-xs-6 col-md-7 detail-field-value">@Model.Price  лв.</span>
-                                            </div>
+@if (this.TempData["MessageSent"] != null)
+{
+    <div class="alert alert-success" style="text-align:center;" role="alert">
+        <span>@TempData["MessageSent"]</span>
+    </div>
+}
+    <section class="block">
+        <div class="container">
+            <h1>@Model.Make @Model.Model @Model.Year</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8 column">
+                            <div class="single-post-sec">
+                                <div class="blog-post vehicul-post">
+                                    <ul class="pgwSlider">
+                                        @foreach (var image in Model.Images)
+                                        {
+                                            <li>
+                                                <a href="@image.ImageUrl" target="_blank"><img src="@image.ImageUrl" alt="@Model.Make" /></a>
+                                                <span>@Model.Make  @Model.Model</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <h1>@Model.Make  @Model.Model | @Model.Year | @Model.Price лв.</h1>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="vehicul-detail">
+                                                <div class="detail-field row">
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Марка:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Make</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Модел:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Model</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Година:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Year</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Вид на трансмисия:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(t => transmissionType)</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Километри:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Milage км.</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Двигател:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Html.DisplayFor(f => fuelType)</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Мощност:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.HorsePower к.с.</span>
+                                                    <span class="col-xs-6 col-md-5 detail-field-label">Цена:</span>
+                                                    <span class="col-xs-6 col-md-7 detail-field-value">@Model.Price  лв.</span>
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h4>Описание за автомобила</h4>
+                                            <hr />
+                                            <p>@Model.Description</p>
                                         </div>
                                     </div>
                                     <div class="col-md-7">
-                                        <h4>Описание за автомобила</h4>
+                                        <h5 style="font-size:20px">Допълнителни ектсри</h5>
                                         <hr />
-                                        <p>@Model.Description</p>
+                                        @foreach (var spec in Model.Specifications)
+                                        {
+                                            var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
+                                            <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
+                                        }
                                     </div>
+                                </div><!-- Blog Post -->
+                            </div><!-- Blog POst Sec -->
+                        </div>
+                        <aside class="col-md-4 column">
+                            <div class="agent_bg_widget widget">
+                                <div class="agent_widget">
+                                    <div class="agent_pic">
+                                        <a href="https://geleto.mobile.bg/" target="_blank" title="">
+                                            <img src="~/img/mobile_bg_01.png" alt="" />
+                                            <h3 class="nocontent outline">--- document outline needed 3 ---</h3>
+                                            @*<h4><link href="https://geleto.mobile.bg/"/></h4>*@
+                                        </a>
+                                    </div>
+                                    <div class="agent_social">
+                                        <a href="#" title=""><i class="fa fa-facebook"></i></a>
+                                        <a href="#" title=""><i class="fa fa-google-plus"></i></a>
+                                        <a href="#" title=""><i class="fa fa-twitter"></i></a>
+                                        <a href="#" title=""><i class="fa fa-tumblr"></i></a>
+                                    </div>
+                                    <span>
+                                        <i class="fa fa-phone"> </i> +1 9090909090
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-envelope"> </i> agent@company.com
+                                    </span>
+                                    <a href="/Home/Index" title="" class="btn contact-agent">Виж други обяви</a>
                                 </div>
-                                <div class="col-md-7">
-                                    <h5 style="font-size:20px">Допълнителни ектсри</h5>
-                                    <hr />
-                                    @foreach (var spec in Model.Specifications)
-                                    {
-                                        var specification = (Specifications)Enum.Parse(typeof(Specifications), spec.Name);
-                                        <div style="margin-bottom:5px;"><i class="fa fa-check" style="margin-right:5px"></i>@Html.DisplayFor(s => specification)</div>
-                                    }
+                            </div><!-- Follow Widget -->
+                        </aside>
+                        <aside>
+                            <vc:sidebar></vc:sidebar>
+                        </aside>
+                        <div class="send-email-to-agent">
+                            <div class="comment-form">
+                                <div class="heading3">
+                                    <h2>НАПРАВИ ЗАПИТВАНЕ</h2>
                                 </div>
-                            </div><!-- Blog Post -->
-                        </div><!-- Blog POst Sec -->
-                    </div>
-                    <aside class="col-md-4 column">
-                        <div class="agent_bg_widget widget">
-                            <div class="agent_widget">
-                                <div class="agent_pic">
-                                    <a href="https://geleto.mobile.bg/" target="_blank" title="">
-                                        <img src="~/img/mobile_bg_01.png" alt="" />
-                                        <h3 class="nocontent outline">--- document outline needed 3 ---</h3>
-                                        @*<h4><link href="https://geleto.mobile.bg/"/></h4>*@
-                                    </a>
-                                </div>
-                                <div class="agent_social">
-                                    <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                    <a href="#" title=""><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                    <a href="#" title=""><i class="fa fa-tumblr"></i></a>
-                                </div>
-                                <span>
-                                    <i class="fa fa-phone"> </i> +1 9090909090
-                                </span>
-                                <span>
-                                    <i class="fa fa-envelope"> </i> agent@company.com
-                                </span>
-                                <a href="/Home/Index" title="" class="btn contact-agent">Виж други обяви</a>
+                                <form method="post" asp-controller="Messages" asp-action="SendMessage" asp-route-id="@Model.Id">
+                                    <partial name="~/Views/Shared/Partial/SendEmailPartial.cshtml" model="@Model.MessageInputModel" />
+                                    <div class="col-md-12">
+                                        <button type="submit" class="flat-btn">ИЗПРАТИ</button>
+                                    </div>
+                                </form>
                             </div>
-                        </div><!-- Follow Widget -->
-                    </aside>
-                    <aside>
-                        <vc:sidebar></vc:sidebar>
-                    </aside>
-                    <div class="send-email-to-agent">
-                        <div class="comment-form">
-                            <div class="heading3">
-                                <h2>НАПРАВИ ЗАПИТВАНЕ</h2>
-                            </div>
-                            <form method="post" asp-controller="Messages" asp-action="SendMessage" asp-route-id="@Model.Id">
-                                <partial name="~/Views/Shared/Partial/SendEmailPartial.cshtml" model="@Model.MessageInputModel" />
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<script type="text/javascript" src="~/js/jquery.min.js"></script>
-<script type="text/javascript" src="~/js/pgwslider.min.js"></script>
-<script>
-    $('.pgwSlider').pgwSlider({
-        displayControls: true,
-        transitionEffect: 'sliding',
-        listPosition: 'left',
-        autoSlide: false,
-        adaptiveHeight: true,
-        displayList: false,
-    });
-</script>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    </section>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/pgwslider.min.js"></script>
+    <script>
+        $('.pgwSlider').pgwSlider({
+            displayControls: true,
+            transitionEffect: 'sliding',
+            listPosition: 'left',
+            autoSlide: false,
+            adaptiveHeight: true,
+            displayList: false,
+        });
+    </script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+

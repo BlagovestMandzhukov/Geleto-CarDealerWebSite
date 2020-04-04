@@ -235,5 +235,10 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult SendMessage(int id)
+        {
+            return this.View();
+        }
     }
 }

@@ -28,7 +28,7 @@
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [StringLength(2000, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+        [StringLength(150, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         [Display(Name = "Съдържание")]
         public string MessageContent { get; set; }
     }

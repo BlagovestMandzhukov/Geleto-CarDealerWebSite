@@ -10,42 +10,28 @@
 
     public class SendGridEmailSender : IEmailSender
     {
-        private readonly SendGridClient client;
-
-        public SendGridEmailSender(string apiKey)
+        public Task SendEmailAsync(string email, string subject, string message)
         {
-            this.client = new SendGridClient(apiKey);
+            //return Execute(Options.SendGridKey, subject, message, email);
         }
 
-        public async Task SendEmailAsync(string from, string fromName, string to, string subject, string htmlContent, IEnumerable<EmailAttachment> attachments = null)
+        public Task Execute(string apiKey, string subject, string message, string email)
         {
-            if (string.IsNullOrWhiteSpace(subject) && string.IsNullOrWhiteSpace(htmlContent))
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage
             {
-                throw new ArgumentException("Subject and message should be provided.");
-            }
+                From = new EmailAddress(),
+                Subject = subject,
+                PlainTextContent = message,
+                HtmlContent = message,
+            };
+            msg.AddTo(new EmailAddress(email));
 
-            var fromAddress = new EmailAddress(from, fromName);
-            var toAddress = new EmailAddress(to);
-            var message = MailHelper.CreateSingleEmail(fromAddress, toAddress, subject, null, htmlContent);
-            if (attachments?.Any() == true)
-            {
-                foreach (var attachment in attachments)
-                {
-                    message.AddAttachment(attachment.FileName, Convert.ToBase64String(attachment.Content), attachment.MimeType);
-                }
-            }
+            // Disable click tracking.
+            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            msg.SetClickTracking(false, false);
 
-            try
-            {
-                var response = await this.client.SendEmailAsync(message);
-                Console.WriteLine(response.StatusCode);
-                Console.WriteLine(await response.Body.ReadAsStringAsync());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            return client.SendEmailAsync(msg);
         }
     }
 }

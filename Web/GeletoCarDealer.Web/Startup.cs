@@ -38,7 +38,6 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<GeletoDbContext>();
-
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -47,6 +46,7 @@
                     });
 
             services.AddControllersWithViews();
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

@@ -10,5 +10,6 @@
         int CreateMessage(int vehicleId, string sentBy, string email, string phoneNumber, string messageContent);
 
         IEnumerable<T> AllMessages<T>();
+
     }
 }

@@ -2081,6 +2081,7 @@ aside .widget:first-child {
 
 /* Heading 4 */
 .heading4 {
+    margin-top:5rem;
     float: left;
     margin-bottom: 55px;
     padding-bottom: 45px;
@@ -2454,7 +2455,7 @@ blockquote p {
     .comment-form form label input, .comment-form form label textarea {
         background: #f9f9f9 none repeat scroll 0 0;
         border: medium none;
-        color: #a7a7a7;
+        color: black;
         float: left;
         font-family: montserrat;
         font-weight: 500;
@@ -4907,7 +4908,10 @@ footer.light-footer .bottom-line {
     background-color: #FF2929;
     margin: 30px 0;
 }
-
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
 .agent-menu {
     list-style: outside none;
     text-align: left;
@@ -5445,6 +5449,8 @@ h1.outline, .outline {
     border-top: 1px solid #e3e3e3;
 }
 .white-box {
+    margin-top:10rem;
+    margin-bottom:1rem;
     padding: 45px 35px;
     min-height: 500px;
     background: #fff;
