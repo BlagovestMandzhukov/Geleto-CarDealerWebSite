@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
+    using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using Microsoft.AspNetCore.Http;
 
@@ -25,7 +27,8 @@
 
         Vehicle GetVehicle(int id);
 
-        Task RemoveVehicleMessageAsync(int id);
+        Task<int> RemoveVehicleMessageAsync(int id);
 
+        int AddMessageToVehicle(int id, string sentBy, string email, string phoneNumber, string messageContent);
     }
 }

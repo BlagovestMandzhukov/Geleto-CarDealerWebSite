@@ -142,17 +142,21 @@
             return vehicle;
         }
 
-        public async Task RemoveVehicleMessageAsync(int messageId)
+        public async Task<int> RemoveVehicleMessageAsync(int messageId)
         {
             var message = await this.messageService.GetMessageAsync(messageId);
-            if (message == null)
-            {
-                return;
-            }
-
             var vehicle = await this.vehicleRepository.All().FirstOrDefaultAsync(x => x.Id == message.VehicleId);
             vehicle.Messages.Remove(message);
             await this.vehicleRepository.SaveChangesAsync();
+
+            return vehicle.Id;
+        }
+
+        public int AddMessageToVehicle(int id, string sentBy, string email, string phoneNumber, string messageContent)
+        {
+            var message = this.messageService.CreateMessage(id, sentBy, email, phoneNumber, messageContent);
+            this.vehicleRepository.SaveChangesAsync();
+            return message.VehicleId;
         }
     }
 }

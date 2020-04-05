@@ -9,9 +9,18 @@
 <div id="preloader"></div>
 <div class="theme-layout"></div>
 <div class="container">
-    <div class="heading4">
-        <h2>Получени съобщения</h2>
-    </div>
+    @if (Model.Messages.Count() == 0)
+    {
+        <div class="heading4">
+            <h2>Няма получени съобщения</h2>
+        </div>
+    }
+    else
+    {
+        <div class="heading4">
+            <h2>Получени съобщения</h2>
+        </div>
+    }
 </div>
 <div class="container">
     @foreach (var message in Model.Messages)
@@ -49,7 +58,6 @@
                         </li>
                     </ul>
                 </div>
-                    <a asp-controller="Administration" asp-action="RemoveMessage" asp-route-id="@message.Id" class="btn btn-danger" >Премахни съобщението</a>
                 <div class="send-email-to-agent">
                     <div class="comment-form" style="display: none;">
                         <form method="post" asp-controller="Administration" asp-action="SendMessage">
@@ -57,22 +65,22 @@
                                 <div class="col-md-12">
                                     <label>
                                         <i class="fa fa-user"></i>
-                                        <input asp-for="@Model.CreateMessage.SendToEmail" name="SendToEmail" type="text" id="Email" placeholder="Емайл*">
-                                        <span asp-validation-for="@Model.CreateMessage.SendToEmail" class="text-danger"></span>
+                                        <input asp-for="@message.CreateMessage.SendToEmail" name="SendToEmail" type="text" id="Email" placeholder="Емайл*">
+                                        <span asp-validation-for="@message.CreateMessage.SendToEmail" class="text-danger"></span>
                                     </label>
                                 </div>
                                 <div class="col-md-12">
                                     <label>
                                         <i class="fa fa-user"></i>
-                                        <input asp-for="@Model.CreateMessage.Subject" name="Subject" type="text" id="Subject" placeholder="Тема*">
-                                        <span asp-validation-for="@Model.CreateMessage.Subject" class="text-danger"></span>
+                                        <input asp-for="@message.CreateMessage.Subject" name="Subject" type="text" id="Subject" placeholder="Тема*">
+                                        <span asp-validation-for="@message.CreateMessage.Subject" class="text-danger"></span>
                                     </label>
                                 </div>
                                 <div class="col-md-12">
                                     <label>
                                         <i class="fa fa-user"></i>
-                                        <textarea asp-for="@Model.CreateMessage.Content" name="Content" type="text" id="Content" placeholder="Съдържание*"></textarea>
-                                        <span asp-validation-for="@Model.CreateMessage.Content" class="text-danger"></span>
+                                        <textarea asp-for="@message.CreateMessage.Content" name="Content" type="text" id="Content" placeholder="Съдържание*"></textarea>
+                                        <span asp-validation-for="@message.CreateMessage.Content" class="text-danger"></span>
                                     </label>
                                 </div>
                             </div>
@@ -81,6 +89,11 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div>
+                    <form method="post">
+                        <a asp-controller="Administration" asp-action="RemoveMessage" asp-route-id="@message.Id" class="btn btn-danger">Премахни съобщението</a>
+                    </form>
                 </div>
             </div>
         </div>

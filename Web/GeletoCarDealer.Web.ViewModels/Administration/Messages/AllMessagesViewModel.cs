@@ -8,6 +8,5 @@
     {
         public IEnumerable<MessagesViewModel> Messages { get; set; }
         
-        public CreateMessageInputModel CreateMessage { get; set; }
     }
 }

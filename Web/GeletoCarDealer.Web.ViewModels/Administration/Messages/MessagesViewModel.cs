@@ -23,5 +23,8 @@
         public int VehicleId { get; set; }
 
         public VehiclesViewModel Vehicle { get; set; }
+
+        public CreateMessageInputModel CreateMessage { get; set; }
+
     }
 }

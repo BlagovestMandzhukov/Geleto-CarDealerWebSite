@@ -252,11 +252,14 @@
             return this.RedirectToAction("MyMessages");
         }
 
-        [HttpPost]
-        public IActionResult RemoveMessage(int id)
+        public async Task<IActionResult> RemoveMessage(int id)
         {
-            this.vehicleService.RemoveVehicleMessageAsync(id);
-            return this.Redirect("/Administration/Admin");
+            await this.messageService.RemoveMessageAsync(id);
+            var viewModel = new AllMessagesViewModel
+            {
+                Messages = this.messageService.AllMessages<MessagesViewModel>(),
+            };
+            return this.View("MyMessages", viewModel);
         }
     }
 }

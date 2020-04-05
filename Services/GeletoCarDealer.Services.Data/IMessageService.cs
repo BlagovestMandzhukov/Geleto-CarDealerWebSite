@@ -9,11 +9,12 @@
 
     public interface IMessageService
     {
-        int CreateMessage(int vehicleId, string sentBy, string email, string phoneNumber, string messageContent);
+        Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent);
 
         IEnumerable<T> AllMessages<T>();
 
-
         Task<Message> GetMessageAsync(int id);
+
+        Task RemoveMessageAsync(int id);
     }
 }

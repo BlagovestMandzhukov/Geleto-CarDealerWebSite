@@ -15,8 +15,6 @@
     public class MessageService : IMessageService
     {
         private readonly IDeletableEntityRepository<Message> messagesRepository;
-        private readonly IVehicleService vehicleService;
-        private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
         public MessageService(
             IDeletableEntityRepository<Message> messagesRepository)
@@ -30,21 +28,19 @@
             return query.To<T>().ToList();
         }
 
-        public int CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
+        public Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
         {
-            var vehicle = this.vehicleService.GetVehicle(id);
             var message = new Message
             {
                 SendBy = sentBy,
                 Email = email,
                 PhoneNumber = phoneNumber,
                 MessageContent = messageContent,
+                VehicleId = id,
             };
-
-            vehicle.Messages.Add(message);
+            this.messagesRepository.AddAsync(message);
             this.messagesRepository.SaveChangesAsync();
-            this.vehicleRepository.SaveChangesAsync();
-            return vehicle.Id;
+            return message;
         }
 
         public Task<Message> GetMessageAsync(int id)
@@ -53,11 +49,11 @@
             return message;
         }
 
-        //public void RemoveMessage(int id)
-        //{
-        //    var message = this.messagesRepository.All().FirstOrDefault(x => x.Id == id);
-        //    this.messagesRepository.HardDelete(message);
-        //    this.messagesRepository.SaveChangesAsync();
-        //}
+        public async Task RemoveMessageAsync(int id)
+        {
+            var message = this.messagesRepository.All().FirstOrDefault(x => x.Id == id);
+            this.messagesRepository.Delete(message);
+            await this.messagesRepository.SaveChangesAsync();
+        }
     }
 }

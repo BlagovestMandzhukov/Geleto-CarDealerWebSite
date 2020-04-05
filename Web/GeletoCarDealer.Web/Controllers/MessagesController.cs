@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Messages;
     using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@
     public class MessagesController : BaseController
     {
         private readonly IMessageService messageService;
+        private readonly IVehicleService vehicleService;
 
-        public MessagesController(IMessageService messageService)
+        public MessagesController(IMessageService messageService, IVehicleService vehicleService)
         {
             this.messageService = messageService;
+            this.vehicleService = vehicleService;
         }
 
         [HttpPost]
@@ -25,7 +28,7 @@
                 return this.RedirectToAction("ById", "Vehicles", new { _id = id });
             }
 
-            var vehicleId = this.messageService.CreateMessage(
+            var vehicleId = this.vehicleService.AddMessageToVehicle(
                  id,
                  input.SendBy,
                  input.Email,
