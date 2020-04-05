@@ -6,8 +6,9 @@
     public interface IEmailSender
     {
         Task SendEmailAsync(
-            string email,
+            string to,
             string subject,
-            string message);
+            string htmlContent,
+            IEnumerable<EmailAttachment> attachments = null);
     }
 }

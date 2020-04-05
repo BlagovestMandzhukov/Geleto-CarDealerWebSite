@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Моите съобщения";
 }
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+</script>
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
@@ -21,7 +22,13 @@
                 <div style="width: 200px; height: 250px; float: left; margin-right: 5rem;">
                     <img class="align-self-start mr-3" src="@message.Vehicle.ImageUrl" alt="@message.Vehicle.Make">
                 </div>
-                <a asp-controller="Administration" asp-action="SendMessage" asp-route-id="@message.Id" class="btn btn-success">Отговори</a>
+                <a class="btn btn-success" onclick="showSendMessageForm(@message.Id)">Отговори</a>
+                <script>
+                    function showSendMessageForm(id) {
+                        $(".comment-form").toggle();
+                    }
+
+                </script>
                 <div class="media-body">
                     <h5 class="mt-0">@message.Vehicle.Make @message.Vehicle.Model  @message.Vehicle.Year</h5>
                     <br />
@@ -42,9 +49,44 @@
                         </li>
                     </ul>
                 </div>
+                    <a asp-controller="Administration" asp-action="RemoveMessage" asp-route-id="@message.Id" class="btn btn-danger" >Премахни съобщението</a>
+                <div class="send-email-to-agent">
+                    <div class="comment-form" style="display: none;">
+                        <form method="post" asp-controller="Administration" asp-action="SendMessage">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>
+                                        <i class="fa fa-user"></i>
+                                        <input asp-for="@Model.CreateMessage.SendToEmail" name="SendToEmail" type="text" id="Email" placeholder="Емайл*">
+                                        <span asp-validation-for="@Model.CreateMessage.SendToEmail" class="text-danger"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>
+                                        <i class="fa fa-user"></i>
+                                        <input asp-for="@Model.CreateMessage.Subject" name="Subject" type="text" id="Subject" placeholder="Тема*">
+                                        <span asp-validation-for="@Model.CreateMessage.Subject" class="text-danger"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>
+                                        <i class="fa fa-user"></i>
+                                        <textarea asp-for="@Model.CreateMessage.Content" name="Content" type="text" id="Content" placeholder="Съдържание*"></textarea>
+                                        <span asp-validation-for="@Model.CreateMessage.Content" class="text-danger"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="flat-btn">ИЗПРАТИ</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     }
 </div>
+
+
 
 

@@ -25,5 +25,7 @@
 
         Vehicle GetVehicle(int id);
 
+        Task RemoveVehicleMessageAsync(int id);
+
     }
 }

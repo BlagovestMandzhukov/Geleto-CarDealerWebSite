@@ -21,17 +21,20 @@
         private readonly IImageService imageService;
         private readonly ICategoryService categoryService;
         private readonly IRepository<Specification> specRepository;
+        private readonly IMessageService messageService;
 
         public VehicleService(
             IDeletableEntityRepository<Vehicle> vehicleRepository,
             IImageService imageService,
             ICategoryService categoryService,
-            IRepository<Specification> specRepository)
+            IRepository<Specification> specRepository,
+            IMessageService messageService)
         {
             this.vehicleRepository = vehicleRepository;
             this.imageService = imageService;
             this.categoryService = categoryService;
             this.specRepository = specRepository;
+            this.messageService = messageService;
         }
 
         public async Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description)
@@ -137,6 +140,19 @@
             var vehicle = this.vehicleRepository.All().FirstOrDefault(x => x.Id == id);
 
             return vehicle;
+        }
+
+        public async Task RemoveVehicleMessageAsync(int messageId)
+        {
+            var message = await this.messageService.GetMessageAsync(messageId);
+            if (message == null)
+            {
+                return;
+            }
+
+            var vehicle = await this.vehicleRepository.All().FirstOrDefaultAsync(x => x.Id == message.VehicleId);
+            vehicle.Messages.Remove(message);
+            await this.vehicleRepository.SaveChangesAsync();
         }
     }
 }

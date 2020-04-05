@@ -19,13 +19,9 @@
         private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
         public MessageService(
-            IDeletableEntityRepository<Message> messagesRepository,
-            IVehicleService vehicleService,
-            IDeletableEntityRepository<Vehicle> vehicleRepository)
+            IDeletableEntityRepository<Message> messagesRepository)
         {
             this.messagesRepository = messagesRepository;
-            this.vehicleService = vehicleService;
-            this.vehicleRepository = vehicleRepository;
         }
 
         public IEnumerable<T> AllMessages<T>()
@@ -50,5 +46,18 @@
             this.vehicleRepository.SaveChangesAsync();
             return vehicle.Id;
         }
+
+        public Task<Message> GetMessageAsync(int id)
+        {
+            var message = this.messagesRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            return message;
+        }
+
+        //public void RemoveMessage(int id)
+        //{
+        //    var message = this.messagesRepository.All().FirstOrDefault(x => x.Id == id);
+        //    this.messagesRepository.HardDelete(message);
+        //    this.messagesRepository.SaveChangesAsync();
+        //}
     }
 }

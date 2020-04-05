@@ -4,34 +4,48 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using GeletoCarDealer.Common;
     using SendGrid;
     using SendGrid.Helpers.Mail;
 
     public class SendGridEmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        private readonly SendGridClient client;
+
+        public SendGridEmailSender(string apiKey)
         {
-            //return Execute(Options.SendGridKey, subject, message, email);
+            this.client = new SendGridClient(apiKey);
         }
 
-        public Task Execute(string apiKey, string subject, string message, string email)
+        public async Task SendEmailAsync(string to, string subject, string htmlContent, IEnumerable<EmailAttachment> attachments = null)
         {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage
+            if (string.IsNullOrWhiteSpace(subject) && string.IsNullOrWhiteSpace(htmlContent))
             {
-                From = new EmailAddress(),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message,
-            };
-            msg.AddTo(new EmailAddress(email));
+                throw new ArgumentException("Subject and message should be provided.");
+            }
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
+            var fromAddress = new EmailAddress(GlobalConstants.MyEmail, GlobalConstants.MyName);
+            var toAddress = new EmailAddress(to);
+            var message = MailHelper.CreateSingleEmail(fromAddress, toAddress, subject, null, htmlContent);
+            if (attachments?.Any() == true)
+            {
+                foreach (var attachment in attachments)
+                {
+                    message.AddAttachment(attachment.FileName, Convert.ToBase64String(attachment.Content), attachment.MimeType);
+                }
+            }
 
-            return client.SendEmailAsync(msg);
+            try
+            {
+                var response = await this.client.SendEmailAsync(message);
+                Console.WriteLine(response.StatusCode);
+                Console.WriteLine(await response.Body.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

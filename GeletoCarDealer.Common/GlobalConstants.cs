@@ -6,8 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string VehiclePath = "wwwroot/img/VehicleImages/image{0}.jpg";
+        public const string SendgridApiKey = "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";
 
-        public const string VehicleRootPath = "/images/Products/image{0}.jpg";
+        public const string MyEmail = "blagovest.mandzhukov@abv.bg";
+
+        public const string MyName = "Blagovest Mandzhukov";
     }
 }

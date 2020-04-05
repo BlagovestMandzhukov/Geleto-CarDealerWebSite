@@ -1,7 +1,9 @@
 ﻿namespace GeletoCarDealer.Web
 {
     using System.Reflection;
+
     using CloudinaryDotNet;
+    using GeletoCarDealer.Common;
     using GeletoCarDealer.Data;
     using GeletoCarDealer.Data.Common;
     using GeletoCarDealer.Data.Common.Repositories;
@@ -57,7 +59,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(GlobalConstants.SendgridApiKey));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IVehicleService, VehicleService>();

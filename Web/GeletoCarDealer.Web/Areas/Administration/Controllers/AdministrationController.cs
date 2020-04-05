@@ -13,6 +13,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Services.Mapping;
+    using GeletoCarDealer.Services.Messaging;
     using GeletoCarDealer.Web.Controllers;
     using GeletoCarDealer.Web.ViewModels.Administration.Images;
     using GeletoCarDealer.Web.ViewModels.Administration.Messages;
@@ -30,15 +31,18 @@
         private readonly IImageService imageService;
         private readonly IVehicleService vehicleService;
         private readonly IMessageService messageService;
+        private readonly IEmailSender sender;
 
         public AdministrationController(
             IImageService imageService,
             IVehicleService vehicleService,
-            IMessageService messageService)
+            IMessageService messageService,
+            IEmailSender sender)
         {
             this.imageService = imageService;
             this.vehicleService = vehicleService;
             this.messageService = messageService;
+            this.sender = sender;
         }
 
         [Route("/[controller]/Admin")]
@@ -236,9 +240,23 @@
             return this.View(viewModel);
         }
 
-        public IActionResult SendMessage(int id)
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(CreateMessageInputModel model)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("MyMessages", model);
+            }
+
+            await this.sender.SendEmailAsync(model.SendToEmail, model.Subject, model.Content);
+            return this.RedirectToAction("MyMessages");
+        }
+
+        [HttpPost]
+        public IActionResult RemoveMessage(int id)
+        {
+            this.vehicleService.RemoveVehicleMessageAsync(id);
+            return this.Redirect("/Administration/Admin");
         }
     }
 }
