@@ -16,5 +16,7 @@
         Task<Message> GetMessageAsync(int id);
 
         Task RemoveMessageAsync(int id);
+
+        Task CreateContactsMessage(string sentBy, string email, string phoneNumber, string messageContent);
     }
 }

@@ -38,5 +38,22 @@
             this.TempData["MessageSent"] = "Вашето запитване беше изпратено успешно!";
             return this.RedirectToAction("ById", "Vehicles", new { id = vehicleId });
         }
+
+        public async Task<IActionResult> AskQuestion(MessageInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("/Home/Contacts");
+            }
+
+            await this.messageService.CreateContactsMessage(
+                 input.SendBy,
+                 input.Email,
+                 input.PhoneNumber,
+                 input.MessageContent);
+
+            this.TempData["MessageSent"] = "Вашето запитване беше изпратено успешно!";
+            return this.Redirect("/Home/Contacts");
+        }
     }
 }

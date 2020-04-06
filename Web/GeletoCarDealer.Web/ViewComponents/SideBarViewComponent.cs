@@ -22,12 +22,11 @@
             this.vehiclesRepository = vehiclesRepository;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int id)
         {
-
             var model = new SideBarViewModel
             {
-                 Vehicles = this.vehiclesRepository.All().Take(2)
+                 Vehicles = this.vehiclesRepository.All().Where(x => x.Id != id).Take(2)
                                     .To<SideBarVehiclesViewModel>().ToList(),
             };
 

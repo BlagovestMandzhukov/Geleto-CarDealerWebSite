@@ -43,6 +43,19 @@
             return message;
         }
 
+        public async Task CreateContactsMessage(string sentBy, string email, string phoneNumber, string messageContent)
+        {
+            var message = new Message
+            {
+                SendBy = sentBy,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                MessageContent = messageContent,
+            };
+            await this.messagesRepository.AddAsync(message);
+            await this.messagesRepository.SaveChangesAsync();
+        }
+
         public Task<Message> GetMessageAsync(int id)
         {
             var message = this.messagesRepository.All().FirstOrDefaultAsync(x => x.Id == id);

@@ -74,7 +74,7 @@
             <div class="form-group col-md-4">
                 <label asp-for="FuelType">Двигател</label>
                 <select asp-for="@Model.FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()" placeholder="Двигател" class="form-control">
-                    <option selected="selected" value="@Model.Category">Избери двигател</option>
+                    <option selected="selected" value="@Model.FuelType">Избери двигател</option>
                 </select>
                 <span asp-validation-for="FuelType" class="text-danger"></span>
             </div>

@@ -1,28 +1,5 @@
-﻿@using GeletoCarDealer.Common
+﻿@model GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles.SearchBarViewModel
 @using GeletoCarDealer.Data.Models.Enums
-@{
-    this.ViewData["Title"] = "Home Page";
-    this.Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<!-- /.preloader -->
-<div id="preloader"></div>
-<div class="theme-layout">
-</div>
-@*<div class="inner-head overlap">
-    <div style="background: url(/img/parallax1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible"></div><!-- PARALLAX BACKGROUND IMAGE -->
-    <div class="container">
-        <div class="inner-content">
-            <span>
-                <i class="ti ti-home"></i>
-            </span>
-            <h2>АВТОКЪЩА - ГЕЛЕТО</h2>
-            <ul>
-                <li><a href="/Home/Index" title="">НАЧАЛО</a></li>
-                <li><a href="/Vehicles/GetAll" title="">АВТОМОБИЛИ</a></li>
-            </ul>
-        </div>
-    </div>
-    </div><!--<!-- inner Head -->*@
 <section class="horizontal-search">
     <div class="container">
         <h1 class="nocontent outline">--- Search form  ---</h1>
@@ -32,24 +9,25 @@
                     <div class="search-form-content">
                         <div class="search-form-field">
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
-                                <div class="label-select">
-                                    <select class="form-control" name="s_location">
-                                        <option>Марка</option>
+                                <div class="label-select" icon="fas fa-chevron-down">
+                                    <select id="makes" asp-items="@(new SelectList(Model.Makes))" placeholder="Марка" class="form-control">
+                                        <option value="">--Марка--</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select class="form-control" name="anymodule">
-                                        <option>Модел</option>
+                                    <select id="models" asp-items="@(new SelectList(Model.Models))" placeholder="Модел" class="form-control">
+                                        <option value="">--Модел--</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select class="form-control" name="s_location">
-                                        <option>Категория</option>
+                                    <select  asp-items="@Html.GetEnumSelectList<CategoryType>()" placeholder="Категория" class="form-control">
+                                        <option value="">--Kатегория--</option>
                                     </select>
                                 </div>
                             </div>
@@ -67,14 +45,6 @@
                     </div>
                 </form>
             </div><!-- Services Sec -->
-        </div>
-    </div>
-</section>
-<section class="block remove-top">
-    <div class="container">
-        <div class="col-md-12">
-                <vc:most-rescent-vehicles>
-                </vc:most-rescent-vehicles>
         </div>
     </div>
 </section>

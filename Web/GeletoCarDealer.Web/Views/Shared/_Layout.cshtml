@@ -56,17 +56,8 @@
                 <nav>
                     <h1 class="nocontent outline">--- Main Navigation ---</h1>
                     <ul>
-                        <li> <a href="/Home/Index" title="">Начало</a></li>
-                        <li class="menu-item-has-children">
-                            <a href="#" title="">Категория</a>
-                            <ul>
-                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Автомобили и Джипове</a></li>
-                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Бусове</a></li>
-                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Камиони</a></li>
-                                <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Мотори</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/Vehicles/GetAll" title="">Търсене на Автомобил</a></li>
+                        <li> <a  asp-controller="Home" asp-action="Index" title="">Начало</a></li>
+                        <li><a  asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
                         <li>
                             <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
                         </li>

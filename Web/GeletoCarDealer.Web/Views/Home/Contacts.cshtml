@@ -1,10 +1,16 @@
-﻿@{
+﻿@model GeletoCarDealer.Web.ViewModels.UsersArea.Messages.MessageInputModel
+@{
     ViewData["Title"] = "За контакти";
 }
 @{
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@if (this.TempData["MessageSent"] != null)
+{
+    <div class="alert alert-success" style="text-align:center;" role="alert">
+        <span>@TempData["MessageSent"]</span>
+    </div>
+}
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout">
@@ -44,22 +50,30 @@
                     <div class="row">
                         <div class="col-md-6 column">
                             <div class="contact-form">
-                                <form>
+                                <form method="post" asp-controller="Messages" asp-action="AskQuestion">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <i class="fa fa-user"></i>
-                                            <input type="text" placeholder="Name">
+                                            <input asp-for="@Model.SendBy" name="SendBy" type="text" id="SendBy" placeholder="Име*">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                         <div class="col-md-12">
                                             <i class="fa fa-at"></i>
-                                            <input type="text" placeholder="Email">
+                                            <input asp-for="@Model.Email" name="Email" type="text" id="Email" placeholder="Емайл*">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <i class="fa fa-phone"></i>
+                                            <input asp-for="@Model.PhoneNumber" name="PhoneNumber" type="text" id="PhoneNumber" placeholder="Телефон*">
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                         </div>
                                         <div class="col-md-12">
                                             <i class="fa fa-pencil"></i>
-                                            <textarea placeholder="Message"></textarea>
+                                            <textarea asp-for="@Model.MessageContent" name="MessageContent" type="text" placeholder="Съобщение"></textarea>
+                                            <span asp-validation-for="MessageContent" class="text-danger"></span>
                                         </div>
                                         <div class="col-md-12">
-                                            <button class="flat-btn" type="submit">SEND NOW</button>
+                                            <button class="flat-btn" type="submit">ИЗПРАТИ</button>
                                         </div>
                                     </div>
                                 </form>
@@ -88,3 +102,6 @@
         </div>
     </div>
 </section>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

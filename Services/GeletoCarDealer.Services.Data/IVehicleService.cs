@@ -30,5 +30,12 @@
         Task<int> RemoveVehicleMessageAsync(int id);
 
         int AddMessageToVehicle(int id, string sentBy, string email, string phoneNumber, string messageContent);
+
+        ICollection<T> SearchByMake<T>(string make);
+
+        ICollection<T> SearchByCategory<T>(int category);
+
+        ICollection<T> SearchByModel<T>(string model);
+
     }
 }

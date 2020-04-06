@@ -58,6 +58,7 @@ body {
     /*margin-top: 50px;*/
     position: relative;
 }
+
 body {
     font-family: 'open sans';
     overflow-x: hidden;
@@ -274,6 +275,7 @@ img {
         padding: 15px 12px 15px 15px;
         top: 40%;
     }
+
 .preview {
     display: -webkit-box;
     display: -webkit-flex;
@@ -323,13 +325,13 @@ img {
             margin-right: 0;
         }
 
-    .tab-content img {
-        width: 100%;
-        -webkit-animation-name: opacity;
-        animation-name: opacity;
-        -webkit-animation-duration: .3s;
-        animation-duration: .3s;
-    }
+.tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+    animation-name: opacity;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+}
 
 .card {
     margin-top: 20px;
@@ -337,13 +339,14 @@ img {
     padding: 20px;
     line-height: 1.5em;
     border-radius: 25px;
-
 }
+
 .h3-SideBar {
     font-size: 24px;
     text-align: center;
     margin-bottom: 5px
 }
+
 .card-Sidebar {
     padding: 20px;
     line-height: 1.5em;
@@ -357,7 +360,7 @@ img {
     /*background: #eee;*/
     border-radius: 15px;
     text-align-last: center;
-    display:block;
+    display: block;
 }
 
 @media screen and (min-width: 997px) {
@@ -496,6 +499,7 @@ img {
         transform: scale(1);
     }
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-family: montserrat;
     color: #2e2e2e;
@@ -508,6 +512,7 @@ p {
     font-size: 14px;
     letter-spacing: 0.4px;
 }
+
 .mw30-text {
     /*max-height: 30px;*/
     overflow: hidden;
@@ -540,6 +545,7 @@ input[type="checkbox"] {
     background: #fbfbfb;
     position: relative;
 }
+
 input[type="file"] {
     display: block;
 }
@@ -580,16 +586,18 @@ ol li, ol li a {
     color: black;
     font-size: 14px;
     line-height: 26px;
-    list-style-type:none;
+    list-style-type: none;
 }
-ul li.Admin{
-    margin-top:40px;
-     font-family: open sans;
-    color: black;
-    font-size: 14px;
-    line-height: 26px;
-    list-style-type:none;
-}
+
+    ul li.Admin {
+        margin-top: 40px;
+        font-family: open sans;
+        color: black;
+        font-size: 14px;
+        line-height: 26px;
+        list-style-type: none;
+    }
+
 a:hover,
 a:focus {
     text-decoration: none;
@@ -986,6 +994,7 @@ iframe {
         list-style: outside none none;
         margin: 0;
         padding: 0;
+        margin-right:100px;
     }
 
         .menu nav > ul > li {
@@ -1507,6 +1516,7 @@ iframe {
         display: inline-block;
         margin-right: 5px;
     }
+
 <style >
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -2081,7 +2091,7 @@ aside .widget:first-child {
 
 /* Heading 4 */
 .heading4 {
-    margin-top:5rem;
+    margin-top: 5rem;
     float: left;
     margin-bottom: 55px;
     padding-bottom: 45px;
@@ -2512,8 +2522,7 @@ blockquote p {
         color: #FFF;
     }
 
-.h3-SideBar{
-
+.h3-SideBar {
 }
 /* Our team */
 .lsting-agents-sec {
@@ -3646,7 +3655,7 @@ blockquote p {
     font-size: 14px;
     margin-top: 30px;
     padding: 15px 30px;
-    color:white;
+    color: white;
 }
 
 html.no-scroll {
@@ -3715,7 +3724,7 @@ html.no-scroll {
 
 header.white > .menu {
     background: rgba(255, 255, 255, 0.98) none repeat scroll 0 0;
-    height:113px;
+    height: 113px;
 }
 
     header.white > .menu .logo span {
@@ -4482,7 +4491,6 @@ footer.light-footer p {
 
 footer.light-footer .bottom-line {
     background: #f9f9f9 none repeat scroll 0 0;
-  
 }
 
     footer.light-footer .bottom-line span {
@@ -4594,7 +4602,6 @@ footer.light-footer .bottom-line {
 }
 
 .horizontal-search, .virtecal-search {
-    margin-bottom: 100px;
     padding-bottom: 10px;
     border-top: 1px solid rgb(213, 208, 208);
     border-bottom: 1px solid rgb(213, 208, 208);
@@ -4696,6 +4703,7 @@ footer.light-footer .bottom-line {
         .virtecal-search .search-form .search-form-content .search-form-field .label-select,
         .search_widget .search-form .search-form-content .search-form-field .label-select {
             position: relative;
+            width:200px;
         }
 
             .horizontal-search .search-form .search-form-content .search-form-field .label-select::before,
@@ -4721,7 +4729,7 @@ footer.light-footer .bottom-line {
             .virtecal-search .search-form .search-form-content .search-form-field .label-select::after,
             .search_widget .search-form .search-form-content .search-form-field .label-select::after {
                 content: "\f107";
-                font-family: FontAwesome;
+                font-family:FontAwesome;
                 line-height: 1;
                 position: absolute;
                 top: 16px;
@@ -4908,10 +4916,12 @@ footer.light-footer .bottom-line {
     background-color: #FF2929;
     margin: 30px 0;
 }
+
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
 }
+
 .agent-menu {
     list-style: outside none;
     text-align: left;
@@ -5429,6 +5439,7 @@ i.fa.fa-th {
 h1.outline, .outline {
     display: none;
 }
+
 .separator {
     margin: 20px 0 10px;
     border-top: 1px solid #e3e3e3;
@@ -5448,19 +5459,27 @@ h1.outline, .outline {
     margin: 5px 0;
     border-top: 1px solid #e3e3e3;
 }
+
 .white-box {
-    margin-top:10rem;
-    margin-bottom:1rem;
+    margin-top: 10rem;
+    margin-bottom: 1rem;
     padding: 45px 35px;
     min-height: 500px;
     background: #fff;
     /*box-shadow: 0 1px 5px -1px #ccc;*/
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2)
 }
+
 .car-listing {
     padding: 15px 0;
-    float:left;
-    margin-left:2%;
+    float: left;
+    margin-left: 2%;
+}
+
+}
+
+.car-types-listing {
+    margin-bottom: 20px;
 }
 
 .car-description h4 {
@@ -5509,7 +5528,7 @@ h1.outline, .outline {
 
     .car-description strong {
         color: #333;
-        font-size:20px;
+        font-size: 20px;
     }
 
     .car-description .row {

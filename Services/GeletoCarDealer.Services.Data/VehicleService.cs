@@ -156,7 +156,33 @@
         {
             var message = this.messageService.CreateMessage(id, sentBy, email, phoneNumber, messageContent);
             this.vehicleRepository.SaveChangesAsync();
-            return message.VehicleId;
+            var vehiceId = this.vehicleRepository.All().Where(x => x.Id == id).Select(x => x.Id).FirstOrDefault();
+            return vehiceId;
         }
+
+        public ICollection<T> SearchByMake<T>(string make)
+        {
+            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
+                .Where(x => x.Make == make);
+
+            return vehiclesByMake.To<T>().ToList();
+        }
+
+        public ICollection<T> SearchByCategory<T>(int category)
+        {
+            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
+                .Where(x => x.CategoryId == category);
+
+            return vehiclesByMake.To<T>().ToList();
+        }
+
+        public ICollection<T> SearchByModel<T>(string model)
+        {
+            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
+                .Where(x => x.Model == model);
+
+            return vehiclesByMake.To<T>().ToList();
+        }
+
     }
 }
