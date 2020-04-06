@@ -32,7 +32,6 @@
                                     .Distinct()
                                     .ToList(),
             };
-
             return this.View(model);
         }
     }
