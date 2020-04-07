@@ -5,20 +5,20 @@
         <h1 class="nocontent outline">--- Search form  ---</h1>
         <div class="">
             <div class="search-form">
-                <form action="vehiculs.html" method="get" class="form-inline">
+                <form asp-controller="Vehicles" asp-action="GetAll" method="get" class="form-inline">
                     <div class="search-form-content">
                         <div class="search-form-field">
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select id="makes" asp-items="@(new SelectList(Model.Makes))" placeholder="Марка" class="form-control">
-                                        <option value="">--Марка--</option>
+                                    <select asp-items="@(new SelectList(Model.Makes))" placeholder="Марка" class="form-control">
+                                        <option hidden value="default">--Марка--</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select id="models" asp-items="@(new SelectList(Model.Models))" placeholder="Модел" class="form-control">
+                                    <select id="models" asp-items="@(new SelectList(Model.Models, new {Model.Models}))" placeholder="Модел" class="form-control">
                                         <option value="">--Модел--</option>
                                     </select>
                                 </div>
@@ -26,7 +26,7 @@
 
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select  asp-items="@Html.GetEnumSelectList<CategoryType>()" placeholder="Категория" class="form-control">
+                                    <select asp-items="@Html.GetEnumSelectList<CategoryType>()" placeholder="Категория" class="form-control">
                                         <option value="">--Kатегория--</option>
                                     </select>
                                 </div>
@@ -42,6 +42,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="search-form-submit">
+                        <button type="submit" class="btn-search">Търси</button>
                     </div>
                 </form>
             </div><!-- Services Sec -->
