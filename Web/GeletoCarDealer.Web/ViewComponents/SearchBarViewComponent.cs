@@ -27,13 +27,9 @@
         {
             var model = new SearchBarViewModel
             {
-                Models = this.vehiclesRepository.All().Select(x => x.Model)
-                                    .ToList(),
-                Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>(),
+                Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>(),
 
-                Categories = this.vehiclesRepository.All().Select(x => x.Category.Name)
-                                    .Distinct()
-                                    .ToList(),
+                Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>(),
             };
             return this.View(model);
         }

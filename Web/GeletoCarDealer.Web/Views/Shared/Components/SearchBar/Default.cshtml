@@ -7,11 +7,15 @@
             <div class="search-form">
                 <div class="search-form-content">
                     <div class="search-form-field">
-                        <form id="order-form" asp-controller="Vehicles" asp-action="GetAll" method="GET">
+                        <form runat="server" autopostback="true" id="order-form" asp-controller="Vehicles" asp-action="GetAll" method="GET">
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
                                     <select class="form-control">
                                         <option value="">--Марка--</option>
+                                        @foreach (var make in Model.Makes)
+                                        {
+                                            <option value="@make.Make">@make.Make</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -20,6 +24,10 @@
                                 <div class="label-select">
                                     <select class="form-control">
                                         <option value="">--Модел--</option>
+                                        @foreach (var currentModel in Model.Models)
+                                        {
+                                            <option value="@currentModel.Model">@currentModel.Model</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -51,9 +59,31 @@
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 <script>
     $('#sort').change(function () {
-            $('#order-form').submit();
+        $('#order-form').submit();
     });
     $('#category').change(function () {
-            $('#order-form').submit();
+        $('#order-form').submit();
+    });
+    $(function () {
+        $("#sort").click(function () {
+            var item = $("#sort option:selected").text();
+            sessionStorage.setItem("sele", item);
         });
+        var ty = sessionStorage.getItem("sele");
+        if (ty) {
+            //Set the value of select from sessionStorage
+            $('#sort option').filter(function () { return $(this).html() == ty; }).prop('selected', true);
+        }
+    });
+    $(function () {
+        $("#category").click(function () {
+            var item = $("#category option:selected").text();
+            sessionStorage.setItem("cat", item);
+        });
+        var ty = sessionStorage.getItem("cat");
+        if (ty) {
+            //Set the value of select from sessionStorage
+            $('#category option').filter(function () { return $(this).html() == ty; }).prop('selected', true);
+        }
+    });
 </script>

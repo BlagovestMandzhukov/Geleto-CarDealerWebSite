@@ -19,7 +19,6 @@
             {
                 Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(orderBy, category),
             };
-
             return this.View("Vehicles", viewModel);
         }
 

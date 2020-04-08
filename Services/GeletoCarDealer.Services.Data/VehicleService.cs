@@ -180,7 +180,7 @@
         {
             IQueryable<Vehicle> vehicleMakes = this.vehicleRepository.All();
 
-            return vehicleMakes.To<T>().ToList();
+            return vehicleMakes.To<T>().Distinct().ToList();
         }
 
         public IEnumerable<T> GetVehicleModels<T>()

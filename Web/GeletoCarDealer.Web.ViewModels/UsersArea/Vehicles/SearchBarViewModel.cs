@@ -10,10 +10,7 @@
     {
         public IEnumerable<VehicleMakeViewModel> Makes { get; set; }
 
-        public IEnumerable<string> Models { get; set; }
+        public IEnumerable<VehicleModelsViewModel> Models { get; set; }
 
-        public IEnumerable<string> Categories { get; set; }
-
-        public SearchBarInputModel InputModel { get; set; }
     }
 }

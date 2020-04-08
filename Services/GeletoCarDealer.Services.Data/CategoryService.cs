@@ -80,7 +80,7 @@
 
         public int GetAllBuses(int id)
         {
-            var categoryId = this.categoryRepository.All().Where(x => x.Name == "Motorcycle").Select(x => x.Id).FirstOrDefault();
+            var categoryId = this.categoryRepository.All().Where(x => x.Name == "Bus").Select(x => x.Id).FirstOrDefault();
 
             if (categoryId == 0)
             {
