@@ -56,8 +56,8 @@
                 <nav>
                     <h1 class="nocontent outline">--- Main Navigation ---</h1>
                     <ul>
-                        <li> <a  asp-controller="Home" asp-action="Index" title="">Начало</a></li>
-                        <li><a  asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
+                        <li> <a asp-controller="Home" asp-action="Index" title="">Начало</a></li>
+                        <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
                         <li>
                             <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
                         </li>
@@ -87,8 +87,9 @@
     </footer>
     <!-- Script -->
 
-    <script src="~/Identity/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/modernizr.js"></script>
     <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
@@ -99,7 +100,7 @@
     <script type="text/javascript" src="~/js/script.js"></script>
     <script src="~/js/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
     <script src="~/js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
- 
+
     @this.RenderSection("Scripts", required: false)
 
     <script type="text/javascript">

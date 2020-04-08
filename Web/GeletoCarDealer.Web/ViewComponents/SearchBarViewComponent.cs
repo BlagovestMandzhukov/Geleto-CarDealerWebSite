@@ -7,6 +7,7 @@
 
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
+    using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
@@ -14,10 +15,12 @@
     public class SearchBarViewComponent : ViewComponent
     {
         private readonly IDeletableEntityRepository<Vehicle> vehiclesRepository;
+        private readonly IVehicleService vehicleService;
 
-        public SearchBarViewComponent(IDeletableEntityRepository<Vehicle> vehiclesRepository)
+        public SearchBarViewComponent(IDeletableEntityRepository<Vehicle> vehiclesRepository,IVehicleService vehicleService)
         {
             this.vehiclesRepository = vehiclesRepository;
+            this.vehicleService = vehicleService;
         }
 
         public IViewComponentResult Invoke()
@@ -26,8 +29,8 @@
             {
                 Models = this.vehiclesRepository.All().Select(x => x.Model)
                                     .ToList(),
-                Makes = this.vehiclesRepository.All().Select(x => x.Make)
-                                    .ToList(),
+                Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>(),
+
                 Categories = this.vehiclesRepository.All().Select(x => x.Category.Name)
                                     .Distinct()
                                     .ToList(),

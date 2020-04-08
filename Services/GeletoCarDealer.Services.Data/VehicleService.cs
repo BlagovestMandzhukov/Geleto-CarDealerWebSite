@@ -6,6 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using GeletoCarDealer.Common;
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
@@ -111,8 +112,23 @@
             return vehicle.Id;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(string orderBy = null, int? category = null)
         {
+            switch (orderBy)
+            {
+                case GlobalConstants.OrderByPriceAscending: return this.GetAllByPriceAscending<T>();
+                case GlobalConstants.OrderByPriceDescending: return this.GetAllByPriceDescending<T>();
+                case GlobalConstants.OrderByYearAscending: return this.GetAllByYear<T>();
+            }
+
+            switch (category)
+            {
+                case GlobalConstants.CarCategory: return this.GetAllInCarCategory<T>(category.Value);
+                case GlobalConstants.SUVCategory: return this.GetAllInSuvCategory<T>(category.Value);
+                case GlobalConstants.MotorcycleCategory: return this.GetAllInMotorcycleCategory<T>(category.Value);
+                case GlobalConstants.BusCategory: return this.GetAllInBusCategory<T>(category.Value);
+            }
+
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
             return query.To<T>().ToList();
         }
@@ -160,29 +176,86 @@
             return vehiceId;
         }
 
-        public ICollection<T> SearchByMake<T>(string make)
+        public IEnumerable<T> GetVehicleMakes<T>()
         {
-            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
-                .Where(x => x.Make == make);
+            IQueryable<Vehicle> vehicleMakes = this.vehicleRepository.All();
+
+            return vehicleMakes.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetVehicleModels<T>()
+        {
+            IQueryable<Vehicle> vehicleModels = this.vehicleRepository.All();
+
+            return vehicleModels.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetVehicleCategories<T>()
+        {
+            IQueryable<Vehicle> vehicleCategories = this.vehicleRepository.All();
+
+            return vehicleCategories.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllByMake<T>(string make)
+        {
+            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All().Where(x => x.Make == make);
 
             return vehiclesByMake.To<T>().ToList();
         }
 
-        public ICollection<T> SearchByCategory<T>(int category)
+        private IEnumerable<T> GetAllByPriceAscending<T>()
         {
-            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
-                .Where(x => x.CategoryId == category);
-
-            return vehiclesByMake.To<T>().ToList();
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Price);
+            return query.To<T>().ToList();
         }
 
-        public ICollection<T> SearchByModel<T>(string model)
+        private IEnumerable<T> GetAllByPriceDescending<T>()
         {
-            IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All()
-                .Where(x => x.Model == model);
-
-            return vehiclesByMake.To<T>().ToList();
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderByDescending(x => x.Price);
+            return query.To<T>().ToList();
         }
 
+        private IEnumerable<T> GetAllByYear<T>()
+        {
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderByDescending(x => x.Year);
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInCarCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllCars(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInSuvCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllSuvs(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInMotorcycleCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllMotorcycles(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInBusCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllBuses(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
     }
 }

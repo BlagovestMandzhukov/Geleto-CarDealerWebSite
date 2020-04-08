@@ -13,7 +13,7 @@
     {
         Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(string orderBy = null, int? category = null);
 
         IEnumerable<T> GetAllDeleted<T>();
 
@@ -31,11 +31,10 @@
 
         int AddMessageToVehicle(int id, string sentBy, string email, string phoneNumber, string messageContent);
 
-        ICollection<T> SearchByMake<T>(string make);
+        IEnumerable<T> GetVehicleModels<T>();
 
-        ICollection<T> SearchByCategory<T>(int category);
+        IEnumerable<T> GetVehicleCategories<T>();
 
-        ICollection<T> SearchByModel<T>(string model);
-
+        IEnumerable<T> GetVehicleMakes<T>();
     }
 }

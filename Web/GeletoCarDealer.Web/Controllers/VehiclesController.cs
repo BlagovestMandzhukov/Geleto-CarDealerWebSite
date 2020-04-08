@@ -13,14 +13,26 @@
             this.vehicleService = vehicleService;
         }
 
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery]string orderBy = null, [FromQuery]int? category = null)
         {
+            var viewModel = new AllVehiclesViewModel
+            {
+                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(orderBy, category),
+            };
+
+            return this.View("Vehicles", viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Search(string make, string model)
+        {
+
             var viewModel = new AllVehiclesViewModel
             {
                 Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
             };
+            return this.RedirectToAction("GetAll", viewModel);
 
-            return this.View("Vehicles", viewModel);
         }
 
         [Route("ById/{id:int}")]

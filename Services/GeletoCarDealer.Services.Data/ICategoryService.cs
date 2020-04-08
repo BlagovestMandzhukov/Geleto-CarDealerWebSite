@@ -8,5 +8,13 @@
     public interface ICategoryService
     {
         Task<int> CreateCategory(string name);
+
+        int GetAllCars(int id);
+
+        int GetAllSuvs(int id);
+
+        int GetAllMotorcycles(int id);
+
+        int GetAllBuses(int id);
     }
 }

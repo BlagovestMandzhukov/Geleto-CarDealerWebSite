@@ -4729,7 +4729,7 @@ footer.light-footer .bottom-line {
             .virtecal-search .search-form .search-form-content .search-form-field .label-select::after,
             .search_widget .search-form .search-form-content .search-form-field .label-select::after {
                 content: "\f107";
-                font-family:FontAwesome;
+                font-family:FontAwesome 5 Free;
                 line-height: 1;
                 position: absolute;
                 top: 16px;
