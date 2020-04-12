@@ -112,10 +112,10 @@
             return vehicle.Id;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
-            return query.To<T>().ToList();
+            return await query.To<T>().ToListAsync();
         }
 
         public IEnumerable<T> GetAllByOrder<T>(string orderBy = null)
@@ -126,6 +126,7 @@
                 case GlobalConstants.OrderByPriceDescending: return this.GetAllByPriceDescending<T>();
                 case GlobalConstants.OrderByYearAscending: return this.GetAllByYear<T>();
             }
+
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
             return query.To<T>().ToList();
         }
@@ -207,7 +208,7 @@
             return vehicleCategories.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllByMake<T>(string make)
+        private IEnumerable<T> GetAllByMake<T>(string make)
         {
             IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All().Where(x => x.Make == make);
 
@@ -231,7 +232,5 @@
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderByDescending(x => x.Year);
             return query.To<T>().ToList();
         }
-
-
     }
 }

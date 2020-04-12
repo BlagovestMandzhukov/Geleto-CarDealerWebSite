@@ -1,7 +1,7 @@
 ﻿@model GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles.AllVehiclesViewModel
 @using GeletoCarDealer.Data.Models.Enums
 @{
-    ViewData["Title"] = "Aвтомобили";
+    ViewData["Title"] = "Търсене на автомобили";
 }
 <section class="horizontal-search">
     <div class="container">
@@ -13,16 +13,23 @@
                         <form id="order-form" asp-controller="Vehicles" asp-action="GetAll" method="get">
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select class="form-control">
+                                    <select asp-for="@Model.Make" id="make" class="form-control">
                                         <option value="">--Марка--</option>
+                                        @foreach (var make in Model.Makes)
+                                        {
+                                            <option value="@make.Make">@make.Make</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
-
                             <div class="form-group col-xs-12 col-sm-3 col-md-3">
                                 <div class="label-select">
-                                    <select class="form-control" >
+                                    <select asp-for="@Model.Model" id="vehicleModel" class="form-control">
                                         <option value="">--Модел--</option>
+                                        @foreach (var vehicleModel in Model.Models)
+                                        {
+                                            <option value="@vehicleModel.Model"> @vehicleModel.Model</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -157,6 +164,12 @@
     });
 
     $('#category').change(function () {
+        $('#order-form').submit();
+    });
+    $('#vehicleModel').change(function () {
+        $('#order-form').submit();
+    });
+    $('#make').change(function () {
         $('#order-form').submit();
     });
 

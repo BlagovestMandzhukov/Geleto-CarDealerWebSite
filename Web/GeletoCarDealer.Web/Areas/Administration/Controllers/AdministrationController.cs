@@ -101,11 +101,11 @@
         }
 
         [Route("All")]
-        public IActionResult AllVehicles()
+        public async Task<IActionResult> AllVehicles()
         {
             var viewModel = new AllVehiclesViewModel
             {
-                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
+                Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>(),
             };
 
             return this.View(viewModel);

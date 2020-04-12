@@ -13,7 +13,7 @@
     {
         Task<int> CreateVehicleAsync(string make, string model, int year, int milage, string category, string fuelType, decimal price, int horsePower, string transmission, IList<string> specifications, IList<IFormFile> images, string description);
 
-        IEnumerable<T> GetAll<T>();
+        Task<IEnumerable<T>> GetAll<T>();
 
         IEnumerable<T> GetAllByOrder<T>(string orderBy = null);
 

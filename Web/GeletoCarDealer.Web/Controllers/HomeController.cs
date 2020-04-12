@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using GeletoCarDealer.Data;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
@@ -21,11 +21,11 @@
         }
 
         [Route("/")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new AllVehiclesViewModel
             {
-                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
+                Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>(),
             };
 
             return this.View(viewModel);

@@ -1,37 +1,54 @@
 ﻿namespace GeletoCarDealer.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
 
     public class VehiclesController : BaseController
     {
         private readonly IVehicleService vehicleService;
-        private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
-        public VehiclesController(IVehicleService vehicleService, IDeletableEntityRepository<Vehicle> vehicleRepository)
+        public VehiclesController(IVehicleService vehicleService)
         {
             this.vehicleService = vehicleService;
-            this.vehicleRepository = vehicleRepository;
         }
 
         [HttpGet]
-        public IActionResult GetAll(AllVehiclesViewModel model)
+        public async Task<IActionResult> GetAll(string orderBy, int category, string make, string model)
         {
             var viewModel = new AllVehiclesViewModel();
 
-            viewModel.Vehicles = this.vehicleService.GetAll<VehiclesViewModel>();
-
-            if (!string.IsNullOrEmpty(model.OrderBy) || model.Category > 0)
+            viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>();
+            viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>();
+            if (string.IsNullOrEmpty(orderBy) && category == 0)
             {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(model.OrderBy).Where(x => x.CategoryId == model.Category);
+                viewModel.Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>();
             }
-            if (model.Category == 0 && !string.IsNullOrEmpty(model.OrderBy))
+            if (!string.IsNullOrEmpty(make))
             {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(model.OrderBy);
+                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
+                                                            .Where(x => x.Make == make);
+            }
+            if (category > 0)
+            {
+                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>()
+                                                           .Where(x => x.CategoryId == category);
+                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
+                                                            .Where(x => x.Make == make && x.CategoryId
+                                                            == category);
+            }
+            if (!string.IsNullOrEmpty(orderBy) || category > 0)
+            {
+                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
+            }
+            if (category == 0 && !string.IsNullOrEmpty(orderBy))
+            {
+                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy);
             }
 
             return this.View("Vehicles", viewModel);
