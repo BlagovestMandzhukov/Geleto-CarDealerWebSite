@@ -7,5 +7,9 @@
     public class AllVehiclesViewModel
     {
         public IEnumerable<VehiclesViewModel> Vehicles { get; set; }
+
+        public int Category { get; set; }
+
+        public string OrderBy { get; set; }
     }
 }

@@ -1,37 +1,40 @@
 ﻿namespace GeletoCarDealer.Web.Controllers
 {
+    using GeletoCarDealer.Data.Common.Repositories;
+    using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
 
     public class VehiclesController : BaseController
     {
         private readonly IVehicleService vehicleService;
+        private readonly IDeletableEntityRepository<Vehicle> vehicleRepository;
 
-        public VehiclesController(IVehicleService vehicleService)
+        public VehiclesController(IVehicleService vehicleService, IDeletableEntityRepository<Vehicle> vehicleRepository)
         {
             this.vehicleService = vehicleService;
+            this.vehicleRepository = vehicleRepository;
         }
 
-        public IActionResult GetAll([FromQuery]string orderBy = null, [FromQuery]int? category = null)
+        [HttpGet]
+        public IActionResult GetAll(AllVehiclesViewModel model)
         {
-            var viewModel = new AllVehiclesViewModel
+            var viewModel = new AllVehiclesViewModel();
+
+            viewModel.Vehicles = this.vehicleService.GetAll<VehiclesViewModel>();
+
+            if (!string.IsNullOrEmpty(model.OrderBy) || model.Category > 0)
             {
-                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(orderBy, category),
-            };
+                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(model.OrderBy).Where(x => x.CategoryId == model.Category);
+            }
+            if (model.Category == 0 && !string.IsNullOrEmpty(model.OrderBy))
+            {
+                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(model.OrderBy);
+            }
+
             return this.View("Vehicles", viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Search(string make, string model)
-        {
-
-            var viewModel = new AllVehiclesViewModel
-            {
-                Vehicles = this.vehicleService.GetAll<VehiclesViewModel>(),
-            };
-            return this.RedirectToAction("GetAll", viewModel);
-
         }
 
         [Route("ById/{id:int}")]

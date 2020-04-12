@@ -112,7 +112,13 @@
             return vehicle.Id;
         }
 
-        public IEnumerable<T> GetAll<T>(string orderBy = null, int? category = null)
+        public IEnumerable<T> GetAll<T>()
+        {
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
+            return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllByOrder<T>(string orderBy = null)
         {
             switch (orderBy)
             {
@@ -120,18 +126,22 @@
                 case GlobalConstants.OrderByPriceDescending: return this.GetAllByPriceDescending<T>();
                 case GlobalConstants.OrderByYearAscending: return this.GetAllByYear<T>();
             }
-
-            switch (category)
-            {
-                case GlobalConstants.CarCategory: return this.GetAllInCarCategory<T>(category.Value);
-                case GlobalConstants.SUVCategory: return this.GetAllInSuvCategory<T>(category.Value);
-                case GlobalConstants.MotorcycleCategory: return this.GetAllInMotorcycleCategory<T>(category.Value);
-                case GlobalConstants.BusCategory: return this.GetAllInBusCategory<T>(category.Value);
-            }
-
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
             return query.To<T>().ToList();
         }
+
+        //public IEnumerable<T> GetAllFromCategory<T>(int? category = null)
+        //{
+        //    switch (category)
+        //    {
+        //        case GlobalConstants.CarCategory: return this.GetAllInCarCategory<T>(category.Value);
+        //        case GlobalConstants.SUVCategory: return this.GetAllInSuvCategory<T>(category.Value);
+        //        case GlobalConstants.MotorcycleCategory: return this.GetAllInMotorcycleCategory<T>(category.Value);
+        //        case GlobalConstants.BusCategory: return this.GetAllInBusCategory<T>(category.Value);
+        //    }
+        //    IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
+        //    return query.To<T>().ToList();
+        //}
 
         public IEnumerable<T> GetAllDeleted<T>()
         {
@@ -222,40 +232,6 @@
             return query.To<T>().ToList();
         }
 
-        private IEnumerable<T> GetAllInCarCategory<T>(int id)
-        {
-            var categoryId = this.categoryService.GetAllCars(id);
 
-            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
-
-            return query.To<T>().ToList();
-        }
-
-        private IEnumerable<T> GetAllInSuvCategory<T>(int id)
-        {
-            var categoryId = this.categoryService.GetAllSuvs(id);
-
-            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
-
-            return query.To<T>().ToList();
-        }
-
-        private IEnumerable<T> GetAllInMotorcycleCategory<T>(int id)
-        {
-            var categoryId = this.categoryService.GetAllMotorcycles(id);
-
-            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
-
-            return query.To<T>().ToList();
-        }
-
-        private IEnumerable<T> GetAllInBusCategory<T>(int id)
-        {
-            var categoryId = this.categoryService.GetAllBuses(id);
-
-            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
-
-            return query.To<T>().ToList();
-        }
     }
 }

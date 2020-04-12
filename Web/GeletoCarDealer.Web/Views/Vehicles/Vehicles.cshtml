@@ -3,7 +3,53 @@
 @{
     ViewData["Title"] = "Aвтомобили";
 }
-<vc:search-bar></vc:search-bar>
+<section class="horizontal-search">
+    <div class="container">
+        <h1 class="nocontent outline">--- Search form  ---</h1>
+        <div class="">
+            <div class="search-form">
+                <div class="search-form-content">
+                    <div class="search-form-field">
+                        <form id="order-form" asp-controller="Vehicles" asp-action="GetAll" method="get">
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select class="form-control">
+                                        <option value="">--Марка--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select class="form-control" >
+                                        <option value="">--Модел--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.Category" asp-items="Html.GetEnumSelectList<CategoryType>()" id="category" name="category" placeholder="Категория" class="form-control">
+                                        <option value="0">--Kатегория--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.OrderBy" id="sort" class="form-control" name="orderBy">
+                                        <option value="">Сортирай по:</option>
+                                        <option value="upPrice">Цена възходяща</option>
+                                        <option value="downPrice">Цена низходяща</option>
+                                        <option value="year">Година</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- Services Sec -->
+        </div>
+    </div>
+</section>
 <!-- /.preloader -->
 <section class="block remove-top">
     <div class="container">
@@ -104,5 +150,15 @@
         </div>
     </div>
 </section>
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<script>
+    $('#sort').change(function () {
+        $('#order-form').submit();
+    });
 
+    $('#category').change(function () {
+        $('#order-form').submit();
+    });
+
+</script>
 

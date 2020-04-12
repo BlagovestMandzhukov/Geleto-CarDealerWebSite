@@ -20,6 +20,7 @@
             this.vehicleService = vehicleService;
         }
 
+        [Route("/")]
         public IActionResult Index()
         {
             var viewModel = new AllVehiclesViewModel

@@ -1,5 +1,6 @@
 ﻿namespace GeletoCarDealer.Web
 {
+    using System;
     using System.Reflection;
 
     using CloudinaryDotNet;
@@ -36,7 +37,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<GeletoDbContext>(
-                options => 
+                options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
@@ -47,6 +48,9 @@
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
+            services.AddDistributedMemoryCache();
+
+            services.AddSession();
 
             services.AddControllersWithViews();
 
