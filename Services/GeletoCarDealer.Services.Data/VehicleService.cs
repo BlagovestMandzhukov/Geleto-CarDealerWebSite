@@ -189,16 +189,16 @@
 
         public IEnumerable<T> GetVehicleMakes<T>()
         {
-            IQueryable<Vehicle> vehicleMakes = this.vehicleRepository.All();
+            IQueryable<Vehicle> vehicleMakes = this.vehicleRepository.All().OrderBy(x => x.Make);
 
             return vehicleMakes.To<T>().Distinct().ToList();
         }
 
         public IEnumerable<T> GetVehicleModels<T>()
         {
-            IQueryable<Vehicle> vehicleModels = this.vehicleRepository.All();
+            IQueryable<Vehicle> vehicleModels = this.vehicleRepository.All().OrderBy(x => x.Model);
 
-            return vehicleModels.To<T>().ToList();
+            return vehicleModels.To<T>().Distinct().ToList();
         }
 
         public IEnumerable<T> GetVehicleCategories<T>()
@@ -208,7 +208,7 @@
             return vehicleCategories.To<T>().ToList();
         }
 
-        private IEnumerable<T> GetAllByMake<T>(string make)
+        public IEnumerable<T> GetAllByMake<T>(string make)
         {
             IQueryable<Vehicle> vehiclesByMake = this.vehicleRepository.All().Where(x => x.Make == make);
 
