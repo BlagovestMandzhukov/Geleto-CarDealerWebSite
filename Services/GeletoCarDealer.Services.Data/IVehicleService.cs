@@ -42,5 +42,7 @@
         IEnumerable<T> GetVehicleMakes<T>();
 
         IEnumerable<T> GetAllByMake<T>(string make);
+
+        IEnumerable<T> GetAllByModel<T>(string model);
     }
 }

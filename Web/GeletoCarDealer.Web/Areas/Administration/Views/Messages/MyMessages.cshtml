@@ -92,7 +92,7 @@
                 }
                 <div class="send-email-to-agent">
                     <div class="comment-form" style="display: none;">
-                        <form method="post" asp-controller="Administration" asp-action="SendMessage">
+                        <form method="post" asp-area="Administration" asp-controller="Messages" asp-action="SendMessage">
                             <div class="row">
                                 <div class="col-md-12">
                                     <label>
@@ -124,7 +124,7 @@
                 </div>
                 <div>
                     <form method="post">
-                        <a asp-controller="Administration" asp-action="RemoveMessage" asp-route-id="@message.Id" class="btn btn-danger">Премахни съобщението</a>
+                        <a asp-controller="Messages" asp-action="RemoveMessage" asp-route-id="@message.Id" class="btn btn-danger">Премахни съобщението</a>
                     </form>
                 </div>
             </div>

@@ -37,9 +37,9 @@
                                 <div class="label-select">
                                     <select asp-for="@Model.Model" id="vehicleModel" class="form-control">
                                         <option value="">--Модел--</option>
-                                        @foreach (var vehicleModel in Model.Models)
+                                        @foreach (var vehicleModel in Model.Models.Select(x => x.Model).Distinct())
                                         {
-                                            <option value="@vehicleModel.Model"> @vehicleModel.Model</option>
+                                            <option value="@vehicleModel"> @vehicleModel</option>
                                         }
                                     </select>
                                 </div>

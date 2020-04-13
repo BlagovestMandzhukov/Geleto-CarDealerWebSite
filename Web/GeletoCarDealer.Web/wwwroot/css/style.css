@@ -44,6 +44,7 @@
 /*=============== General Styling ===================*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800');
+@import "font-awesome";
 
 html, body {
     overflow-x: hidden;
@@ -1172,7 +1173,7 @@ iframe {
         font-family: Montserrat;
         font-size: 44px;
         font-weight: bold;
-        margin: 66px 0 0;
+        /*margin: 66px 0 0;*/
         width: 100%;
     }
 
@@ -4710,7 +4711,6 @@ footer.light-footer .bottom-line {
             .horizontal-search .search-form .search-form-content .search-form-field .label-select::before,
             .virtecal-search .search-form .search-form-content .search-form-field .label-select::before,
             .search_widget .search-form .search-form-content .search-form-field .label-select::before {
-                content: "";
                 position: absolute;
                 right: 0;
                 height: 100%;
@@ -4730,13 +4730,14 @@ footer.light-footer .bottom-line {
             .virtecal-search .search-form .search-form-content .search-form-field .label-select::after,
             .search_widget .search-form .search-form-content .search-form-field .label-select::after {
                 content: "\f107";
-                font-family:FontAwesome 5 Free;
+                font-family: 'Font Awesome\ 5 Free';
                 line-height: 1;
                 position: absolute;
                 top: 16px;
                 right: 20px;
                 pointer-events: none;
                 z-index: 7;
+                font-weight: 900;
             }
 
     .horizontal-search .search-form .search-form-content .form-group select,
@@ -5474,7 +5475,8 @@ h1.outline, .outline {
 .car-listing {
     padding: 15px 0;
     float: left;
-    margin-left: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 }

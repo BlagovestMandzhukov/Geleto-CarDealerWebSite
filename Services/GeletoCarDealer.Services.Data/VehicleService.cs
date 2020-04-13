@@ -215,6 +215,13 @@
             return vehiclesByMake.To<T>().ToList();
         }
 
+        public IEnumerable<T> GetAllByModel<T>(string model)
+        {
+            IQueryable<Vehicle> vehiclesByModel = this.vehicleRepository.All().Where(x => x.Model == model);
+
+            return vehiclesByModel.To<T>().ToList();
+        }
+
         private IEnumerable<T> GetAllByPriceAscending<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Price);

@@ -12,22 +12,22 @@
 <div align="center">
     <ul>
         <li style="margin-top:40px">
-            <a asp-controller="Administration" asp-action="Create">
+            <a asp-controller="Vehicles" asp-action="Create">
                 <input type="button" class="btn btn-danger" value="Добави автомобили">
             </a>
         </li>
         <li style="margin-top:40px">
-            <a asp-controller="Administration" asp-action="AllVehicles">
+            <a asp-controller="Vehicles" asp-action="AllVehicles">
                 <input type="button" class="btn btn-danger" value="Моите автомобили">
             </a>
         </li>
         <li style="margin-top:40px">
-            <a asp-controller="Administration" asp-action="AllDeleted">
+            <a asp-area="Administration" asp-controller="Vehicles" asp-action="AllDeleted">
                 <input type="button" class="btn btn-danger" value="Премахнати автомобили">
             </a>
         </li>
         <li style="margin-top:40px">
-            <a asp-controller="Administration" asp-action="MyMessages">
+            <a asp-area="Administration" asp-controller="Messages" asp-action="MyMessages">
                 <input type="button" class="btn btn-danger" value="Съобщения">
             </a>
         </li>

@@ -41,6 +41,10 @@
             if (string.IsNullOrEmpty(orderBy) && category == 0)
             {
                 viewModel.Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>();
+                if (!string.IsNullOrEmpty(model))
+                {
+                    viewModel.Vehicles = this.vehicleService.GetAllByModel<VehiclesViewModel>(model);
+                }
             }
 
             if (!string.IsNullOrEmpty(make))
@@ -63,13 +67,13 @@
                     {
                         viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
                             .Where(x => x.CategoryId == category);
+                        return this.View("Vehicles", viewModel);
                     }
                 }
                 if (!string.IsNullOrEmpty(model))
                 {
                     viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
                         .Where(x => x.Model == model);
-
                 }
                 return this.View("Vehicles", viewModel);
             }

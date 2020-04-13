@@ -17,7 +17,7 @@
                                         <div>
                                             <img src="@image.ImageUrl" />
                                         </div>
-                                        <form method="post" asp-controller="Administration" asp-action="DeleteImage" asp-route-id="@image.Id" align="center" enctype="multipart/form-data">
+                                        <form method="post" asp-controller="Images" asp-action="DeleteImage" asp-route-id="@image.Id" align="center" enctype="multipart/form-data">
                                             <div>
                                                 <button type="submit" class="btn btn-danger">Премахни снимка</button>
                                             </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-<form method="post" asp-controller="Administration" asp-action="AddImages" asp-route-id="@Model.VehicleId" align="center" enctype="multipart/form-data">
+<form method="post" asp-controller="Images" asp-action="AddImages" asp-route-id="@Model.VehicleId" align="center" enctype="multipart/form-data">
     <div class="field" align="center" width=940 cellspacing=0 cellpadding=0 border=0 style="margin:0 auto; margin-top:25px;">
         <style>
             .thumb {

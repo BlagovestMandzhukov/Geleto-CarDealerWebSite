@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+
     using AutoMapper;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
@@ -23,6 +24,8 @@
         public int HorsePower { get; set; }
 
         public decimal Price { get; set; }
+
+        public int CategoryId { get; set; }
 
         public int Year { get; set; }
 

@@ -81,11 +81,11 @@
             {
                 var user = new ApplicationUser
                 {
-                    UserName = Input.Username,
-                    Email = Input.Email,
-                    PasswordHash = Input.Password,
+                    UserName = this.Input.Username,
+                    Email = this.Input.Email,
+                    PasswordHash = this.Input.Password,
                 };
-                var result = await this.userManager.CreateAsync(user, Input.Password);
+                var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
@@ -108,9 +108,10 @@
                     else
                     {
                         await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);

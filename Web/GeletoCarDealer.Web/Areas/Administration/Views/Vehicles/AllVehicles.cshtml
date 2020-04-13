@@ -1,4 +1,4 @@
-﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.AllVehiclesViewModel
+﻿@model GeletoCarDealer.Web.ViewModels.Administration.Vehicles.SearchBarAllVehiclesViewModel
 @using GeletoCarDealer.Data.Models.Enums
 @{
     ViewData["Title"] = "Моите автомобили";
@@ -6,6 +6,71 @@
 <!-- /.preloader -->
 <div id="preloader"></div>
 <div class="theme-layout"></div>
+<section class="horizontal-search">
+    <div class="container">
+        <h1 class="nocontent outline">--- Search form  ---</h1>
+        <div class="">
+            <div class="search-form">
+                <div class="search-form-content">
+                    <div class="search-form-field">
+                        <form id="order-form" asp-controller="Vehicles" asp-action="AllVehicles" method="get">
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.Make" id="make" class="form-control">
+                                        <option value="">--Марка--</option>
+                                        @if (Model.Category == 0)
+                                        {
+                                            @foreach (var make in Model.Makes.Select(x => x.Make).Distinct())
+                                            {
+                                                <option value="@make">@make</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @foreach (var make in Model.Makes)
+                                            {
+                                                <option value="@make.Make">@make.Make</option>
+                                            }
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.Model" id="vehicleModel" class="form-control">
+                                        <option value="">--Модел--</option>
+                                        @foreach (var vehicleModel in Model.Models.Select(x => x.Model).Distinct())
+                                        {
+                                            <option value="@vehicleModel"> @vehicleModel</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.Category" asp-items="Html.GetEnumSelectList<CategoryType>()" id="category" name="category" placeholder="Категория" class="form-control">
+                                        <option value="0">--Kатегория--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-3 col-md-3">
+                                <div class="label-select">
+                                    <select asp-for="@Model.OrderBy" id="sort" class="form-control" name="orderBy">
+                                        <option value="">Сортирай по:</option>
+                                        <option value="upPrice">Цена възходяща</option>
+                                        <option value="downPrice">Цена низходяща</option>
+                                        <option value="year">Година</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- Services Sec -->
+        </div>
+    </div>
+</section>
 <div class="recommended-cars">
     <div class="container">
         <div class="row">
@@ -19,15 +84,15 @@
                             <div class="row car-listing">
                                 <div class="separator-lg noprint"></div>
                                 <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
-                                    <a asp-controller="Administration" asp-action="VehicleById" asp-route-id="@vehicle.Id" title="@vehicle.Make @vehicle.Model" class="thumb js-query-href-car">
+                                    <a asp-controller="Vehicles" asp-action="VehicleById" asp-route-id="@vehicle.Id" title="@vehicle.Make @vehicle.Model" class="thumb js-query-href-car">
                                         <img src="@vehicle.ImageUrl" alt="@vehicle.Make" />
                                     </a>
-                                    <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
-                                    <a asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
+                                    <a asp-controller="Vehicles" asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-success">Редактирай обявата</a>
+                                    <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Изтрий обявата</a>
                                 </div>
                                 <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8">
                                     <h4>
-                                        <a asp-controller="Administration" asp-action="VehicleById" asp-route-id="@vehicle.Id">
+                                        <a asp-controller="Vehicles" asp-action="VehicleById" asp-route-id="@vehicle.Id">
                                             @vehicle.Make @vehicle.Model @vehicle.Year
                                         </a>
                                     </h4>
@@ -109,6 +174,23 @@
         </div>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<script>
+    $('#sort').change(function () {
+        $('#order-form').submit();
+    });
+
+    $('#category').change(function () {
+        $('#order-form').submit();
+    });
+    $('#vehicleModel').change(function () {
+        $('#order-form').submit();
+    });
+    $('#make').change(function () {
+        $('#order-form').submit();
+    });
+
+</script>
 
 
 

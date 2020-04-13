@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    public class DashboardController : Controller
+    public class DashboardController : AdministrationController
     {
         private readonly ISettingsService settingsService;
 
@@ -13,7 +13,7 @@
         {
             this.settingsService = settingsService;
         }
-
+        [Route("[controller]/Admin")]
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
