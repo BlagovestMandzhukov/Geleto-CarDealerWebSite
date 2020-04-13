@@ -27,7 +27,7 @@
 
             var model = new MostRescentVehiclesViewModel
             {
-                Vehicles = this.vehiclesRepository.All().OrderByDescending(x => x.CreatedOn).Take(5)
+                Vehicles = this.vehiclesRepository.All().OrderByDescending(x => x.CreatedOn).Take(2)
                                     .To<VehiclesViewModel>().ToList(),
             };
 

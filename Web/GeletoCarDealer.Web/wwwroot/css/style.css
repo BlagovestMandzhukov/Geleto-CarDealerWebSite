@@ -1152,7 +1152,7 @@ iframe {
     }
 
         .inner-content > span > i {
-            color: #ffffff;
+            color: black;
             font-size: 52px;
             left: 0;
             position: absolute;
@@ -1167,7 +1167,7 @@ iframe {
         }
 
     .inner-content h2 {
-        color: #ffffff;
+        color: black;
         float: left;
         font-family: Montserrat;
         font-size: 44px;
@@ -1193,8 +1193,9 @@ iframe {
     }
 
         .inner-content li a {
-            color: #fff;
+            color: black;
             float: left;
+            font-size: 20px;
         }
 
         .inner-content li:last-child::before {
@@ -4605,7 +4606,7 @@ footer.light-footer .bottom-line {
     padding-bottom: 10px;
     border-top: 1px solid rgb(213, 208, 208);
     border-bottom: 1px solid rgb(213, 208, 208);
-    background-color: #eee;
+    background-color: #808080;
     padding-top: 20px;
     text-align: -webkit-center;
 }

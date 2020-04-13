@@ -1,5 +1,6 @@
 ﻿namespace GeletoCarDealer.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -19,12 +20,24 @@
         }
 
         [HttpGet]
+        [Route("search")]
         public async Task<IActionResult> GetAll(string orderBy, int category, string make, string model)
         {
             var viewModel = new AllVehiclesViewModel();
 
-            viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>();
-            viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>();
+            if (category == 0)
+            {
+                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>();
+                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>();
+            }
+            else
+            {
+                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
+                                                       .Where(x => x.CategoryId
+                                                       == category);
+            }
+
             if (string.IsNullOrEmpty(orderBy) && category == 0)
             {
                 viewModel.Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>();
@@ -39,6 +52,8 @@
                 {
                     viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
                         .Where(x => x.CategoryId == category);
+                    viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
+                                                            .Where(x => x.Make == make && x.CategoryId == category);
                 }
                 if (!string.IsNullOrEmpty(orderBy))
                 {
@@ -59,15 +74,6 @@
                 return this.View("Vehicles", viewModel);
             }
 
-            if (category > 0)
-            {
-                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>()
-                                                           .Where(x => x.CategoryId == category);
-                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
-                                                            .Where(x => x.Make == make && x.CategoryId
-                                                            == category);
-            }
-
             if (!string.IsNullOrEmpty(orderBy) || category > 0)
             {
                 viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
@@ -81,7 +87,7 @@
             return this.View("Vehicles", viewModel);
         }
 
-        [Route("ById/{id:int}")]
+        [Route("car/{id:int}")]
         public IActionResult ById(int id)
         {
             var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);

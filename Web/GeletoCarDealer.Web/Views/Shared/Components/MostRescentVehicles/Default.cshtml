@@ -2,12 +2,13 @@
 @using GeletoCarDealer.Data.Models.Enums
 <div id="cars-wrapper">
     <div class="white-box clearfix">
+        <h4 style="text-align:center">--Последно добавени--</h4>
         @foreach (var vehicle in Model.Vehicles)
         {
             var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
             var fuelType = (FuelType)Enum.Parse(typeof(FuelType), vehicle.FuelType);
             <div class="row car-listing">
-            <div class="separator-lg noprint"></div>
+                <div class="separator-lg noprint"></div>
                 <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <a asp-controller="Vehicles" asp-action="ById" asp-route-id="@vehicle.Id" title="@vehicle.Make @vehicle.Model" class="thumb js-query-href-car">
                         <img src="@vehicle.ImageUrl" alt="@vehicle.Make" />

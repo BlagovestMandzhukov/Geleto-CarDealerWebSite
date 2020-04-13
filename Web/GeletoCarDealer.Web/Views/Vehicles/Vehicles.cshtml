@@ -15,10 +15,21 @@
                                 <div class="label-select">
                                     <select asp-for="@Model.Make" id="make" class="form-control">
                                         <option value="">--Марка--</option>
-                                        @foreach (var make in Model.Makes)
+                                        @if (Model.Category == 0)
                                         {
-                                            <option value="@make.Make">@make.Make</option>
+                                            @foreach (var make in Model.Makes.Select(x => x.Make).Distinct())
+                                            {
+                                                <option value="@make">@make</option>
+                                            }
                                         }
+                                        else
+                                        {
+                                            @foreach (var make in Model.Makes)
+                                            {
+                                                <option value="@make.Make">@make.Make</option>
+                                            }
+                                        }
+
                                     </select>
                                 </div>
                             </div>

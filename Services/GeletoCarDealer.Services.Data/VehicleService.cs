@@ -191,14 +191,14 @@
         {
             IQueryable<Vehicle> vehicleMakes = this.vehicleRepository.All().OrderBy(x => x.Make);
 
-            return vehicleMakes.To<T>().Distinct().ToList();
+            return vehicleMakes.To<T>().ToList();
         }
 
         public IEnumerable<T> GetVehicleModels<T>()
         {
             IQueryable<Vehicle> vehicleModels = this.vehicleRepository.All().OrderBy(x => x.Model);
 
-            return vehicleModels.To<T>().Distinct().ToList();
+            return vehicleModels.Distinct().To<T>().ToList();
         }
 
         public IEnumerable<T> GetVehicleCategories<T>()
