@@ -1,9 +1,4 @@
-/*
- *  Project: Scrolly : parallax is easy as a matter of fact !
- *  Description: Based on jQuery boilerplate
- *  Author: Victor C. / Octave & Octave web agency
- *  Licence: MIT
- */
+
 (function ( $, window, document, undefined ) {
     var pluginName = 'scrolly',
         defaults = {

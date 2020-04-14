@@ -12,7 +12,6 @@
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
-    //using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
     using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
@@ -253,9 +252,19 @@
                 viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
                 return viewModel;
             }
+            else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category).Where(x => x.Model == model);
+                return viewModel;
+            }
             else if (string.IsNullOrEmpty(make) && string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+            }
+            else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model);
+                return viewModel;
             }
 
             if (!string.IsNullOrEmpty(make))
@@ -310,6 +319,7 @@
             {
                 viewModel.Vehicles = await this.GetAll<VehiclesViewModel>();
             }
+
             return viewModel;
         }
 
@@ -327,7 +337,7 @@
 
         private IEnumerable<T> GetAllByYear<T>()
         {
-            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderByDescending(x => x.Year);
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Year);
             return query.To<T>().ToList();
         }
 

@@ -25,18 +25,12 @@
         {
         }
 
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> OnPost()
         {
             await this.signInManager.SignOutAsync();
             this.logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return this.LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return this.RedirectToPage();
-            }
+
+            return this.RedirectToPage("/", new { area = "default" });
         }
     }
 }

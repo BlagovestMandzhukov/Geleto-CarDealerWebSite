@@ -74,6 +74,10 @@
         <div class="col-md-12">
             <div id="cars-wrapper">
                 <div class="white-box clearfix">
+                    @if (Model.Vehicles.Count() == 0)
+                    {
+                        <h1 style="text-align: center">НЯМА НАЛИЧНИ АВТОМОБИЛИ!</h1>
+                    }
                     @foreach (var vehicle in Model.Vehicles)
                     {
                         var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), vehicle.TransmissionType);
@@ -97,7 +101,7 @@
                                             <div class="col-sm-6 col-sm-push-6 right-col-xs">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <strong>@vehicle.Price BGN</strong>
+                                                        <strong>@vehicle.Price ЛВ.</strong>
                                                     </div>
                                                 </div>
                                             </div>

@@ -17,7 +17,7 @@ jQuery(document).ready(function () {
 	
 	//Click event to scroll to top
 	$('.scrollToTop').click(function(){
-		$('html, body').animate({scrollTop : 0},800);
+		$('html, body').animate({scrollTop : 0},400);
 		return false;
 	});
 	
@@ -43,11 +43,11 @@ jQuery(document).ready(function () {
         $(".menu nav").slideToggle();
     });
 
-    // Get Header Height //
-    var stick = $(".simple-header.for-sticky").height();
-    $(".simple-header.for-sticky").parent().css({
-        "padding-top": stick
-    });
+    //// Get Header Height //
+    //var stick = $(".simple-header.for-sticky").height();
+    //$(".simple-header.for-sticky").parent().css({
+    //    "padding-top": stick
+    //});
 
 
     $("header").on("click", function (e) {
@@ -64,16 +64,16 @@ jQuery(document).ready(function () {
     $('#vehicul-geo').slider();
 
     /*** FIXED Menu APPEARS ON SCROLL DOWN ***/
-    $(window).scroll(function () {
-        var scroll = $(window).scrollTop();
-        if (scroll >= 50) {
-            $(".for-sticky").addClass("sticky");
-        }
-        else {
-            $(".for-sticky").removeClass("sticky");
-            $("for-sticky").addClass("");
-        }
-    });
+    //$(window).scroll(function () {
+    //    var scroll = $(window).scrollTop();
+    //    if (scroll >= 50) {
+    //        $(".for-sticky").addClass("sticky");
+    //    }
+    //    else {
+    //        $(".for-sticky").removeClass("sticky");
+    //        $("for-sticky").addClass("");
+    //    }
+    //});
 
 
     /*=================== Parallax ===================*/

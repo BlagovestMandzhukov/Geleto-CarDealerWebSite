@@ -21,6 +21,12 @@
 
 </head>
 <body>
+    <style>
+        body {
+            background-image: url('img/marble1-2398946_1920.jpg');
+            background-size: cover;
+        }
+    </style>
     <header class="simple-header for-sticky white">
         <div class="menu">
             <div class="container">
@@ -32,7 +38,6 @@
                 @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
                 {
                     <form class="popup-client" asp-area="Identity" asp-page="/Account/Logout"
-                          asp-route-returnUrl="@Url.Page("/", new { area = "default" })"
                           method="post">
                         <span><input style="border:none" type="submit" value="Logout" /></span>
                     </form>
@@ -79,9 +84,9 @@
             <div class="container">
                 <span>Copyright All Right Reserved 2020</span>
                 <ul>
-                    <li><a title="" asp-controller="Home" asp-action="Index">НАЧАЛО</a></li>
-                    <li><a title="" asp-controller="Vehicles" asp-action="GetAll">АВТОМОБИЛИ</a></li>
-                    <li><a title="" asp-controller="Home" asp-action="Contacts">КОНТАКТИ</a></li>
+                    <li><a title=""  asp-controller="Home" asp-action="Index">НАЧАЛО</a></li>
+                    <li><a title=""  asp-controller="Vehicles" asp-action="GetAll">АВТОМОБИЛИ</a></li>
+                    <li><a title=""  asp-controller="Home" asp-action="Contacts">КОНТАКТИ</a></li>
                 </ul>
             </div>
         </div>
