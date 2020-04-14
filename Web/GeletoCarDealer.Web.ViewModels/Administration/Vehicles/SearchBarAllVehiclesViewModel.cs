@@ -6,7 +6,7 @@
 
     public class SearchBarAllVehiclesViewModel
     {
-        public IEnumerable<VehiclesViewModel> Vehicles { get; set; }
+        public IEnumerable<AdminVehiclesViewModel> Vehicles { get; set; }
 
         public IEnumerable<SearchBarVehiclesMakesViewModel> Makes { get; set; }
 

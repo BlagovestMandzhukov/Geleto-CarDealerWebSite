@@ -25,68 +25,7 @@
         {
             var viewModel = new AllVehiclesViewModel();
 
-            if (category == 0)
-            {
-                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>();
-                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>();
-            }
-            else
-            {
-                viewModel.Makes = this.vehicleService.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
-                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
-                                                       .Where(x => x.CategoryId
-                                                       == category);
-            }
-
-            if (string.IsNullOrEmpty(orderBy) && category == 0)
-            {
-                viewModel.Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>();
-                if (!string.IsNullOrEmpty(model))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByModel<VehiclesViewModel>(model);
-                }
-            }
-
-            if (!string.IsNullOrEmpty(make))
-            {
-                viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
-                                                            .Where(x => x.Make == make);
-                viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make);
-                if (category > 0)
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                        .Where(x => x.CategoryId == category);
-                    viewModel.Models = this.vehicleService.GetVehicleModels<VehicleModelsViewModel>()
-                                                            .Where(x => x.Make == make && x.CategoryId == category);
-                }
-                if (!string.IsNullOrEmpty(orderBy))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy)
-                        .Where(x => x.Make == make);
-                    if (category > 0)
-                    {
-                        viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                            .Where(x => x.CategoryId == category);
-                        return this.View("Vehicles", viewModel);
-                    }
-                }
-                if (!string.IsNullOrEmpty(model))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                        .Where(x => x.Model == model);
-                }
-                return this.View("Vehicles", viewModel);
-            }
-
-            if (!string.IsNullOrEmpty(orderBy) || category > 0)
-            {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
-            }
-
-            if (category == 0 && !string.IsNullOrEmpty(orderBy))
-            {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy);
-            }
+            viewModel = await this.vehicleService.GetAllFiltered(orderBy, category, make, model);
 
             return this.View("Vehicles", viewModel);
         }

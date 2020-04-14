@@ -24,37 +24,47 @@
     <header class="simple-header for-sticky white">
         <div class="menu">
             <div class="container">
-                <div class="logo">
+                <div class="logo" style="margin-left: 60px">
                     <a asp-controller="Home" asp-action="Index" title="">
-                        <span><img class="img-logo" src="~/img/logo.png" width="150" height="80"></span>
+                        <span><img class="img-logo" src="~/img/logo.png" width="120" height="60"></span>
                     </a>
                 </div><!-- LOGO -->
-                @if (this.User.Identity.IsAuthenticated)
+                @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
                 {
                     <form class="popup-client" asp-area="Identity" asp-page="/Account/Logout"
-                          asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                          asp-route-returnUrl="@Url.Page("/", new { area = "default" })"
                           method="post">
                         <span><input style="border:none" type="submit" value="Logout" /></span>
                     </form>
+                    <span class="menu-toggle"><i class="fa fa-bars"></i></span>
+                    <nav>
+                        <h1 class="nocontent outline">--- Main Navigation ---</h1>
+                        <ul>
+                            <li> <a asp-controller="Home" asp-action="Index" title="">Начало</a></li>
+                            <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
+                            </li>
+                            <li>
+                                <a href="/Dashboard/Admin" title="">Администратор</a>
+                            </li>
+                        </ul>
+                    </nav>
                 }
                 else
                 {
-                    <div class="popup-client">
-                        <span><a href="/Identity/Account/Login" title="Manage">Login</a></span>
-                        <span><a href="/Identity/Account/Register" title="Manage">Register</a></span>
-                    </div>
+                    <span class="menu-toggle"><i class="fa fa-bars"></i></span>
+                    <nav>
+                        <h1 class="nocontent outline">--- Main Navigation ---</h1>
+                        <ul>
+                            <li> <a asp-controller="Home" asp-action="Index" title="">Начало</a></li>
+                            <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
+                            </li>
+                        </ul>
+                    </nav>
                 }
-                <span class="menu-toggle"><i class="fa fa-bars"></i></span>
-                <nav>
-                    <h1 class="nocontent outline">--- Main Navigation ---</h1>
-                    <ul>
-                        <li> <a asp-controller="Home" asp-action="Index" title="">Начало</a></li>
-                        <li><a asp-controller="Vehicles" asp-action="GetAll" title="">Търсене на Автомобил</a></li>
-                        <li>
-                            <a asp-controller="Home" asp-action="Contacts" title="">Контакти</a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </header>

@@ -9,6 +9,7 @@
     using GeletoCarDealer.Services.Data;
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
     using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Mvc;
 
     public class VehiclesController : AdministrationController
@@ -72,71 +73,9 @@
         [Route("All")]
         public async Task<IActionResult> AllVehicles(string orderBy, int category, string make, string model)
         {
-            var viewModel = new SearchBarAllVehiclesViewModel();
+            var viewModel = new AllVehiclesViewModel();
 
-            if (category == 0)
-            {
-                viewModel.Makes = this.vehicleService.GetVehicleMakes<SearchBarVehiclesMakesViewModel>();
-                viewModel.Models = this.vehicleService.GetVehicleModels<SearchBarVehiclesModelsViewModel>();
-            }
-            else
-            {
-                viewModel.Makes = this.vehicleService.GetVehicleMakes<SearchBarVehiclesMakesViewModel>().Where(x => x.CategoryId == category);
-                viewModel.Models = this.vehicleService.GetVehicleModels<SearchBarVehiclesModelsViewModel>()
-                                                       .Where(x => x.CategoryId
-                                                       == category);
-            }
-
-            if (string.IsNullOrEmpty(orderBy) && category == 0)
-            {
-                viewModel.Vehicles = await this.vehicleService.GetAll<VehiclesViewModel>();
-                if (!string.IsNullOrEmpty(model))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByModel<VehiclesViewModel>(model);
-                }
-            }
-
-            if (!string.IsNullOrEmpty(make))
-            {
-                viewModel.Models = this.vehicleService.GetVehicleModels<SearchBarVehiclesModelsViewModel>()
-                                                            .Where(x => x.Make == make);
-                viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make);
-                if (category > 0)
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                        .Where(x => x.CategoryId == category);
-                    viewModel.Models = this.vehicleService.GetVehicleModels<SearchBarVehiclesModelsViewModel>()
-                                                            .Where(x => x.Make == make && x.CategoryId == category);
-                }
-                if (!string.IsNullOrEmpty(orderBy))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy)
-                        .Where(x => x.Make == make);
-                    if (category > 0)
-                    {
-                        viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                            .Where(x => x.CategoryId == category);
-                        return this.View("AllVehicles", viewModel);
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(model))
-                {
-                    viewModel.Vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>(make)
-                        .Where(x => x.Model == model);
-                }
-                return this.View("AllVehicles", viewModel);
-            }
-
-            if (!string.IsNullOrEmpty(orderBy) || category > 0)
-            {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
-            }
-
-            if (category == 0 && !string.IsNullOrEmpty(orderBy))
-            {
-                viewModel.Vehicles = this.vehicleService.GetAllByOrder<VehiclesViewModel>(orderBy);
-            }
+            viewModel = await this.vehicleService.GetAllFiltered(orderBy, category, make, model);
 
             return this.View("AllVehicles", viewModel);
         }
@@ -145,7 +84,7 @@
         [Route("VehicleById/{id:int}")]
         public IActionResult VehicleById(int id)
         {
-            var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
+            var vehicle = this.vehicleService.GetById<AdminVehicleDetailsViewModel>(id);
 
             if (vehicle == null)
             {
@@ -197,7 +136,7 @@
         [Route("Delete/{id:int}")]
         public IActionResult Delete(int id)
         {
-            var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(id);
+            var vehicle = this.vehicleService.GetById<AdminVehicleDetailsViewModel>(id);
 
             if (vehicle == null)
             {
@@ -218,9 +157,9 @@
         [Route("Deleted")]
         public IActionResult AllDeleted()
         {
-            var viewModel = new AllVehiclesViewModel
+            var viewModel = new AdminAllVehiclesViewModel
             {
-                Vehicles = this.vehicleService.GetAllDeleted<VehiclesViewModel>(),
+                Vehicles = this.vehicleService.GetAllDeleted<AdminVehiclesViewModel>(),
             };
 
             return this.View("AllDeletedVehicles", viewModel);

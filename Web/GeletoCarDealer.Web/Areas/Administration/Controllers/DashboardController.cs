@@ -13,6 +13,7 @@
         {
             this.settingsService = settingsService;
         }
+
         [Route("[controller]/Admin")]
         public IActionResult Index()
         {

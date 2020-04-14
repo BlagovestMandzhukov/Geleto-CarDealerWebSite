@@ -1,13 +1,14 @@
 ﻿namespace GeletoCarDealer.Web.Areas.Administration.Controllers
 {
-    using GeletoCarDealer.Services.Data;
-    using GeletoCarDealer.Web.ViewModels.Administration.Images;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using GeletoCarDealer.Services.Data;
+    using GeletoCarDealer.Web.ViewModels.Administration.Images;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ImagesController : AdministrationController
     {
@@ -19,6 +20,7 @@
             this.imageService = imageService;
             this.vehicleService = vehicleService;
         }
+
         public IActionResult EditImages(int id)
         {
             var vehicle = this.vehicleService.GetVehicle(id);

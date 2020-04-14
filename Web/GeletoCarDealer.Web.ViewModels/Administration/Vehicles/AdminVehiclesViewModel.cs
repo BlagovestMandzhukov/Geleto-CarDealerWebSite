@@ -11,7 +11,7 @@
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
 
-    public class VehiclesViewModel : IMapFrom<Vehicle>, IHaveCustomMappings
+    public class AdminVehiclesViewModel : IMapFrom<Vehicle>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -37,7 +37,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Vehicle, VehiclesViewModel>()
+            configuration.CreateMap<Vehicle, AdminVehiclesViewModel>()
                 .ForMember(x => x.ImageUrl, cfg => cfg.MapFrom(x => x.Images.Any() ? x.Images.FirstOrDefault().ImageUrl : "/img/no-image.png"));
         }
     }

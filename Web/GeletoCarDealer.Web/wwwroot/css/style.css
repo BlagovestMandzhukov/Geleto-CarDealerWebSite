@@ -987,11 +987,12 @@ iframe {
     }
 
 .menu nav {
-    float: right;
+    /*float: right;*/
+    margin-left:35%;
 }
 
     .menu nav > ul {
-        float: left;
+        /*float: left;*/
         list-style: outside none none;
         margin: 0;
         padding: 0;
@@ -1150,6 +1151,8 @@ iframe {
         position: absolute;
         top: 0;
         width: 120px;
+        margin-top: 30px;
+        margin-left: 30px;
     }
 
         .inner-content > span > i {
@@ -4607,9 +4610,10 @@ footer.light-footer .bottom-line {
     padding-bottom: 10px;
     border-top: 1px solid rgb(213, 208, 208);
     border-bottom: 1px solid rgb(213, 208, 208);
-    background-color: #808080;
+    background-color: #e6e6e6;
     padding-top: 20px;
     text-align: -webkit-center;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2)
 }
 
 .search-form-title-tow {
@@ -4761,7 +4765,7 @@ footer.light-footer .bottom-line {
         -moz-box-shadow: none;
         -o-box-shadow: none;
         -ms-box-shadow: none;
-        box-shadow: none;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2)
     }
 
     .virtecal-search .search-form .search-form-content .form-group select {
@@ -5469,7 +5473,9 @@ h1.outline, .outline {
     min-height: 500px;
     background: #fff;
     /*box-shadow: 0 1px 5px -1px #ccc;*/
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2)
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    width: 85%;
+    margin-left: 6%;
 }
 
 .car-listing {
@@ -5503,7 +5509,7 @@ h1.outline, .outline {
 
 .car-listing h4 {
     margin: 0 0 5px;
-    font-size: 25px;
+    font-size: 17px;
     line-height: 20px;
     color: #333;
     font-weight: bold;
@@ -5531,7 +5537,7 @@ h1.outline, .outline {
 
     .car-description strong {
         color: #333;
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .car-description .row {

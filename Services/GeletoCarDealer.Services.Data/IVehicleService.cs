@@ -6,7 +6,7 @@
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
-    using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Http;
 
     public interface IVehicleService
@@ -44,5 +44,7 @@
         IEnumerable<T> GetAllByMake<T>(string make);
 
         IEnumerable<T> GetAllByModel<T>(string model);
+
+        Task<AllVehiclesViewModel> GetAllFiltered(string orderBy, int category, string make, string model);
     }
 }

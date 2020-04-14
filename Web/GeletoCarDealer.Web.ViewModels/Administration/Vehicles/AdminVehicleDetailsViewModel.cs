@@ -10,7 +10,7 @@
     using GeletoCarDealer.Web.ViewModels.Administration.Images;
     using GeletoCarDealer.Web.ViewModels.Administration.Specifications;
 
-    public class VehicleDetailsViewModel : IMapFrom<Vehicle>, IMapFrom<Image>, IMapFrom<Specification>
+    public class AdminVehicleDetailsViewModel : IMapFrom<Vehicle>, IMapFrom<Image>, IMapFrom<Specification>
     {
         public int Id { get; set; }
 

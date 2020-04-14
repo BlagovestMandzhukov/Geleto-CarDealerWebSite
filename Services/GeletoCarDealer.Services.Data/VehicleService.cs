@@ -12,7 +12,8 @@
     using GeletoCarDealer.Data.Models.Enums;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Mapping;
-    using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
+    //using GeletoCarDealer.Web.ViewModels.Administration.Vehicles;
+    using GeletoCarDealer.Web.ViewModels.UsersArea.Vehicles;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
@@ -131,18 +132,18 @@
             return query.To<T>().ToList();
         }
 
-        //public IEnumerable<T> GetAllFromCategory<T>(int? category = null)
-        //{
-        //    switch (category)
-        //    {
-        //        case GlobalConstants.CarCategory: return this.GetAllInCarCategory<T>(category.Value);
-        //        case GlobalConstants.SUVCategory: return this.GetAllInSuvCategory<T>(category.Value);
-        //        case GlobalConstants.MotorcycleCategory: return this.GetAllInMotorcycleCategory<T>(category.Value);
-        //        case GlobalConstants.BusCategory: return this.GetAllInBusCategory<T>(category.Value);
-        //    }
-        //    IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
-        //    return query.To<T>().ToList();
-        //}
+        public IEnumerable<T> GetAllFromCategory<T>(int? category = null)
+        {
+            switch (category)
+            {
+                case GlobalConstants.CarCategory: return this.GetAllInCarCategory<T>(category.Value);
+                case GlobalConstants.SUVCategory: return this.GetAllInSuvCategory<T>(category.Value);
+                case GlobalConstants.MotorcycleCategory: return this.GetAllInMotorcycleCategory<T>(category.Value);
+                case GlobalConstants.BusCategory: return this.GetAllInBusCategory<T>(category.Value);
+            }
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
+            return query.To<T>().ToList();
+        }
 
         public IEnumerable<T> GetAllDeleted<T>()
         {
@@ -222,6 +223,96 @@
             return vehiclesByModel.To<T>().ToList();
         }
 
+        public async Task<AllVehiclesViewModel> GetAllFiltered(string orderBy, int category, string make, string model)
+        {
+            var viewModel = new AllVehiclesViewModel();
+
+            if (category == 0)
+            {
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>();
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>();
+            }
+            else
+            {
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                                                       .Where(x => x.CategoryId
+                                                       == category);
+            }
+
+            if (string.IsNullOrEmpty(orderBy) && category == 0)
+            {
+                viewModel.Vehicles = await this.GetAll<VehiclesViewModel>();
+                if (!string.IsNullOrEmpty(model))
+                {
+                    viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
+                }
+            }
+            else if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(model) && category == 0)
+            {
+                viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
+                return viewModel;
+            }
+            else if (string.IsNullOrEmpty(make) && string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+            }
+
+            if (!string.IsNullOrEmpty(make))
+            {
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                                                            .Where(x => x.Make == make);
+                viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make);
+                if (category > 0)
+                {
+                    viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make)
+                        .Where(x => x.CategoryId == category);
+                    viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                                                            .Where(x => x.Make == make && x.CategoryId == category);
+                }
+
+                if (!string.IsNullOrEmpty(orderBy))
+                {
+                    viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy)
+                        .Where(x => x.Make == make);
+                    if (category > 0)
+                    {
+                        viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make)
+                            .Where(x => x.CategoryId == category);
+                        return viewModel;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(model))
+                {
+                    viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make)
+                        .Where(x => x.Model == model);
+                }
+
+                return viewModel;
+            }
+
+            if (!string.IsNullOrEmpty(orderBy))
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy);
+                if (category > 0)
+                {
+                    viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
+                }
+            }
+
+            if (category == 0 && !string.IsNullOrEmpty(orderBy))
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy);
+            }
+
+            if (viewModel.Vehicles == null)
+            {
+                viewModel.Vehicles = await this.GetAll<VehiclesViewModel>();
+            }
+            return viewModel;
+        }
+
         private IEnumerable<T> GetAllByPriceAscending<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Price);
@@ -237,6 +328,42 @@
         private IEnumerable<T> GetAllByYear<T>()
         {
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderByDescending(x => x.Year);
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInCarCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllCars(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInSuvCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllSuvs(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInMotorcycleCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllMotorcycles(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
+        private IEnumerable<T> GetAllInBusCategory<T>(int id)
+        {
+            var categoryId = this.categoryService.GetAllBuses(id);
+
+            IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
+
             return query.To<T>().ToList();
         }
     }

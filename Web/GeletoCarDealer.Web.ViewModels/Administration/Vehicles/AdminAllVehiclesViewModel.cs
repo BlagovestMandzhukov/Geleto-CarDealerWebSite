@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class AllVehiclesViewModel
+    public class AdminAllVehiclesViewModel
     {
-        public IEnumerable<VehiclesViewModel> Vehicles { get; set; }
+        public IEnumerable<AdminVehiclesViewModel> Vehicles { get; set; }
     }
 }
