@@ -263,6 +263,7 @@
                                                        .Where(x => x.Make
                                                        == make);
                 }
+
                 return viewModel;
             }
             else if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(model) && category == 0 && !string.IsNullOrEmpty(make))
@@ -287,7 +288,11 @@
             else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category).Where(x => x.Model == model);
-                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.Model == model && x.CategoryId == category);
+                if (viewModel.Vehicles.Count() == 0)
+                {
+                    viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+                }
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
             }
@@ -301,14 +306,22 @@
             else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model && x.CategoryId == category);
+                if (viewModel.Vehicles.Count() == 0)
+                {
+                    viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
+                }
                 viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
             }
             else if (!string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
             {
-                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model && x.Make == make && x.CategoryId == category);
-                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category && x.Make == make);
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Make == make && x.CategoryId == category);
+                if (viewModel.Vehicles.Count() == 0)
+                {
+                    viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
+                }
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.Make == make && x.CategoryId == category);
 
                 return viewModel;
@@ -316,6 +329,11 @@
             else if (!string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make).Where(x => x.CategoryId == category && x.Model == model);
+                if (viewModel.Vehicles.Count() == 0)
+                {
+                    viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+                }
+
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category && x.Make == make);
                 viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
@@ -323,10 +341,16 @@
             else if (!string.IsNullOrEmpty(make) && string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category && x.Make == make);
+                if (viewModel.Vehicles.Count() == 0)
+                {
+                    viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
+                }
+
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category && x.Make == make);
                 viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
             }
+
             if (!string.IsNullOrEmpty(make))
             {
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
@@ -336,8 +360,14 @@
                 {
                     viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make)
                         .Where(x => x.CategoryId == category);
+                    if (viewModel.Vehicles.Count() == 0)
+                    {
+                        viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+                    }
+
                     viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
                                                             .Where(x => x.Make == make && x.CategoryId == category);
+                    return viewModel;
                 }
 
                 if (!string.IsNullOrEmpty(orderBy))
@@ -377,6 +407,7 @@
                         viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
                     }
                 }
+
                 return viewModel;
             }
 

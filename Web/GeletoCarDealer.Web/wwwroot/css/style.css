@@ -4750,8 +4750,8 @@ footer.light-footer .bottom-line {
         position: relative;
         display: block;
         height: 45px;
-        font-size: 16px;
-        color: #2D313F;
+        font-size: 15px;
+        font-style: italic;
         line-height: 50px;
         border: 1px solid #e5e5e5;
         -webkit-border-radius: 4px;
