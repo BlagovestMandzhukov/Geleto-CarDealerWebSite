@@ -44,7 +44,7 @@
 
             await this.vehicleService.AddVehicleImagesAsync(id, images);
 
-            return this.RedirectToAction("VehicleById", new { id = vehicleId.Id });
+            return this.RedirectToAction("VehicleById", "Vehicles", new { id = vehicleId.Id });
         }
 
         [HttpPost]

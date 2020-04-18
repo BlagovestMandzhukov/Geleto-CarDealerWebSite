@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     public class Category
-    {
+    { 
         public Category()
         {
             this.Vehicles = new HashSet<Vehicle>();

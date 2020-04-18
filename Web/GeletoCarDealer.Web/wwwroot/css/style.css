@@ -1157,7 +1157,7 @@ iframe {
     }
 
         .inner-content > span > i {
-            color: black;
+            color: white;
             font-size: 52px;
             left: 0;
             position: absolute;
@@ -1172,10 +1172,10 @@ iframe {
         }
 
     .inner-content h2 {
-        color: black;
+        color: #818181;
         float: left;
         font-family: Montserrat;
-        font-size: 44px;
+        font-size: 25px;
         font-weight: bold;
         /*margin: 66px 0 0;*/
         width: 100%;
@@ -5476,7 +5476,7 @@ h1.outline, .outline {
     /*box-shadow: 0 1px 5px -1px #ccc;*/
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
     width: 85%;
-    margin-left: 6%;
+    margin-left: 8%;
 }
 
 .car-listing {

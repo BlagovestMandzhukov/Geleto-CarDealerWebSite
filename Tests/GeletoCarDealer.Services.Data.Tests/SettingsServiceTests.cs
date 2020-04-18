@@ -1,4 +1,4 @@
-﻿namespace GeletoCarDealer.Services.Data.Tests
+﻿namespace AspNetCoreTemplate.Services.Data.Tests
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -8,7 +8,7 @@
     using GeletoCarDealer.Data.Common.Repositories;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Data.Repositories;
-
+    using GeletoCarDealer.Services.Data;
     using Microsoft.EntityFrameworkCore;
 
     using Moq;

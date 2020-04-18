@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+
     using GeletoCarDealer.Data;
     using GeletoCarDealer.Data.Models.Models;
     using GeletoCarDealer.Services.Data;
@@ -54,6 +55,5 @@
 
             return this.View(viewModel);
         }
-
     }
 }

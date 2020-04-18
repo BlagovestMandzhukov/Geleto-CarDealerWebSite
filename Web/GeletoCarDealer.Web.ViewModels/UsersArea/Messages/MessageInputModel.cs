@@ -23,8 +23,8 @@
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [Display(Name = "Телефон")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid Phone Number")]
-        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Невалиден телефонен номер.")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Невалиден телефонен номер.")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]

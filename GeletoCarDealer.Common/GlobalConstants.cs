@@ -16,7 +16,7 @@
 
         public const string OrderByYearAscending = "yearAscending";
 
-        public const string OrderByYearDescending = "year";
+        public const string OrderByMilage = "milage";
 
         public const int CarCategory = 1;
 

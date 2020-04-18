@@ -7,6 +7,5 @@
     public class AllMessagesViewModel
     {
         public IEnumerable<MessagesViewModel> Messages { get; set; }
-        
     }
 }

@@ -24,6 +24,7 @@
 
         public IViewComponentResult Invoke(int id)
         {
+            var random = new Random();
             var model = new SideBarViewModel
             {
                  Vehicles = this.vehiclesRepository.All().Where(x => x.Id != id).Take(2)

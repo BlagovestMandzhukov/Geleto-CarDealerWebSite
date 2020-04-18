@@ -124,7 +124,7 @@
             {
                 case GlobalConstants.OrderByPriceAscending: return this.GetAllByPriceAscending<T>();
                 case GlobalConstants.OrderByPriceDescending: return this.GetAllByPriceDescending<T>();
-                case GlobalConstants.OrderByYearAscending: return this.GetAllByYear<T>();
+                case GlobalConstants.OrderByMilage: return this.GetAllByMilage<T>();
             }
 
             IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.CreatedOn);
@@ -245,28 +245,88 @@
                 if (!string.IsNullOrEmpty(model))
                 {
                     viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
+                    viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.Model == model);
+                    if (!string.IsNullOrEmpty(make))
+                    {
+                        viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                                                       .Where(x => x.Make
+                                                       == make);
+                    }
+
+                    return viewModel;
                 }
+
+                if (!string.IsNullOrEmpty(make))
+                {
+                    viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make);
+                    viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                                                       .Where(x => x.Make
+                                                       == make);
+                }
+                return viewModel;
             }
-            else if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(model) && category == 0)
+            else if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(model) && category == 0 && !string.IsNullOrEmpty(make))
             {
-                viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>();
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.Make == make);
+                return viewModel;
+            }
+            else if (!string.IsNullOrEmpty(orderBy) && string.IsNullOrEmpty(model) && category == 0 && string.IsNullOrEmpty(make))
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy);
+                return viewModel;
+            }
+            else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category == 0)
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.Model == model);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>();
                 return viewModel;
             }
             else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category).Where(x => x.Model == model);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.Model == model && x.CategoryId == category);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
             }
             else if (string.IsNullOrEmpty(make) && string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
             {
                 viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
+                return viewModel;
             }
             else if (string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
             {
-                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model);
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model && x.CategoryId == category);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
                 return viewModel;
             }
+            else if (!string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Model == model && x.Make == make && x.CategoryId == category);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category && x.Make == make);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.Make == make && x.CategoryId == category);
 
+                return viewModel;
+            }
+            else if (!string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make).Where(x => x.CategoryId == category && x.Model == model);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category && x.Make == make);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                return viewModel;
+            }
+            else if (!string.IsNullOrEmpty(make) && string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
+            {
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category && x.Make == make);
+                viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category && x.Make == make);
+                viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                return viewModel;
+            }
             if (!string.IsNullOrEmpty(make))
             {
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
@@ -307,12 +367,17 @@
                 if (category > 0)
                 {
                     viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
-                }
-            }
+                    if (!string.IsNullOrEmpty(model))
+                    {
+                        viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category);
+                    }
 
-            if (category == 0 && !string.IsNullOrEmpty(orderBy))
-            {
-                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy);
+                    if (!string.IsNullOrEmpty(make))
+                    {
+                        viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.CategoryId == category);
+                    }
+                }
+                return viewModel;
             }
 
             if (viewModel.Vehicles == null)
@@ -335,9 +400,9 @@
             return query.To<T>().ToList();
         }
 
-        private IEnumerable<T> GetAllByYear<T>()
+        private IEnumerable<T> GetAllByMilage<T>()
         {
-            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Year);
+            IQueryable<Vehicle> query = this.vehicleRepository.All().OrderBy(x => x.Milage);
             return query.To<T>().ToList();
         }
 
