@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Services.Data.Tests
+﻿namespace AspNetCoreTemplate.Data.Tests
 {
     using System.Collections.Generic;
     using System.Linq;
