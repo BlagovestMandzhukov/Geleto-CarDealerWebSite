@@ -316,7 +316,7 @@
             }
             else if (!string.IsNullOrEmpty(make) && !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(orderBy) && category > 0)
             {
-                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Make == make && x.CategoryId == category);
+                viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.Make == make && x.CategoryId == category && x.Model == model);
                 if (viewModel.Vehicles.Count() == 0)
                 {
                     viewModel.Vehicles = this.GetAllByOrder<VehiclesViewModel>(orderBy).Where(x => x.CategoryId == category);
@@ -331,7 +331,7 @@
                 viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make).Where(x => x.CategoryId == category && x.Model == model);
                 if (viewModel.Vehicles.Count() == 0)
                 {
-                    viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category);
+                    viewModel.Vehicles = this.GetAllFromCategory<VehiclesViewModel>(category).Where(x => x.Make == make);
                 }
 
                 viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>().Where(x => x.CategoryId == category && x.Make == make);
@@ -439,7 +439,7 @@
 
         private IEnumerable<T> GetAllInCarCategory<T>(int id)
         {
-            var categoryId = this.categoryService.GetAllCars(id);
+            var categoryId = this.categoryService.GetCarsId(id);
 
             IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
 
@@ -448,7 +448,7 @@
 
         private IEnumerable<T> GetAllInSuvCategory<T>(int id)
         {
-            var categoryId = this.categoryService.GetAllSuvs(id);
+            var categoryId = this.categoryService.GetSuvId(id);
 
             IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
 
@@ -457,7 +457,7 @@
 
         private IEnumerable<T> GetAllInMotorcycleCategory<T>(int id)
         {
-            var categoryId = this.categoryService.GetAllMotorcycles(id);
+            var categoryId = this.categoryService.GetMotorcycleId(id);
 
             IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
 
@@ -466,7 +466,7 @@
 
         private IEnumerable<T> GetAllInBusCategory<T>(int id)
         {
-            var categoryId = this.categoryService.GetAllBuses(id);
+            var categoryId = this.categoryService.GetBusId(id);
 
             IQueryable<Vehicle> query = this.vehicleRepository.All().Where(x => x.CategoryId == categoryId);
 

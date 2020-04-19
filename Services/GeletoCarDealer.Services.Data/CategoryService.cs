@@ -27,6 +27,11 @@
 
         public async Task<int> CreateCategory(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return 0;
+            }
+
             var cat = await this.categoryRepository.All().FirstOrDefaultAsync(x => x.Name == name);
             if (cat == null)
             {
@@ -42,7 +47,7 @@
             return cat.Id;
         }
 
-        public int GetAllCars(int id)
+        public int GetCarsId(int id)
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Car").Select(x => x.Id).FirstOrDefault();
 
@@ -54,7 +59,7 @@
             return categoryId;
         }
 
-        public int GetAllSuvs(int id)
+        public int GetSuvId(int id)
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "SUVS").Select(x => x.Id).FirstOrDefault();
 
@@ -66,7 +71,7 @@
             return categoryId;
         }
 
-        public int GetAllMotorcycles(int id)
+        public int GetMotorcycleId(int id)
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Motorcycle").Select(x => x.Id).FirstOrDefault();
 
@@ -78,7 +83,7 @@
             return categoryId;
         }
 
-        public int GetAllBuses(int id)
+        public int GetBusId(int id)
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Bus").Select(x => x.Id).FirstOrDefault();
 

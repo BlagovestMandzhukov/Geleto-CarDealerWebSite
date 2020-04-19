@@ -27,10 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\GeletoCarDealer.Data.Models\GeletoCarDealer.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\GeletoCarDealer.Data\GeletoCarDealer.Data.csproj" />
-    <ProjectReference Include="..\..\Data\GeletoCarDealer.Data\GeletoCarDealer.Data.csproj" />
-    <ProjectReference Include="..\..\Services\GeletoCarDealer.Services.Data\GeletoCarDealer.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\GeletoCarDealer.Services.Data\GeletoCarDealer.Services.Data.csproj" />
   </ItemGroup>
 

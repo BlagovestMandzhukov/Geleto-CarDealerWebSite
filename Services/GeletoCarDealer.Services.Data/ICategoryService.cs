@@ -9,12 +9,12 @@
     {
         Task<int> CreateCategory(string name);
 
-        int GetAllCars(int id);
+        int GetCarsId(int id);
 
-        int GetAllSuvs(int id);
+        int GetSuvId(int id);
 
-        int GetAllMotorcycles(int id);
+        int GetMotorcycleId(int id);
 
-        int GetAllBuses(int id);
+        int GetBusId(int id);
     }
 }
