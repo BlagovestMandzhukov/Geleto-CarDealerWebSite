@@ -124,5 +124,22 @@
             int expected = 0;
             Assert.Equal(expected, cat);
         }
+        [Fact]
+        public async Task CreateCategoryShouldNotCreateIfstringIsEmpty()
+        {
+            var options = new DbContextOptionsBuilder<GeletoDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            var context = new GeletoDbContext(options);
+
+            var categoryRepository = new EfRepository<Category>(context);
+            var vehicleRepository = new EfDeletableEntityRepository<Vehicle>(context);
+
+            var categoryService = new CategoryService(categoryRepository, vehicleRepository);
+
+            int cat = await categoryService.CreateCategory("");
+            int expected = 0;
+            Assert.Equal(expected, cat);
+        }
     }
 }
