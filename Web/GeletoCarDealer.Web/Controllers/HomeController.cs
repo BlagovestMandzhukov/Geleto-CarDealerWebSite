@@ -32,6 +32,7 @@
             return this.View(viewModel);
         }
 
+        [Route("contacts")]
         public IActionResult Contacts()
         {
             return this.View();

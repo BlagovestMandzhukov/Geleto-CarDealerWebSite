@@ -28,6 +28,11 @@
             return query.To<T>().ToList();
         }
 
+        public IEnumerable<Message> GetAll()
+        {
+            return this.messagesRepository.All();
+        }
+
         public Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
         {
             var message = new Message

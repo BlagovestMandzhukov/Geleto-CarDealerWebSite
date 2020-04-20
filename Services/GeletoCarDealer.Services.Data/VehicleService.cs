@@ -245,26 +245,29 @@
                 if (!string.IsNullOrEmpty(model))
                 {
                     viewModel.Vehicles = this.GetAllByModel<VehiclesViewModel>(model);
-                    viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>().Where(x => x.Model == model);
+                    viewModel.Makes = this.GetVehicleMakes<VehicleMakeViewModel>();
                     if (!string.IsNullOrEmpty(make))
                     {
                         viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
                                                        .Where(x => x.Make
                                                        == make);
+                        viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make).Where(x => x.Model == model);
+                        if (viewModel.Vehicles.Count() == 0)
+                        {
+                            viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make);
+                        }
                     }
 
                     return viewModel;
                 }
-
-                if (!string.IsNullOrEmpty(make))
-                {
-                    viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make);
-                    viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
-                                                       .Where(x => x.Make
-                                                       == make);
-                }
-
-                return viewModel;
+                //else if (!string.IsNullOrEmpty(make))
+                //{
+                //    viewModel.Vehicles = this.GetAllByMake<VehiclesViewModel>(make);
+                //    viewModel.Models = this.GetVehicleModels<VehicleModelsViewModel>()
+                //                                       .Where(x => x.Make
+                //                                       == make);
+                //    return viewModel;
+                //}
             }
             else if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(model) && category == 0 && !string.IsNullOrEmpty(make))
             {
