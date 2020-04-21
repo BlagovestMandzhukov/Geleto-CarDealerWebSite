@@ -2,7 +2,6 @@
 ========================================= 
    Kwitara cars :  TABLE OF CONTENT 
 =========================================
-
 1. General Styling
 3. Header 
 4. Sticky Header
@@ -29,7 +28,6 @@
 20. Page Top
 30. About Section
 31. Blog Single Page
-
 32. Sidebar
 33. Footer
 34. Experience Bar
@@ -58,7 +56,6 @@ body {
     color: black;
     /*margin-top: 50px;*/
     position: relative;
-    
 }
 
 body {
@@ -990,7 +987,7 @@ iframe {
 
 .menu nav {
     /*float: right;*/
-    margin-left:35%;
+    margin-left: 35%;
 }
 
     .menu nav > ul {
@@ -998,7 +995,7 @@ iframe {
         list-style: outside none none;
         margin: 0;
         padding: 0;
-        margin-right:100px;
+        margin-right: 100px;
     }
 
         .menu nav > ul > li {
@@ -4711,7 +4708,7 @@ footer.light-footer .bottom-line {
         .virtecal-search .search-form .search-form-content .search-form-field .label-select,
         .search_widget .search-form .search-form-content .search-form-field .label-select {
             position: relative;
-            width:200px;
+            width: 200px;
         }
 
             .horizontal-search .search-form .search-form-content .search-form-field .label-select::before,

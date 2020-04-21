@@ -28,11 +28,6 @@
             return query.To<T>().ToList();
         }
 
-        public IEnumerable<Message> GetAll()
-        {
-            return this.messagesRepository.All();
-        }
-
         public Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
         {
             var message = new Message
@@ -72,6 +67,11 @@
             var message = this.messagesRepository.All().FirstOrDefault(x => x.Id == id);
             this.messagesRepository.Delete(message);
             await this.messagesRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<Message> GetAll()
+        {
+            return this.messagesRepository.All();
         }
     }
 }

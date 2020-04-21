@@ -17,8 +17,8 @@
 
         Task RemoveMessageAsync(int id);
 
-        Task CreateContactsMessage(string sentBy, string email, string phoneNumber, string messageContent);
-
         IEnumerable<Message> GetAll();
+
+        Task CreateContactsMessage(string sentBy, string email, string phoneNumber, string messageContent);
     }
 }

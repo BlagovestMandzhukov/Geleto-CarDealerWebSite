@@ -1,8 +1,13 @@
 ﻿namespace GeletoCarDealer.Services.Data.Tests
 {
-    using GeletoCarDealer.Data;
     using System;
     using System.Threading.Tasks;
+
+    using GeletoCarDealer.Data;
+    using GeletoCarDealer.Data.Models;
+    using GeletoCarDealer.Data.Models.Models;
+    using GeletoCarDealer.Data.Repositories;
+    using Microsoft.EntityFrameworkCore;
     using Xunit;
 
     public class CategoryServiceTests

@@ -47,7 +47,7 @@
             return cat.Id;
         }
 
-        public int GetCarsId(int id)
+        public int GetCarsId()
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Car").Select(x => x.Id).FirstOrDefault();
 
@@ -59,7 +59,7 @@
             return categoryId;
         }
 
-        public int GetSuvId(int id)
+        public int GetSuvId()
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "SUVS").Select(x => x.Id).FirstOrDefault();
 
@@ -71,7 +71,7 @@
             return categoryId;
         }
 
-        public int GetMotorcycleId(int id)
+        public int GetMotorcycleId()
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Motorcycle").Select(x => x.Id).FirstOrDefault();
 
@@ -83,7 +83,7 @@
             return categoryId;
         }
 
-        public int GetBusId(int id)
+        public int GetBusId()
         {
             var categoryId = this.categoryRepository.All().Where(x => x.Name == "Bus").Select(x => x.Id).FirstOrDefault();
 
