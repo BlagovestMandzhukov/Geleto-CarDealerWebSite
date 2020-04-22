@@ -30,7 +30,7 @@
                                         @foreach (var image in Model.Images)
                                         {
                                             <li>
-                                                <a href="@image.ImageUrl" target="_blank"><img src="@image.ImageUrl" alt="@Model.Make" /></a>
+                                                <img src="@image.ImageUrl" alt="@Model.Make" />
                                                 <span>@Model.Make  @Model.Model</span>
                                             </li>
                                         }
@@ -132,7 +132,7 @@
             transitionEffect: 'sliding',
             listPosition: 'left',
             autoSlide: false,
-            adaptiveHeight: true,
+            adaptiveHeight: false,
             displayList: false,
         });
     </script>

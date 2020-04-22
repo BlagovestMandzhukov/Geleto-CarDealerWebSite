@@ -3741,6 +3741,7 @@ header.white > .menu {
 
 header.white .menu nav > ul > li > a {
     color: #333333;
+    font-size:13px;
 }
 
 header.white .menu nav > ul > li:hover > a {

@@ -9,7 +9,7 @@
 
     public interface IMessageService
     {
-        Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent);
+        Task<Message> CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent);
 
         IEnumerable<T> AllMessages<T>();
 

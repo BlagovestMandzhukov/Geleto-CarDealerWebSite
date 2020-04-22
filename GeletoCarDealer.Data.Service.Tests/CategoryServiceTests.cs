@@ -45,7 +45,7 @@
             var categoryService = new CategoryService(categoryRepository, vehicleRepository);
 
             int carId = await categoryService.CreateCategory("Car");
-            int carCategoryId = categoryService.GetCarsId(carId);
+            int carCategoryId = categoryService.GetCarsId();
             int expectedResult = 1;
 
             Assert.Equal(expectedResult, carCategoryId);
@@ -65,7 +65,7 @@
             var categoryService = new CategoryService(categoryRepository, vehicleRepository);
 
             int busId = await categoryService.CreateCategory("Bus");
-            int busCategoryId = categoryService.GetBusId(busId);
+            int busCategoryId = categoryService.GetBusId();
 
             Assert.Equal(busId, busCategoryId);
         }
@@ -84,7 +84,7 @@
 
             int motorcycleId = await categoryService.CreateCategory("Motorcycle");
 
-            int motorcycleCategoryId = categoryService.GetMotorcycleId(motorcycleId);
+            int motorcycleCategoryId = categoryService.GetMotorcycleId();
 
             Assert.Equal(motorcycleId, motorcycleCategoryId);
         }
@@ -103,7 +103,7 @@
 
             int suvId = await categoryService.CreateCategory("SUVS");
 
-            int suvCategoryId = categoryService.GetSuvId(suvId);
+            int suvCategoryId = categoryService.GetSuvId();
 
             Assert.Equal(suvId, suvCategoryId);
         }

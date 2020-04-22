@@ -28,7 +28,7 @@
             return query.To<T>().ToList();
         }
 
-        public Message CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
+        public async Task<Message> CreateMessage(int id, string sentBy, string email, string phoneNumber, string messageContent)
         {
             var message = new Message
             {
@@ -38,8 +38,8 @@
                 MessageContent = messageContent,
                 VehicleId = id,
             };
-            this.messagesRepository.AddAsync(message);
-            this.messagesRepository.SaveChangesAsync();
+            await this.messagesRepository.AddAsync(message);
+            await this.messagesRepository.SaveChangesAsync();
             return message;
         }
 
@@ -56,15 +56,15 @@
             await this.messagesRepository.SaveChangesAsync();
         }
 
-        public Task<Message> GetMessageAsync(int id)
+        public async Task<Message> GetMessageAsync(int id)
         {
-            var message = this.messagesRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var message = await this.messagesRepository.All().FirstOrDefaultAsync(x => x.Id == id);
             return message;
         }
 
         public async Task RemoveMessageAsync(int id)
         {
-            var message = this.messagesRepository.All().FirstOrDefault(x => x.Id == id);
+            var message = await this.messagesRepository.All().FirstOrDefaultAsync(x => x.Id == id);
             this.messagesRepository.Delete(message);
             await this.messagesRepository.SaveChangesAsync();
         }

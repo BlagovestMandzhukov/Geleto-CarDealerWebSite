@@ -76,6 +76,11 @@
         public async Task<bool> Delete(int id)
         {
             var vehicle = await this.vehicleRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (vehicle == null)
+            {
+                return false;
+            }
+
             this.vehicleRepository.Delete(vehicle);
             await this.vehicleRepository.SaveChangesAsync();
             return true;
