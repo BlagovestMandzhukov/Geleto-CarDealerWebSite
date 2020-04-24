@@ -200,12 +200,7 @@
             return vehicleModels.Distinct().To<T>().ToList();
         }
 
-        public IEnumerable<T> GetVehicleCategories<T>()
-        {
-            IQueryable<Vehicle> vehicleCategories = this.vehicleRepository.All();
-
-            return vehicleCategories.To<T>().ToList();
-        }
+     
 
         public IEnumerable<T> GetAllByMake<T>(string make)
         {

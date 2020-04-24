@@ -20,20 +20,20 @@ namespace GeletoCarDealer.Services.Data.Tests
 {
     public class ImagesServiceTests
     {
-        [Fact]
-        public async Task UploadImageAsyncShouldAddImagesToVehicle()
-        {
-            var options = new DbContextOptionsBuilder<GeletoDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
-            var context = new GeletoDbContext(options);
-            var imageRepository = new EfDeletableEntityRepository<Image>(context);
-            var vehicleRepository = new EfDeletableEntityRepository<Vehicle>(context);
-            Account account = new Account(
-                                "dtq8zwbyi",
-                                "261259893366574",
-                                "RhRIxDhZAE9p0lm2vrEB8_imPqU");
-            var cloudinary = new Mock<Cloudinary>(account);
+        //[Fact]
+        //public async Task UploadImageAsyncShouldAddImagesToVehicle()
+        //{
+        //    var options = new DbContextOptionsBuilder<GeletoDbContext>()
+        //        .UseInMemoryDatabase(Guid.NewGuid().ToString())
+        //        .Options;
+        //    var context = new GeletoDbContext(options);
+        //    var imageRepository = new EfDeletableEntityRepository<Image>(context);
+        //    var vehicleRepository = new EfDeletableEntityRepository<Vehicle>(context);
+        //    Account account = new Account(
+        //                        "dtq8zwbyi",
+        //                        "261259893366574",
+        //                        "RhRIxDhZAE9p0lm2vrEB8_imPqU");
+        //    var cloudinary = new Mock<Cloudinary>(account);
             //var imageService = new ImageService(imageRepository, vehicleRepository);
 
             //var vehicle = new Vehicle
@@ -59,6 +59,6 @@ namespace GeletoCarDealer.Services.Data.Tests
             //var images = await imageRepository.All().ToListAsync();
 
             //Assert.Equal(2, images.Count);
-        }
+        
     }
 }

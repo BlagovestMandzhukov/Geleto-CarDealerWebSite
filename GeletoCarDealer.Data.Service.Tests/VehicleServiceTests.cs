@@ -163,9 +163,9 @@ namespace GeletoCarDealer.Data.Service.Tests
             };
 
             var vehicleId = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
-            
+
             var acutalVehicleId = await this.vehicleService.AddVehicleImagesAsync(vehicleId, images);
-            
+
             var vehicle = this.vehicleService.GetById<VehicleDetailsViewModel>(acutalVehicleId);
             var actualImagesCount = vehicle.Images.Count();
             Assert.Equal(1, actualImagesCount);
@@ -205,7 +205,7 @@ namespace GeletoCarDealer.Data.Service.Tests
 
             Assert.Single(vehicles);
         }
-        
+
         [Fact]
         public async Task GetAllDeletedShouldReturnVehiclesWhereIsDeletedIsTrue()
         {
@@ -221,7 +221,7 @@ namespace GeletoCarDealer.Data.Service.Tests
             var deletedVehicles = this.vehicleService.GetAllDeleted<VehiclesViewModel>();
             Assert.Single(deletedVehicles);
         }
-        
+
         [Fact]
         public async Task GetByIdShouldReturnIdOfVehicle()
         {
@@ -254,7 +254,7 @@ namespace GeletoCarDealer.Data.Service.Tests
         [Fact]
         public async Task RemoveVehicleMessageShouldDeleteMessage()
         {
-            
+
             var spec = new List<string>
             {
                 "4x4",
@@ -264,7 +264,7 @@ namespace GeletoCarDealer.Data.Service.Tests
             var message = this.messageService.CreateMessage(vehicleId1, "asd", "asd@asd.asd", "0854325512", "asdkhasdkjhagsjdkhgasda");
             var message1 = this.messageService.CreateMessage(vehicleId1, "asd", "asd@asd.asd", "0854325512", "asdkhasdkjhagsjdkhgasda");
             var vehicle = this.vehicleService.GetVehicle(vehicleId1);
-            var id =  await this.vehicleService.RemoveVehicleMessageAsync(message.Id);
+            var id = await this.vehicleService.RemoveVehicleMessageAsync(message.Id);
             Assert.Single(vehicle.Messages);
         }
         [Fact]
@@ -282,6 +282,273 @@ namespace GeletoCarDealer.Data.Service.Tests
             Assert.Single(vehicle.Messages);
         }
 
+        [Fact]
+        public async Task GetAllByModelShouldReturnAllVehiclesWithGivenModel()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicles = this.vehicleService.GetAllByModel<VehiclesViewModel>("A4");
+
+            Assert.Equal(2, vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllByMakeShouldReturnAllVehiclesWithGivenMake()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicles = this.vehicleService.GetAllByMake<VehiclesViewModel>("Audi");
+
+            Assert.Equal(2, vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldSortAllByPriceAscending()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicles = this.vehicleService.GetAllFiltered("upPrice", 0, null, null);
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            Assert.Equal(1, actualVehicle.Id);
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllFromCarCategory()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 1, null, null);
+            var vehicles1 = this.vehicleService.GetAllFiltered(null, 2, null, null);
+            var vehicles2 = this.vehicleService.GetAllFiltered(null, 3, null, null);
+            var vehicles3 = this.vehicleService.GetAllFiltered(null, 4, null, null);
+
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+            Assert.Single(vehicles1.Result.Vehicles);
+            Assert.Single(vehicles2.Result.Vehicles);
+            Assert.Single(vehicles3.Result.Vehicles);
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllFromCarCategoryAndSortedUpPrice()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered("upPrice", 1, null, null);
+            var actualVehicle = vehicles.Result.Vehicles.First();
+
+            Assert.Equal(1, actualVehicle.Id);
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+        }
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllFromCarCategoryAndSortedUpPriceWithMakeAudi()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered("upPrice", 1, "Audi", null);
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" && x.CategoryId == 1);
+            Assert.Equal(vehicleMakes.Count(), vehicles.Result.Vehicles.Count());
+            Assert.Equal(1, actualVehicle.Id);
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllFromCarCategoryAndSortedUpPriceWithMakeAndModel()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered("upPrice", 1, "Audi", "A4");
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" && x.CategoryId == 1 && x.Model == "A4");
+            Assert.Equal(vehicleMakes.Count(), vehicles.Result.Vehicles.Count());
+            Assert.Equal(1, actualVehicle.Id);
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllFromCarCategoryWithMakeAndModel()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 1, "Audi", "A4");
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" && x.CategoryId == 1 && x.Model == "A4");
+            Assert.Equal(vehicleMakes.Count(), vehicles.Result.Vehicles.Count());
+            Assert.Equal(1, actualVehicle.Id);
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllWithGivenMakeAndModel()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 0, "Audi", "A4");
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" && x.Model == "A4");
+            Assert.Equal(vehicleMakes.Count(), vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllWithGivenMake()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 0 , "Audi", null);
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            //var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" );
+            Assert.Equal(3, vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllWithGivenModel()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 0, null, "A4");
+            var actualVehicle = vehicles.Result.Vehicles.First();
+            //var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" );
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllWithGivenModelAndCategory()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 1, null, "A4");
+            var vehicles2 = this.vehicleService.GetAllFiltered(null, 2, null, "Q7");
+            //var actualVehicle = vehicles.Result.Vehicles.First();
+            //var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" );
+            Assert.Equal(2, vehicles.Result.Vehicles.Count());
+            Assert.Single(vehicles2.Result.Vehicles);
+        }
+
+        [Fact]
+        public async Task GetAllFilteredShouldReturnAllWithGivenCategoryIfVehiclesCountIsNull()
+        {
+            var spec = new List<string>
+            {
+                "4x4",
+                "ElectricSeats",
+            };
+            var vehicleId1 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 14000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId2 = await this.vehicleService.CreateVehicleAsync("Audi", "A4", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId5 = await this.vehicleService.CreateVehicleAsync("Audi", "Q7", 2010, 202020, "SUVS", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId4 = await this.vehicleService.CreateVehicleAsync("Honda", "Hornet", 2010, 202020, "Motorcycle", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId3 = await this.vehicleService.CreateVehicleAsync("Fiat", "Ducato", 2010, 202020, "Bus", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+            var vehicleId6 = await this.vehicleService.CreateVehicleAsync("Ford", "Focus", 2010, 202020, "Car", "Diesel", 15000, 150, "Automatic", spec, null, "asdasdakjsdh");
+
+            var vehicles = this.vehicleService.GetAllFiltered(null, 1, null, "Q7");
+            var vehicles1 = this.vehicleService.GetAllFiltered(null, 1, "Honda", null);
+            //var actualVehicle = vehicles.Result.Vehicles.First();
+            //var vehicleMakes = this.vehicleService.GetAll<VehiclesViewModel>().Result.Where(x => x.Make == "Audi" );
+            Assert.Equal(3, vehicles.Result.Vehicles.Count());
+            Assert.Equal(3, vehicles1.Result.Vehicles.Count());
+        }
         private void InitializeMapping()
             => AutoMapperConfig.RegisterMappings(
                 typeof(VehiclesViewModel).GetTypeInfo().Assembly,
