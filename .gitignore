@@ -363,3 +363,4 @@ MigrationBackup/
 **/appsettings.production.json
 
 
+/Web/GeletoCarDealer.Web/*.json
