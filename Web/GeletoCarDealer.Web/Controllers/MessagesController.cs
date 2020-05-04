@@ -21,6 +21,7 @@
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult SendMessage(int id, MessageInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -39,6 +40,7 @@
             return this.RedirectToAction("ById", "Vehicles", new { id = vehicleId });
         }
 
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> AskQuestion(MessageInputModel input)
         {
             if (!this.ModelState.IsValid)

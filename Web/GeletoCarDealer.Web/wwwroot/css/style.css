@@ -510,6 +510,7 @@ p {
     color: black;
     line-height: 26px;
     font-size: 14px;
+    word-break: break-word;
     letter-spacing: 0.4px;
 }
 
@@ -5530,6 +5531,7 @@ h1.outline, .outline {
     font-size: 15px;
     color: #777;
     line-height: 25px;
+    word-break: break-word;
 }
 
     .car-description .first-line {
@@ -5568,4 +5570,12 @@ h1.outline, .outline {
 
 .car-description .left-col {
     color: #333
+}
+.load-more-btn {
+    margin: 20px 0;
+    border: 1px solid #777;
+}
+.btn-wide {
+    display: block;
+    width: auto;
 }

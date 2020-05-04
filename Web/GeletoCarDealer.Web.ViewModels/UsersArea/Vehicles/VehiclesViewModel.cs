@@ -35,6 +35,8 @@
 
         public int CategoryId { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Vehicle, VehiclesViewModel>()

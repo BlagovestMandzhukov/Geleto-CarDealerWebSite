@@ -139,21 +139,11 @@ namespace GeletoCarDealer.Data.Service.Tests
         [Fact]
         public async Task AddImagesToVehicleShouldAddImagesToCurrentVehicle()
         {
-            var formFile = new Mock<IFormFile>();
-            var PhysicalFile = new FileInfo(@"C:\Users\Liliya\Desktop\TestImages\0.jpg");
-            var memory = new MemoryStream();
-            var writer = new StreamWriter(memory);
-            writer.Write(PhysicalFile.OpenRead());
-            writer.Flush();
-            memory.Position = 0;
-            var fileName = PhysicalFile.Name;
-            formFile.Setup(_ => _.FileName).Returns(fileName);
-            formFile.Setup(_ => _.Length).Returns(memory.Length);
-            formFile.Setup(_ => _.OpenReadStream()).Returns(memory);
-            formFile.Verify();
+            var moqFormFile = new Mock<IFormFile>();
+
             var images = new List<IFormFile>
             {
-                formFile.Object,
+                moqFormFile.Object,
             };
 
             var spec = new List<string>

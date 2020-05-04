@@ -10,7 +10,7 @@
 
     public interface IImageService
     {
-        Task UploadImageAsync(Vehicle vehicle, IList<IFormFile> files);
+        Task<ICollection<string>> UploadImageAsync(Vehicle vehicle, IList<IFormFile> files);
 
         Task<IEnumerable<Image>> GetImagesAsync(int id);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using GeletoCarDealer.Data;
 using GeletoCarDealer.Data.Models;
 using Microsoft.AspNetCore.Hosting;

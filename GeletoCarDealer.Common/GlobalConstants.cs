@@ -2,6 +2,8 @@
 {
     public static class GlobalConstants
     {
+        public const int PageSize = 5;
+
         public const string SystemName = "Автокъща - ГЕЛЕТО";
 
         public const string AdministratorRoleName = "Admin";

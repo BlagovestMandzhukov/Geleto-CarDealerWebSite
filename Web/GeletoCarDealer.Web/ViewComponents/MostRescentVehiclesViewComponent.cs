@@ -24,7 +24,6 @@
 
         public IViewComponentResult Invoke()
         {
-
             var model = new MostRescentVehiclesViewModel
             {
                 Vehicles = this.vehiclesRepository.All().OrderByDescending(x => x.CreatedOn).Take(3)

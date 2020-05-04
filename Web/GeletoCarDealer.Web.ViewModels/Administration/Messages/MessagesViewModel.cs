@@ -25,6 +25,5 @@
         public AdminVehiclesViewModel Vehicle { get; set; }
 
         public CreateMessageInputModel CreateMessage { get; set; }
-
     }
 }

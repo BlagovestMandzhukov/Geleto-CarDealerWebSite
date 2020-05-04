@@ -12,7 +12,7 @@
     public class MessageInputModel : IMapTo<Message>
     {
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [StringLength(60, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         [Display(Name = "Име")]
         public string SendBy { get; set; }
 

@@ -56,9 +56,6 @@
                 Description = description,
             };
 
-            await this.vehicleRepository.AddAsync(vehicle);
-            await this.vehicleRepository.SaveChangesAsync();
-
             foreach (var spec in specifications)
             {
                 var newSpec = new Specification
@@ -68,7 +65,17 @@
                 vehicle.Specifications.Add(newSpec);
             }
 
-            await this.imageService.UploadImageAsync(vehicle, images);
+            var urls = await this.imageService.UploadImageAsync(vehicle, images);
+            foreach (var url in urls)
+            {
+                var image = new Image
+                {
+                    ImageUrl = url,
+                };
+                vehicle.Images.Add(image);
+            }
+
+            await this.vehicleRepository.AddAsync(vehicle);
             await this.vehicleRepository.SaveChangesAsync();
             return vehicle.Id;
         }
@@ -112,7 +119,16 @@
         {
             var vehicle = await this.vehicleRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
 
-            await this.imageService.UploadImageAsync(vehicle, images);
+            var urls = await this.imageService.UploadImageAsync(vehicle, images);
+            foreach (var url in urls)
+            {
+                var image = new Image
+                {
+                    ImageUrl = url,
+                };
+                vehicle.Images.Add(image);
+            }
+
             await this.vehicleRepository.SaveChangesAsync();
             return vehicle.Id;
         }
@@ -199,8 +215,6 @@
 
             return vehicleModels.Distinct().To<T>().ToList();
         }
-
-     
 
         public IEnumerable<T> GetAllByMake<T>(string make)
         {

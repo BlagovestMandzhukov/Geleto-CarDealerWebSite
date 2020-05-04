@@ -9,9 +9,9 @@
     var transmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), Model.TransmissionType);
     var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
 }
+@*<div id="preloader"></div>
+<div class="theme-layout"></div>*@
 <!-- /.preloader -->
-<div id="preloader"></div>
-<div class="theme-layout"></div>
 <form  asp-controller="Vehicles" asp-action="DeleteVehicle" asp-route-id="@Model.Id" method="post" class="form border-primary-4 rounded p-3 w-60 mx-auto mt-3" enctype="multipart/form-data">
     <section class="block">
         <h4 class="mobile-fondsize-20 text-muted text-center">Сигурни ли сте, че искате да изтриете тази обява?</h4>

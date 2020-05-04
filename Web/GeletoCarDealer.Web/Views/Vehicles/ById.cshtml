@@ -9,8 +9,8 @@
     var fuelType = (FuelType)Enum.Parse(typeof(FuelType), Model.FuelType);
 }
 <!-- /.preloader -->
-<div id="preloader"></div>
-<div class="theme-layout"></div>
+@*<div id="preloader"></div>
+    <div class="theme-layout"></div>*@
 @if (this.TempData["MessageSent"] != null)
 {
     <div class="alert alert-success" style="text-align:center;" role="alert">
@@ -63,7 +63,9 @@
                                     <div class="col-md-7">
                                         <h4>Описание за автомобила</h4>
                                         <hr />
-                                        <p>@Model.Description</p>
+                                        <div class="car-description">
+                                            <span>@Model.Description</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">

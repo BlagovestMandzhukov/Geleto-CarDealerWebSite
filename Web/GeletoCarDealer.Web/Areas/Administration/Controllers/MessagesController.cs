@@ -20,6 +20,7 @@
             this.messageService = messageService;
             this.sender = sender;
         }
+
         public IActionResult MyMessages()
         {
             var viewModel = new AllMessagesViewModel
@@ -31,6 +32,7 @@
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> SendMessage(CreateMessageInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -39,6 +41,7 @@
             }
 
             await this.sender.SendEmailAsync(model.SendToEmail, model.Subject, model.Content);
+            this.TempData["MessageSent"] = "Вашият отговор беше изпратен успешно!";
             return this.RedirectToAction("MyMessages");
         }
 

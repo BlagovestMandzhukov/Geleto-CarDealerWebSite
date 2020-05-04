@@ -1,9 +1,8 @@
 ﻿namespace GeletoCarDealer.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using GeletoCarDealer.Data.Models;
     using GeletoCarDealer.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

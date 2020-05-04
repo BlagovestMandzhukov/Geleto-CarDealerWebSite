@@ -26,7 +26,6 @@
             var viewModel = new AllVehiclesViewModel();
 
             viewModel = await this.vehicleService.GetAllFiltered(orderBy, category, make, model);
-
             return this.View("Vehicles", viewModel);
         }
 

@@ -17,8 +17,7 @@
 
         IEnumerable<T> GetAllByOrder<T>(string orderBy = null);
 
-        //IEnumerable<T> GetAllFromCategory<T>(int? category = null);
-
+        // IEnumerable<T> GetAllFromCategory<T>(int? category = null);
         IEnumerable<T> GetAllDeleted<T>();
 
         T GetById<T>(int id);

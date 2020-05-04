@@ -6,38 +6,8 @@
 }
 
 <!-- /.preloader -->
-<div id="preloader"></div>
-<div class="theme-layout"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-        $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function (e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\">Remove image</span>" +
-                                "</span>").insertAfter("#files");
-                            $(".remove").click(function () {
-                                $(this).parent(".pip").remove();
-                            });
-
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-</script>
+@*<div id="preloader"></div>
+<div class="theme-layout"></div>*@
 <div align="center">
     <h1>Добавяне на автомобили</h1>
 </div>
@@ -115,15 +85,7 @@
         <button type="submit" class="btn btn-primary">Редактирай</button>
     </div>
 </form>
-<script>
-        window.onload = () => {
-            $('#manufacturedOn').datetimepicker({
-                format: 'd.m.Y H:i',
-                lang: 'en'
-            });
-        };
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
